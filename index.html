@@ -3,283 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>크총모 S4 · 본선 8강 조별리그</title>
+<title>크총모 S4 · 8강 조별 풀리그</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --void:#0a0505;
-    --panel:#160a0a;
-    --panel2:#1e0e0e;
-    --line:#4a1c1c;
-    --gold:#ff8a3d;
-    --cyan:#ff2d3d;
-    --text:#f2e6e4;
-    --dim:#8a6868;
+    --bg:#0d0708;
+    --panel:#181011;
+    --panel2:#221416;
+    --line:#3a2224;
+    --red:#e5202e;
+    --red-dark:#8f1119;
+    --amber:#f18f3c;
+    --text:#efe7e5;
+    --dim:#9c8283;
+    --white:#ffffff;
   }
   *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:
-      radial-gradient(1200px 600px at 15% -10%, rgba(255,45,61,0.10), transparent 60%),
-      radial-gradient(900px 500px at 100% 0%, rgba(255,138,61,0.07), transparent 55%),
-      var(--void);
+    background:var(--bg);
     color:var(--text);
-    font-family:'Rajdhani',sans-serif;
-    font-weight:500;
-    letter-spacing:.2px;
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:400;
+    line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    padding-top: 20px;
   }
-  h1,h2,h3,.disp{font-family:'Black Han Sans',sans-serif;}
+  h1,h2,h3{font-family:'Noto Sans KR',sans-serif; font-weight:800; margin:0;}
 
   body[data-lang="ko"] .lang-en{display:none;}
   body[data-lang="en"] .lang-ko{display:none;}
 
-  /* ---------- CONTROL BAR ---------- */
-  .controlbar{
-    position:sticky; top:0; z-index:50;
-    display:flex; justify-content:flex-end; gap:8px;
-    padding:10px 16px; background:rgba(7,11,18,0.9); backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
+  /* ---------- floating lang ---------- */
+  .floating-lang {
+    position: fixed; bottom: 20px; right: 20px;
+    display: flex; gap: 8px; z-index: 999;
+    background: rgba(0,0,0,0.7); padding: 8px; border-radius: 4px;
+    border: 1px solid var(--line);
   }
   .lang-btn{
-    background:none; border:1px solid var(--line); color:var(--dim);
-    font-family:'Share Tech Mono',monospace; font-size:12.5px; padding:6px 12px; cursor:pointer;
-    letter-spacing:1px; transition:.15s;
+    background:none; border:none; color:var(--dim);
+    font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:14px;
+    padding:5px 10px; cursor:pointer;
   }
-  .lang-btn.active{border-color:var(--cyan); color:var(--cyan); background:rgba(255,45,61,0.08);}
-  .lang-btn:hover{color:var(--cyan);}
+  .lang-btn.active{color:#fff; border-bottom:2px solid var(--red);}
+  .lang-btn:hover{color:#fff;}
 
-  .hero{
-    position:relative; padding:48px 20px 36px; text-align:center;
-    border-bottom:2px solid var(--cyan); overflow:hidden;
-    box-shadow:0 4px 40px -10px rgba(255,45,61,0.35);
-  }
-  .hero::before{
-    content:""; position:absolute; inset:0;
-    background:repeating-linear-gradient(115deg, rgba(255,45,61,0.035) 0 2px, transparent 2px 34px);
-    pointer-events:none;
-  }
-  .eyebrow{font-size:13.5px; letter-spacing:6px; color:var(--cyan); font-weight:700; text-transform:uppercase; margin-bottom:14px;}
-  .hero h1{
-    font-size:clamp(34px,7vw,56px); font-weight:400; margin:0; color:#fff;
-    text-shadow:0 0 30px rgba(255,138,61,0.25);
-    clip-path:polygon(0 0,100% 0,97% 100%,3% 100%); display:inline-block; padding:6px 26px;
-  }
-  .hero p{color:var(--dim); font-size:16px; margin-top:14px;}
-  .hero .tag{
-    display:inline-block; margin-top:18px; padding:6px 16px; border:1px solid var(--gold); color:var(--gold);
-    font-family:'Share Tech Mono',monospace; font-size:13.5px;
-    clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
-  }
-
+  /* ---------- deadline banner ---------- */
   .deadline-banner{
-    max-width:680px; margin:26px auto 0; padding:14px 18px; background:var(--panel2);
-    border:1px solid var(--line); border-left:4px solid var(--gold);
-    display:flex; gap:12px; align-items:flex-start;
+    max-width:1040px; margin:8px auto 0; padding:16px 22px; background:var(--panel);
+    border-top:3px solid var(--amber);
+    display:flex; gap:14px; align-items:flex-start;
   }
-  .deadline-banner .db-icon{font-size:20px; line-height:1.2;}
-  .deadline-banner .db-title{font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:14.5px; color:var(--gold); letter-spacing:1px; margin-bottom:5px;}
-  .deadline-banner .db-abs{font-family:'Share Tech Mono',monospace; font-size:14px; color:var(--text); margin-bottom:5px; line-height:1.5;}
-  .deadline-banner .db-local{font-family:'Share Tech Mono',monospace; font-size:13px; color:var(--dim);}
-  .deadline-banner .db-local-val{color:var(--cyan); font-weight:700;}
-  .deadline-banner .db-submit{
-    margin-top:6px; padding-top:6px; border-top:1px dashed var(--line);
-    font-family:'Share Tech Mono',monospace; font-size:13px; color:var(--gold); font-weight:700;
-  }
+  .deadline-banner .db-icon{display:none;}
+  .deadline-banner .db-title{font-weight:800; font-size:15px; color:var(--amber); margin-bottom:4px;}
+  .deadline-banner .db-abs{font-size:14px; color:var(--text); margin-bottom:4px;}
+  .deadline-banner .db-submit{margin-top:12px; font-size:13.5px; color:#fff; font-weight:700;}
 
-  section{max-width:1080px; margin:0 auto; padding:40px 20px;}
-  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:20px; flex-wrap:wrap;}
-  .section-head .num{color:var(--cyan); font-family:'Black Han Sans',sans-serif; font-size:24px; line-height:1;}
-  .section-head h2{font-size:21px; font-weight:400; margin:0; color:#fff; letter-spacing:1px;}
-  .section-head .rule{flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); min-width:20px;}
+  section{max-width:1040px; margin:0 auto; padding:16px 22px 8px;}
 
-  .rules{display:none; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
-  .rules.open{display:grid;}
-  .rule-card{background:var(--panel); padding:14px 16px;}
-  .rule-card .k{
-    color:var(--cyan); font-size:14px; font-weight:700; letter-spacing:1px; margin-bottom:5px;
-  }
-  .rule-card .v{font-size:14px; line-height:1.5;}
+  /* ---------- section header ---------- */
+  .section-head{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .section-head .num{color:var(--red); font-weight:900; font-size:22px; line-height:1;}
+  .section-head h2{font-size:20px; font-weight:800; color:#fff;}
+  .section-head .rule{flex:1; height:1px; background:var(--line); min-width:20px;}
 
   .rules-toggle{
-    display:flex; align-items:center; gap:6px; background:none; border:1px solid var(--line);
-    color:var(--dim); font-family:'Share Tech Mono',monospace; font-size:12.5px; letter-spacing:1px;
-    padding:6px 12px; cursor:pointer; transition:.15s;
+    background:var(--panel2); border:1px solid var(--line); color:var(--text);
+    font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:13px;
+    padding:6px 14px; cursor:pointer; border-radius:2px;
   }
-  .rules-toggle:hover{color:var(--cyan); border-color:var(--cyan);}
-  .rules-toggle .chev{transition:transform .2s ease; font-size:10.5px;}
+  .rules-toggle:hover{border-color:var(--red); color:#fff;}
+  .rules-toggle.open{background:var(--red); border-color:var(--red); color:#fff;}
+  .rules-toggle .chev{display:inline-block; margin-left:4px; transition:transform .2s; font-size:11px;}
   .rules-toggle.open .chev{transform:rotate(180deg);}
-  .rules-toggle.open{color:var(--cyan); border-color:var(--cyan);}
 
-  .group-panel{background:var(--panel); border:1px solid var(--line); clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%); max-width:560px; margin:0 auto;}
-  .group-panel .gh{padding:11px 16px; font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:14.5px; letter-spacing:2px; border-bottom:1px solid var(--line);}
-  .group-panel.a .gh{color:var(--cyan);}
-  .group-panel.b .gh{color:var(--gold);}
-  .standings{width:100%; border-collapse:collapse; font-size:14.5px;}
-  .standings th{
-    font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--dim);
-    text-align:right; font-weight:500; padding:8px 10px; border-bottom:1px solid var(--line);
+  /* ---------- rules grid ---------- */
+  .rules{display:none; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:10px;}
+  .rules.open{display:grid;}
+  .rule-card{background:var(--panel); padding:14px 16px; border-radius:2px; border-top:2px solid var(--red-dark);}
+  .rule-card .k{color:var(--amber); font-size:13.5px; font-weight:700; margin-bottom:4px;}
+  .rule-card .v{font-size:14.5px; color:var(--text);}
+
+  /* ---------- group tabs ---------- */
+  .group-tabs{display:flex; margin-bottom:22px; max-width:460px; margin-left:auto; margin-right:auto; border-radius:2px; overflow:hidden;}
+  .group-tab{
+    flex:1; text-align:center; padding:11px 10px; background:var(--panel);
+    font-weight:800; font-size:14.5px; color:var(--dim); cursor:pointer; border:none;
   }
-  .standings th.c-team{text-align:left;}
-  .standings td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:right; font-family:'Share Tech Mono',monospace; font-size:14.5px;}
-  .standings tr:last-child td{border-bottom:none;}
-  .standings td.c-rank{color:var(--dim); font-size:12.5px; width:22px;}
-  .standings td.c-team{text-align:left; font-family:'Rajdhani',sans-serif; font-size:14.5px; font-weight:600; color:var(--text);}
-  .standings td .stat{color:var(--text);}
-  .standings-note{padding:8px 16px 12px; font-size:12.5px; color:var(--dim); font-family:'Share Tech Mono',monospace; border-top:1px dashed var(--line);}
+  .group-tab.active.a, .group-tab.active.b{color:#fff; background:var(--red);}
+
   .group-view{display:none;}
   .group-view.active{display:block;}
-
-  /* ---------- GLOBAL GROUP TABS ---------- */
-  .group-tabs{display:flex; gap:0; margin-bottom:26px; border:1px solid var(--line); max-width:560px; margin-left:auto; margin-right:auto;}
-  .group-tab{
-    flex:1; text-align:center; padding:12px 10px; background:var(--panel);
-    font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:14.5px; letter-spacing:2px;
-    color:var(--dim); cursor:pointer; border:none; transition:.15s;
-  }
-  .group-tab + .group-tab{border-left:1px solid var(--line);}
-  .group-tab.active.a{color:var(--cyan); background:rgba(255,45,61,0.08); box-shadow:inset 0 -2px 0 var(--cyan);}
-  .group-tab.active.b{color:var(--gold); background:rgba(255,138,61,0.08); box-shadow:inset 0 -2px 0 var(--gold);}
-
   .schedule-panel{display:none;}
   .schedule-panel.active{display:block;}
 
-  .week-bar{
-    margin:26px 0 18px; padding:12px 20px; background:var(--panel2);
-    border:1px solid var(--line); border-left:3px solid var(--cyan);
+  /* ---------- standings ---------- */
+  .group-panel{background:var(--panel); max-width:560px; margin:0 auto; border-radius:2px; overflow:hidden;}
+  .group-panel .gh{
+    padding:10px 16px; font-weight:800; font-size:14px; color:#fff; background:var(--red);
   }
-  #schedule-B .week-bar{border-left-color:var(--gold);}
-  .wk-row{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;}
-  .week-bar .wk-label{font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:14px; color:#fff; letter-spacing:1px;}
-  .week-bar .wk-date{font-family:'Share Tech Mono',monospace; font-size:14.5px; color:var(--cyan);}
-  #schedule-B .week-bar .wk-date{color:var(--gold);}
-  .week-bar .wk-time{font-family:'Share Tech Mono',monospace; font-size:14.5px; color:var(--dim);}
-  .week-bar .sep{color:var(--line);}
-  .wk-local{
-    text-align:center; margin-top:8px; padding-top:8px; border-top:1px dashed var(--line);
-    font-family:'Share Tech Mono',monospace; font-size:13.5px; color:var(--dim);
+  .group-panel.b .gh{background:var(--red);}
+  .standings{width:100%; border-collapse:collapse; font-size:14px;}
+  .standings th{
+    font-size:12px; color:var(--dim); text-align:right; font-weight:700;
+    padding:9px 12px; border-bottom:1px solid var(--line); background:var(--panel2);
   }
-  .wk-local .wk-local-val{color:var(--text); font-weight:700;}
-  .match{
-    background:var(--panel); border:1px solid var(--line); margin-bottom:16px;
-    clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  .standings th.c-team{text-align:left;}
+  .standings th:nth-child(3), .standings td:nth-child(3),
+  .standings th:nth-child(4), .standings td:nth-child(4) { width: 50px; text-align: center; }
+  .standings th:nth-child(5), .standings td:nth-child(5) { width: 90px; text-align: right; }
+  .standings td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:right; font-size:14px; font-variant-numeric:tabular-nums;}
+  .standings tr:last-child td{border-bottom:none;}
+  .standings td.c-rank{color:var(--dim); font-size:12.5px; width:26px; font-weight:700;}
+  .standings td.c-team{text-align:left; font-size:14.5px; font-weight:700; color:#fff;}
+  .standings-note{padding:9px 16px 12px; font-size:12px; color:var(--dim);}
+  .set-diff { color: var(--amber); font-size: 13px; margin-left: 4px; }
+  .team-logo-small { 
+    width: 18px; height: 18px; object-fit: contain; 
+    filter: drop-shadow(1px 0 0 rgba(255,255,255,0.9)) drop-shadow(-1px 0 0 rgba(255,255,255,0.9)) drop-shadow(0 1px 0 rgba(255,255,255,0.9)) drop-shadow(0 -1px 0 rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(0,0,0,0.8));
   }
-  .match-head{
-    display:flex; justify-content:space-between; align-items:center; padding:9px 16px;
-    background:var(--panel2); border-bottom:1px solid var(--line);
-    font-family:'Share Tech Mono',monospace; font-size:13px; color:var(--dim); letter-spacing:1px;
+  .standings-adv {
+    margin: 12px 16px 4px; padding: 10px 12px; 
+    background: rgba(241,143,60,0.1); border: 1px solid var(--amber); border-radius: 4px;
+    display: flex; gap: 10px; align-items: center;
   }
-  .submatch{padding:16px 16px 18px;}
-  .sm-top{display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:14px; flex-wrap:wrap;}
-  .sm-side{display:flex; flex-direction:column; align-items:center; gap:5px;}
-  .teamname{font-weight:700; font-size:17px; color:#fff;}
-  .vs{color:var(--dim); font-size:14.5px; font-family:'Share Tech Mono',monospace;}
-  .start-ver{
-    font-family:'Share Tech Mono',monospace; font-size:12px; font-weight:700; letter-spacing:.5px;
-    padding:2px 8px; border:1px solid var(--line);
+  .adv-badge {
+    background: var(--amber); color: #000; font-weight: 900; font-size: 11px;
+    padding: 3px 6px; border-radius: 2px; white-space: nowrap;
   }
-  .start-ver.sc2{color:var(--cyan); border-color:rgba(255,45,61,.4); background:rgba(255,45,61,.08);}
-  .start-ver.sc1{color:#e8e0da; border-color:rgba(232,224,218,.35); background:rgba(232,224,218,.06);}
+  .adv-text { font-size: 13px; color: var(--text); line-height: 1.4; }
+  .adv-text b { color: var(--amber); }
 
-  .set-list{display:flex; flex-direction:column; gap:6px;}
+  /* ---------- week bar ---------- */
+  .week-bar{
+    margin:26px 0 14px; padding:12px 18px; background:var(--panel);
+    border-left:4px solid var(--red); border-radius:2px;
+  }
+  .wk-row{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .week-bar .wk-label{font-weight:900; font-size:16px; color:#fff;}
+  .week-bar .wk-date{font-weight:800; font-size:14.5px; color:var(--red);}
+  .week-bar .wk-time{font-size:13.5px; color:var(--text); font-weight:500;}
+  .week-bar .sep{display:none;}
+  .wk-local{margin-top:5px; font-size:12.5px; color:var(--dim);}
+  .wk-local .wk-local-val{color:var(--amber); font-weight:700;}
+
+  /* ---------- match card ---------- */
+  .match{background:var(--panel); margin-bottom:14px; border-radius:2px; overflow:hidden;}
+  .match-head{
+    display:flex; justify-content:space-between; align-items:center; padding:7px 16px;
+    background:var(--panel2); font-size:12px; color:var(--dim); font-weight:700;
+  }
+  .submatch{padding:16px;}
+  .sm-top{
+    display:grid; grid-template-columns:minmax(0, 1fr) 140px minmax(0, 1fr); align-items:center; gap:0; 
+    margin-bottom:14px; padding:0 16px;
+  }
+  .sm-top > .sm-side.left { grid-column: 1; }
+  .sm-top > .vs { grid-column: 2; text-align: center; }
+  .sm-top > .sm-side.right { grid-column: 3; justify-content: flex-start; }
+  .sm-side{display:flex; align-items:center; gap:10px;}
+  .sm-side.left{justify-content:flex-start;}
+  .sm-side.right{justify-content:flex-start; flex-direction:row-reverse;}
+  .team-logo{
+    width: 28px; height: 28px; object-fit: contain; flex-shrink:0;
+    filter: drop-shadow(1px 0 0 rgba(255,255,255,0.9)) drop-shadow(-1px 0 0 rgba(255,255,255,0.9)) drop-shadow(0 1px 0 rgba(255,255,255,0.9)) drop-shadow(0 -1px 0 rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(0,0,0,0.8));
+  }
+  .teamname{font-weight:800; font-size:16.5px; color:#fff; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .vs{color:var(--red); font-size:13px; font-weight:900; text-align:center;}
+  .start-ver{font-size:11.5px; font-weight:700; padding:1px 8px; border-radius:2px;}
+  .start-ver.sc2{color:#fff; background:var(--red-dark);}
+  .start-ver.sc1{color:var(--text); background:#3a2e24;}
+
+  /* ---------- set rows ---------- */
+  .set-list{display:flex; flex-direction:column;}
   .set-row{
-    display:grid; grid-template-columns:34px 1fr auto 1fr; align-items:center; gap:6px;
-    padding:9px 10px; background:var(--void); border:1px solid var(--line);
+    display:grid; grid-template-columns:minmax(0, 1fr) 140px minmax(0, 1fr); align-items:center; gap:0;
+    padding:12px 16px; border-top:1px solid var(--line); position:relative;
   }
-  .set-row.ace{border-color:rgba(255,138,61,.4);}
-  .set-row .set-num{
-    font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--dim); text-align:left; line-height:1.3;
-  }
-  .set-row.ace .set-num{color:var(--gold);}
-  .set-row .side{display:flex; align-items:center; gap:6px; min-width:0;}
+  .set-row.ace{background:rgba(241,143,60,.05);}
+  
+  .set-row > .side:not(.right) { grid-column: 1; }
+  .set-row > .mid { grid-column: 2; display:flex; flex-direction:column; align-items:center; gap:1px; min-width:80px; padding:0 6px; }
+  .set-row > .side.right { grid-column: 3; justify-content: flex-start; }
+  .set-row.ace .set-num{color:var(--amber); font-weight:900;}
+  .set-row .side{display:flex; align-items:center; gap:6px; min-width:0; padding:2px 8px; border-radius:3px;}
   .set-row .side.right{flex-direction:row-reverse; text-align:right;}
-  .set-row .side .player{
-    font-size:14px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
+  .set-row .side.win .player{color:var(--amber);}
+  .set-row .side.win .player::after{content:" ✓";}
+  .set-row .side .player{font-size:15px; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .set-row .side .race{
-    flex-shrink:0; width:19px; height:19px; display:flex; align-items:center; justify-content:center;
-    font-family:'Share Tech Mono',monospace; font-size:11.5px; font-weight:700; color:var(--dim); border:1px solid var(--line);
+    flex-shrink:0; display:flex; align-items:center; justify-content:center;
   }
-  .set-row .side .race.race-t{color:#4da6ff; border-color:rgba(77,166,255,.5); background:rgba(77,166,255,.08);}
-  .set-row .side .race.race-p{color:#ffd24d; border-color:rgba(255,210,77,.5); background:rgba(255,210,77,.08);}
-  .set-row .side .race.race-z{color:#ff4d4d; border-color:rgba(255,77,77,.5); background:rgba(255,77,77,.08);}
+  .race-icon{width:20px; height:20px; object-fit:contain;}
   .set-row .side .ver-chip{
-    flex-shrink:0; font-family:'Share Tech Mono',monospace; font-size:10px; font-weight:700; letter-spacing:.5px;
-    padding:1px 5px; border:1px solid var(--line); color:var(--dim);
+    flex-shrink:0; font-size:10.5px; font-weight:700; padding:1px 6px; border-radius:2px; color:var(--dim); background:var(--panel2);
   }
-  .set-row .side .ver-chip.sc2{color:var(--cyan); border-color:rgba(255,45,61,.4);}
-  .set-row .side .ver-chip.sc1{color:#e8e0da; border-color:rgba(232,224,218,.35);}
-  .set-row .mid{display:flex; flex-direction:column; align-items:center; gap:2px; min-width:70px;}
-  .set-row .mapname{font-size:13.5px; font-weight:700; color:var(--text); text-align:center; line-height:1.25;}
-  .set-row.ace .mapname{color:var(--gold);}
-  .set-row .ace-note{font-family:'Share Tech Mono',monospace; font-size:10.5px; color:var(--gold);}
+  .set-row .side .ver-chip.sc2{color:#fff; background:var(--red-dark);}
+  .set-row .side .ver-chip.sc1{color:var(--text); background:#3a2e24;}
+  
+  .set-row .mapname{font-size:13px; font-weight:700; color:#fff; text-align:center; line-height:1.3;}
+  .set-row.ace .mapname{color:var(--amber);}
+  .set-row .ace-note{font-size:10.5px; color:var(--amber); font-weight:700;}
+  
+  .r-bg-left.r-Z { background:linear-gradient(to right, rgba(220,50,50,0.15) 0%, transparent 100%); border-left:3px solid #e24a4a; }
+  .r-bg-left.r-T { background:linear-gradient(to right, rgba(50,100,255,0.15) 0%, transparent 100%); border-left:3px solid #4a90e2; }
+  .r-bg-left.r-P { background:linear-gradient(to right, rgba(50,200,50,0.15) 0%, transparent 100%); border-left:3px solid #4ae24a; }
+  .r-bg-right.r-Z { background:linear-gradient(to left, rgba(220,50,50,0.15) 0%, transparent 100%); border-right:3px solid #e24a4a; }
+  .r-bg-right.r-T { background:linear-gradient(to left, rgba(50,100,255,0.15) 0%, transparent 100%); border-right:3px solid #4a90e2; }
+  .r-bg-right.r-P { background:linear-gradient(to left, rgba(50,200,50,0.15) 0%, transparent 100%); border-right:3px solid #4ae24a; }
+
   @media(max-width:480px){
-    .set-row{grid-template-columns:1fr; gap:4px; text-align:center;}
-    .set-row .set-num{text-align:center;}
+    .set-row{
+    display:grid; grid-template-columns:minmax(0, 1fr) 140px minmax(0, 1fr); align-items:center; gap:0;
+    padding:12px 16px; border-top:1px solid var(--line); position:relative;
+  }
+    
+  .set-row > .side:not(.right) { grid-column: 1; }
+  .set-row > .mid { grid-column: 2; display:flex; flex-direction:column; align-items:center; gap:1px; min-width:80px; padding:0 6px; }
+  .set-row > .side.right { grid-column: 3; justify-content: flex-start; }
     .set-row .mid{order:-1;}
     .set-row .side, .set-row .side.right{flex-direction:row; justify-content:center;}
   }
 
-  /* ---------- PLAYOFF NOTE (bottom of each group) ---------- */
-  .po-note{
-    max-width:560px; margin:22px auto 0; padding:12px 16px;
-    background:var(--panel2); border:1px solid var(--line); border-left:3px solid var(--dim);
-    font-size:14.5px; line-height:1.6; color:var(--text);
-  }
-  .po-note.a{border-left-color:var(--cyan);}
-  .po-note.b{border-left-color:var(--gold);}
+  .set-num-center{font-size:11px; color:var(--dim); font-weight:800; letter-spacing:1px; margin-bottom:-2px;}
+  .set-num-center.ace{color:var(--amber); font-size:12px;}
 
-  /* ---------- BRACKET ---------- */
-  /* ---------- BRACKET (responsive tree layout w/ connector lines) ---------- */
+
+  /* ---------- WTL Example ---------- */
+  .wtl-match{background:var(--panel); border:1px solid var(--border); border-radius:6px; margin-top:20px; overflow:hidden;}
+  .wtl-header{display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-bottom:1px solid var(--line); background:#1a110a;}
+  .wtl-score{text-align:center;}
+  .wtl-score-num{font-size:22px; font-weight:900; letter-spacing:2px; line-height:1.2;}
+  .wtl-score-desc{font-size:12px; color:var(--dim); font-weight:700;}
+  .wtl-sub{border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .wtl-sub:last-child{border-bottom:none; padding-bottom:0;}
+  .wtl-sub.ace{background:rgba(241,143,60,.03);}
+  .wtl-sub-head{display:flex; justify-content:center; align-items:center; gap:20px; padding:12px 16px 8px; font-size:15px; font-weight:800;}
+  .wtl-sub-head .player-left, .wtl-sub-head .player-right{display:flex; align-items:center; gap:6px; flex:1; overflow:hidden; padding:4px 8px; border-radius:3px;}
+  .wtl-sub-head .player-left{justify-content:flex-end;}
+  .wtl-sub-head .player-right{justify-content:flex-start;}
+  .wtl-sub-head .sub-score{font-family:monospace; font-size:15px; color:var(--text); letter-spacing:1px; flex-shrink:0; opacity:0.8;}
+  .wtl-map-row{display:flex; justify-content:space-between; align-items:center; padding:4px 16px;}
+  .wtl-map-row .res-wrap{display:flex; align-items:center; gap:10px; flex:1;}
+  .wtl-map-row .res-wrap.left{justify-content:flex-start;}
+  .wtl-map-row .res-wrap.right{justify-content:flex-end;}
+  .wtl-map-row .map-name{width:140px; text-align:center; font-size:13px; font-weight:600; color:#ccc; flex-shrink:0;}
+  .map-res{width:24px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; line-height:1; flex-shrink:0;}
+  .map-res.win{background:#2a442a; color:#85d685;}
+  .map-res.lose{background:#442a2a; color:#d68585;}
+  .map-res.empty{background:transparent; color:transparent;}
+
+  
+  /* ---------- WTL Example Colors ---------- */
+  .wtl-sub.win-left { border-left: 4px solid #85d685; background: linear-gradient(90deg, rgba(133,214,133,0.15) 0%, transparent 60%); }
+  .wtl-sub.win-right { border-right: 4px solid #85d685; background: linear-gradient(270deg, rgba(133,214,133,0.15) 0%, transparent 60%); }
+  .wtl-sub.draw { border-left: 4px solid var(--dim); border-right: 4px solid var(--dim); background: rgba(255,255,255,0.03); }
+  /* ---------- playoff note ---------- */
+  .po-note{
+    max-width:560px; margin:20px auto 0; padding:12px 16px;
+    background:var(--panel); border-left:4px solid var(--amber);
+    font-size:13.5px; line-height:1.65; border-radius:2px;
+  }
+  .po-note b{color:var(--amber);}
+
+  /* ---------- bracket ---------- */
   .bracket-canvas{position:relative; width:100%; aspect-ratio:620/224; margin:0 auto;}
   .br-line{position:absolute; background:var(--line);}
-  .br-line.hl{background:var(--dim);}
   .br-box{
-    position:absolute; background:var(--panel); border:1px solid var(--line);
-    border-left:3px solid var(--dim); padding:8px 4% ; display:flex; flex-direction:column; justify-content:center;
-    box-sizing:border-box;
+    position:absolute; background:var(--panel); border-left:4px solid var(--red-dark);
+    padding:8px 4%; display:flex; flex-direction:column; justify-content:center;
+    border-radius:2px;
   }
-  .br-box.ub{top:0%; left:0%; width:29.03%; height:25%; border-left-color:var(--cyan);}
-  .br-box.lbsf{top:75%; left:0%; width:29.03%; height:25%; border-left-color:var(--dim);}
-  .br-box.lbf{top:37.5%; left:35.48%; width:29.03%; height:25%; border-left-color:var(--dim);}
-  .br-box.gf{top:17.19%; left:70.97%; width:29.03%; height:28.13%; border-left-color:var(--gold); background:var(--panel2);}
-  .br-tag{font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:clamp(9px,2.2vw,12.5px); letter-spacing:1px; color:var(--cyan); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .br-box.gf .br-tag{color:var(--gold);}
-  .br-match{display:flex; align-items:center; gap:4px; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; flex-wrap:wrap; line-height:1.3;}
-  .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11.5px); font-family:'Share Tech Mono',monospace; font-weight:500;}
-
-  footer{text-align:center; padding:36px 20px 56px; color:var(--dim); font-size:13.5px; font-family:'Share Tech Mono',monospace;}
+  .br-box.ub{top:0%; left:0%; width:29.03%; height:25%; border-left-color:var(--red);}
+  .br-box.lbsf{top:75%; left:0%; width:29.03%; height:25%;}
+  .br-box.lbf{top:37.5%; left:35.48%; width:29.03%; height:25%;}
+  .br-box.gf{top:17.19%; left:70.97%; width:29.03%; height:28.13%; border-left-color:var(--amber); background:var(--panel2);}
+  .br-tag{font-weight:900; font-size:clamp(9px,2.2vw,13px); color:var(--red); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .br-box.gf .br-tag{color:var(--amber);}
+  .br-match{display:flex; align-items:center; gap:5px; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; flex-wrap:wrap; line-height:1.3;}
+  .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700;}
 </style>
 </head>
 <body data-lang="en">
 
-<div class="controlbar">
+<div class="floating-lang">
   <button class="lang-btn" id="btn-ko">한국어</button>
-  <button class="lang-btn active" id="btn-en">ENGLISH</button>
-</div>
-
-<div class="hero">
-  <div class="eyebrow">STARCRAFT COMMUNITY LEAGUE</div>
-  <h1>크총모 S4</h1>
-  <p><span class="lang-ko">본선 8강 조별리그</span><span class="lang-en">Round of 8 · Group Stage</span></p>
-  <span class="tag">
-    <span class="lang-ko">8팀 // 2조 // 5전3선승제</span>
-    <span class="lang-en">8 TEAMS // 2 GROUPS // BEST OF 5</span>
-  </span>
+  <button class="lang-btn active" id="btn-en">ENG</button>
 </div>
 
 <div class="deadline-banner">
   <div class="db-icon">⏰</div>
   <div>
-    <div class="db-title"><span class="lang-ko">라인업 제출 마감 (매주 반복)</span><span class="lang-en">Lineup Submission Deadline (Weekly)</span></div>
+    <div class="db-title"><span class="lang-ko">라인업 제출 마감</span><span class="lang-en">Lineup Submission Deadline</span></div>
     <div class="db-abs">
-      <span class="lang-ko">한국시간(KST) 매주 월요일 23:00 · 그 주 조별리그 경기 시작 전 필수 제출</span>
-      <span class="lang-en">Every Monday 23:00 KST (Korea Standard Time) — due before that week's group stage matches begin</span>
-    </div>
-    <div class="db-local">
-      <span class="lang-ko">내 시간대 기준(1주차 예시): </span><span class="lang-en">Your local time (Week 1 example): </span>
-      <span class="db-local-val" id="deadline-local"></span>
+      <span class="lang-ko">
+        • 1주차: 7월 6일(월) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-06T23:00:00+09:00"></span>)</span><br>
+        • 2주차: 7월 13일(월) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-13T23:00:00+09:00"></span>)</span>
+      </span>
+      <span class="lang-en">
+        • Week 1: Jul 6 (Mon) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-06T23:00:00+09:00"></span>)</span><br>
+        • Week 2: Jul 13 (Mon) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-13T23:00:00+09:00"></span>)</span>
+      </span>
     </div>
     <div class="db-submit">
       <span class="lang-ko">제출 방법: Kuro에게 DM</span>
@@ -290,8 +317,16 @@
 
 <section>
   <div class="section-head">
+    <span class="num">00</span>
+    <h2><span class="lang-ko">8강 조별 풀리그</span><span class="lang-en">Round of 8 Group Stage</span></h2>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
     <span class="num">01</span>
-    <h2><span class="lang-ko">대회 공통 규정</span><span class="lang-en">Tournament Rules</span></h2>
+    <h2><span class="lang-ko">대회 공통 규정 <span style="color:var(--amber);">(필독)</span></span><span class="lang-en">General Rules <span style="color:var(--amber);">(Must Read)</span></span></h2>
     <div class="rule"></div>
     <button class="rules-toggle" id="toggle-rules">
       <span class="lang-ko">전체 보기</span><span class="lang-en">Show All</span>
@@ -309,13 +344,20 @@
   </div>
 
   <div class="group-tabs">
-    <button class="group-tab a active" data-group="A">GROUP A</button>
-    <button class="group-tab b" data-group="B">GROUP B</button>
+    <button class="group-tab a active" data-group="A"><span class="lang-ko">A조</span><span class="lang-en">Group A</span></button>
+    <button class="group-tab b" data-group="B"><span class="lang-ko">B조</span><span class="lang-en">Group B</span></button>
   </div>
 
   <div class="group-view active" id="view-A">
-    <div class="group-panel a"><div class="gh">GROUP A <span class="lang-ko">순위표</span><span class="lang-en">STANDINGS</span></div>
+    <div class="group-panel a"><div class="gh"><span class="lang-ko">A조 순위</span><span class="lang-en">Group A Standings</span></div>
       <div style="overflow-x:auto;"><table class="standings" id="groupA"></table></div>
+      <div class="standings-adv">
+        <div class="adv-badge"><span class="lang-ko">1위 혜택</span><span class="lang-en">1st Place</span></div>
+        <div class="adv-text">
+          <span class="lang-ko">조 1위는 <b>승자조 결승(UB Finals)</b>에 직행하며, 승리 시 최종 결승 다이렉트 진출 및 <b>상대 선봉 지목권</b>을 얻게 됩니다!</span>
+          <span class="lang-en">Group 1st advances to <b>UB Finals</b>. A win there grants a direct Grand Finals spot & <b>the right to designate the opponent's Set 1 player!</b></span>
+        </div>
+      </div>
       <div class="standings-note">
         <span class="lang-ko">* 경기 시작 전 — 결과 반영 전 임시값(0-0)입니다</span>
         <span class="lang-en">* Pre-tournament — placeholder values (0-0) until results are in</span>
@@ -323,15 +365,21 @@
     </div>
     <div class="schedule-panel active" id="schedule-A"></div>
     <div class="po-note a">
-      <span class="lang-ko"><b>PLAYOFFS ▸</b> A조 1위는 <b>UB Finals</b>, A조 2위는 <b>LB Semifinals</b>에 진출합니다. 자세한 대진은 아래 03. 플레이오프 참고.</span>
-      <span class="lang-en"><b>PLAYOFFS ▸</b> Group A's 1st place advances to <b>UB Finals</b>, 2nd place to <b>LB Semifinals</b>. See 03. Playoffs below for the full bracket.</span>
+      <span class="lang-ko"><b>플레이오프 진출</b> — A조 1위는 <b>UB Finals</b>, A조 2위는 <b>LB Semifinals</b>에 진출합니다. 자세한 대진은 아래 플레이오프 섹션 참고.</span>
+      <span class="lang-en"><b>Playoff spots</b> — Group A's 1st place advances to <b>UB Finals</b>, 2nd place to <b>LB Semifinals</b>. See the Playoffs section below for the full bracket.</span>
     </div>
   </div>
 
-
   <div class="group-view" id="view-B">
-    <div class="group-panel b"><div class="gh">GROUP B <span class="lang-ko">순위표</span><span class="lang-en">STANDINGS</span></div>
+    <div class="group-panel b"><div class="gh"><span class="lang-ko">B조 순위</span><span class="lang-en">Group B Standings</span></div>
       <div style="overflow-x:auto;"><table class="standings" id="groupB"></table></div>
+      <div class="standings-adv">
+        <div class="adv-badge"><span class="lang-ko">1위 혜택</span><span class="lang-en">1st Place</span></div>
+        <div class="adv-text">
+          <span class="lang-ko">조 1위는 <b>승자조 결승(UB Finals)</b>에 직행하며, 승리 시 최종 결승 다이렉트 진출 및 <b>상대 선봉 지목권</b>을 얻게 됩니다!</span>
+          <span class="lang-en">Group 1st advances to <b>UB Finals</b>. A win there grants a direct Grand Finals spot & <b>the right to designate the opponent's Set 1 player!</b></span>
+        </div>
+      </div>
       <div class="standings-note">
         <span class="lang-ko">* 경기 시작 전 — 결과 반영 전 임시값(0-0)입니다</span>
         <span class="lang-en">* Pre-tournament — placeholder values (0-0) until results are in</span>
@@ -339,8 +387,8 @@
     </div>
     <div class="schedule-panel active" id="schedule-B"></div>
     <div class="po-note b">
-      <span class="lang-ko"><b>PLAYOFFS ▸</b> B조 1위는 <b>UB Finals</b>, B조 2위는 <b>LB Semifinals</b>에 진출합니다. 자세한 대진은 아래 03. 플레이오프 참고.</span>
-      <span class="lang-en"><b>PLAYOFFS ▸</b> Group B's 1st place advances to <b>UB Finals</b>, 2nd place to <b>LB Semifinals</b>. See 03. Playoffs below for the full bracket.</span>
+      <span class="lang-ko"><b>플레이오프 진출</b> — B조 1위는 <b>UB Finals</b>, B조 2위는 <b>LB Semifinals</b>에 진출합니다. 자세한 대진은 아래 플레이오프 섹션 참고.</span>
+      <span class="lang-en"><b>Playoff spots</b> — Group B's 1st place advances to <b>UB Finals</b>, 2nd place to <b>LB Semifinals</b>. See the Playoffs section below for the full bracket.</span>
     </div>
   </div>
 </section>
@@ -348,20 +396,192 @@
 <section id="playoffs-section">
   <div class="section-head">
     <span class="num">03</span>
-    <h2><span class="lang-ko">플레이오프</span><span class="lang-en">Playoffs</span></h2>
+    <h2><span class="lang-ko">플레이오프 진행 방식 <span style="color:var(--amber);">(필독)</span></span><span class="lang-en">Playoff Format <span style="color:var(--amber);">(Must Read)</span></span></h2>
     <div class="rule"></div>
+    <button class="rules-toggle" id="toggle-playoff-rules">
+      <span class="lang-ko">전체 보기</span><span class="lang-en">Show All</span>
+      <span class="chev">▾</span>
+    </button>
   </div>
+  <div class="rules" id="playoff-rules-grid" style="margin-bottom:34px;"></div>
+      <!-- WTL Example -->
+      <div style="max-width:1040px; margin:0 auto;">
+      <h3 class="section-head" style="margin-top:40px; margin-bottom:12px;">
+        <span class="lang-ko">플레이오프 경기 방식 (예시)</span>
+        <span class="lang-en">Playoff Format (Example)</span>
+      </h3>
+      <div class="wtl-match">
+        <div class="wtl-header">
+          <div class="sm-side left">
+            <img src="./assets/team_logos/턱돌호범.png" class="team-logo">
+            <span class="teamname"><span class="lang-ko">턱돌호범</span><span class="lang-en">CRHB</span></span>
+          </div>
+          <div class="wtl-score">
+            <div class="wtl-score-num">4 : 5</div>
+            <div class="wtl-score-desc">(Bo7)</div>
+          </div>
+          <div class="sm-side right" style="flex-direction:row-reverse; justify-content:flex-start;">
+            <img src="./assets/team_logos/BASILISK.png" class="team-logo">
+            <span class="teamname">BASILISK</span>
+          </div>
+        </div>
 
+        <!-- Set 1: Classic vs Serral -->
+        <div class="wtl-sub win-right">
+          <div class="wtl-sub-head">
+            <div class="player-left r-bg-left r-P"><span style="color:var(--dim);">Classic</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">0 | 2</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:#85d685;">Serral</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
+            <div class="map-name">Blackrock</div>
+            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc1">SC1</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
+            <div class="map-name">Polypoid</div>
+            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
+          </div>
+        </div>
+
+        <!-- Set 2: herO vs Serral -->
+        <div class="wtl-sub win-left">
+          <div class="wtl-sub-head">
+            <div class="player-left r-bg-left r-P"><span style="color:#85d685;">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">2 | 0</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:var(--dim);">Serral</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res win">W</div></div>
+            <div class="map-name">Blackrock</div>
+            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc2">SC2</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
+            <div class="map-name">Polypoid</div>
+            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
+          </div>
+        </div>
+
+        <!-- Set 3: herO vs Reynor (Middle 1:1) -->
+        <div class="wtl-sub draw">
+          <div class="wtl-sub-head">
+            <div class="player-left r-bg-left r-P"><span style="color:var(--dim);">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">1 | 1</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:var(--dim);">Reynor</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
+            <div class="map-name">Blackrock</div>
+            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
+            <div class="map-name">Polypoid</div>
+            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
+          </div>
+        </div>
+
+        <!-- Set 4: Solar vs trigger -->
+        <div class="wtl-sub win-right">
+          <div class="wtl-sub-head">
+            <div class="player-left r-bg-left r-Z"><span style="color:var(--dim);">Solar</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">0 | 2</div>
+            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span style="color:#85d685;">trigger</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
+            <div class="map-name">Blackrock</div>
+            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc1">SC1</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
+            <div class="map-name">Polypoid</div>
+            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
+          </div>
+        </div>
+
+        <!-- Set 5: SHIN vs trigger -->
+        <div class="wtl-sub win-left">
+          <div class="wtl-sub-head">
+            <div class="player-left r-bg-left r-Z"><span style="color:#85d685;">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">2 | 0</div>
+            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span style="color:var(--dim);">trigger</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res win">W</div></div>
+            <div class="map-name">Blackrock</div>
+            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc2">SC2</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
+            <div class="map-name">Polypoid</div>
+            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
+          </div>
+        </div>
+
+        <!-- Set 6: 4th Players Tie -->
+        <div class="wtl-sub draw">
+          <div class="wtl-sub-head">
+            <div class="player-left r-bg-left r-Z"><span style="color:var(--dim);">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">1 | 1</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:var(--dim);">Serral</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
+            <div class="map-name">Blackrock</div>
+            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
+          </div>
+          <div class="wtl-map-row">
+            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
+            <div class="map-name">Polypoid</div>
+            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
+          </div>
+        </div>
+
+        <!-- SUPER ACE MATCH -->
+        <div class="wtl-sub win-right ace" style="padding-bottom:12px;">
+          <div class="set-num-center ace" style="text-align:center; margin-top:16px;">SUPER ACE MATCH</div>
+          <div class="wtl-sub-head" style="padding-top:4px;">
+            <div class="player-left r-bg-left r-P"><span style="color:var(--dim);">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score" style="color:var(--text);">0 | 1</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:#85d685;">Serral</span></div>
+          </div>
+          <div class="wtl-map-row" style="flex-direction:column; gap:4px; margin-bottom:8px; margin-top:8px;">
+            <div style="display:flex; gap:16px; align-items:center; width:100%;">
+              <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
+              <div class="map-name" style="color:var(--amber);">Alcyone LE</div>
+              <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc1">SC1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  <div class="section-head" style="margin-top:60px;">
+    <span class="num">04</span>
+    <h2>
+      <span class="lang-ko">플레이오프 대진표</span><span class="lang-en">Playoff Bracket</span>
+      <span style="font-size:13px; color:var(--amber); font-weight:700; margin-left:8px;">
+        <span class="lang-ko">(WTL 포맷: 승리시 연승도전 / 무승부, 패배시 다음 선수 출전)</span>
+        <span class="lang-en">(WTL Format)</span>
+      </span>
+    </h2>
+  </div>
+</section>
+
+<!-- Playoff Bracket -->
+<section class="bracket-container">
   <div class="bracket-canvas">
-    <!-- connector lines -->
+<!-- connector lines -->
     <div class="br-line" style="top:12.05%; left:29.03%; width:3.23%; height:2px;"></div>
     <div class="br-line" style="top:87.05%; left:29.03%; width:3.23%; height:2px;"></div>
     <div class="br-line" style="top:12.5%; left:32.26%; width:2px; height:75%;"></div>
-    <div class="br-line hl" style="top:49.55%; left:32.26%; width:3.23%; height:2px;"></div>
-    <div class="br-line hl" style="top:12.05%; left:29.03%; width:35.48%; height:2px;"></div>
-    <div class="br-line hl" style="top:49.55%; left:64.52%; width:3.23%; height:2px;"></div>
-    <div class="br-line hl" style="top:12.5%; left:67.74%; width:2px; height:37.5%;"></div>
-    <div class="br-line hl" style="top:30.8%; left:67.74%; width:3.23%; height:2px;"></div>
+    <div class="br-line" style="top:49.55%; left:32.26%; width:3.23%; height:2px;"></div>
+    <div class="br-line" style="top:12.05%; left:29.03%; width:38.71%; height:2px;"></div>
+    <div class="br-line" style="top:49.55%; left:64.52%; width:3.23%; height:2px;"></div>
+    <div class="br-line" style="top:12.5%; left:67.74%; width:2px; height:37.5%;"></div>
+    <div class="br-line" style="top:30.8%; left:67.74%; width:3.23%; height:2px;"></div>
 
     <!-- match boxes -->
     <div class="br-box ub">
@@ -401,16 +621,6 @@
     </div>
   </div>
 
-  <div class="section-head" style="margin-top:34px;">
-    <span class="num">03-1</span>
-    <h2 style="font-size:16px;"><span class="lang-ko">플레이오프 진행 방식</span><span class="lang-en">Playoff Match Format</span></h2>
-    <div class="rule"></div>
-    <button class="rules-toggle" id="toggle-playoff-rules">
-      <span class="lang-ko">전체 보기</span><span class="lang-en">Show All</span>
-      <span class="chev">▾</span>
-    </button>
-  </div>
-  <div class="rules" id="playoff-rules-grid"></div>
 </section>
 
 <script>
@@ -438,7 +648,6 @@ const PLAYOFF_RULES = [
 
 const GROUP_A = ["Shopify","ONSYDE","If we lose, it's Crank's fault","StalnieBalls"];
 const GROUP_B = ["Team Liquid","Basilisk","CRHB","Team Red White Blue"];
-// Placeholder standings (0-0) — wire this up to editable data later for the admin page.
 function blankStats(){ return { w:0, l:0, sw:0, sl:0 }; }
 
 const WEEKS = [
@@ -468,14 +677,37 @@ const WEEKS = [
 
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-// Korean display names differ from the canonical (English) team name for some teams.
 const TEAM_KO = {
   "If we lose, it's Crank's fault": "지면 크랭크탓",
   "CRHB": "턱돌호범",
 };
+const TEAM_LOGO = {
+  "Shopify": "Shopify Rebellion.png",
+  "ONSYDE": "ONSYDE.png",
+  "If we lose, it's Crank's fault": "지면 크랭크탓.png",
+  "StalnieBalls": "StalnieBalls.png",
+  "Team Liquid": "Team Liquid.png",
+  "Basilisk": "BASILISK.png",
+  "CRHB": "턱돌호범.png",
+  "Team Red White Blue": "Team RWB.png"
+};
+
 function teamNameHTML(name){
   const ko = TEAM_KO[name] || name;
   return `<span class="lang-ko">${esc(ko)}</span><span class="lang-en">${esc(name)}</span>`;
+}
+
+function getRaceIcon(race, ver) {
+  if(!race || race === "-") return "-";
+  const prefix = ver === "SC1" ? "bw_" : "";
+  const r = race.toLowerCase();
+  const raceMap = { "t": "terran", "p": "protoss", "z": "zerg" };
+  const rName = raceMap[r] || r;
+  return `<img src="./assets/icons/${prefix}${rName}.png" class="race-icon" alt="${race}">`;
+}
+
+function cleanMapName(map) {
+  return map.replace(/\[SC:Evo\]\s*/i, "").replace(/\s*LE$/i, "");
 }
 
 document.getElementById("rules-grid").innerHTML = RULES.map(r=>`
@@ -501,16 +733,26 @@ function wireRulesToggle(btnId, gridId){
 wireRulesToggle("toggle-rules", "rules-grid");
 wireRulesToggle("toggle-playoff-rules", "playoff-rules-grid");
 
-function renderStandings(elId, teams){
+function renderStandings(elId, teams, standingsData){
   const rows = teams.map((t,i)=>{
-    const s = blankStats();
+    const s = (standingsData && standingsData[t]) || blankStats();
+    const diff = s.sw - s.sl;
+    const diffStr = diff > 0 ? `+${diff}` : diff;
     return `
       <tr data-team="${esc(t)}">
         <td class="c-rank">${i+1}</td>
-        <td class="c-team">${teamNameHTML(t)}</td>
+        <td class="c-team">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="./assets/team_logos/${TEAM_LOGO[t]}" class="team-logo-small">
+            ${teamNameHTML(t)}
+          </div>
+        </td>
         <td><span class="stat" data-team="${esc(t)}" data-field="w">${s.w}</span></td>
         <td><span class="stat" data-team="${esc(t)}" data-field="l">${s.l}</span></td>
-        <td><span class="stat" data-team="${esc(t)}" data-field="setdiff">${s.sw}-${s.sl}</span></td>
+        <td>
+          <span class="stat" data-team="${esc(t)}" data-field="setdiff">${s.sw}-${s.sl}</span>
+          <span class="set-diff">(${diffStr})</span>
+        </td>
       </tr>`;
   }).join("");
   document.getElementById(elId).innerHTML = `
@@ -519,12 +761,10 @@ function renderStandings(elId, teams){
       <th class="c-team"><span class="lang-ko">팀</span><span class="lang-en">TEAM</span></th>
       <th><span class="lang-ko">승</span><span class="lang-en">W</span></th>
       <th><span class="lang-ko">패</span><span class="lang-en">L</span></th>
-      <th><span class="lang-ko">세트</span><span class="lang-en">SET</span></th>
+      <th><span class="lang-ko">세트(득실)</span><span class="lang-en">SET(DIFF)</span></th>
     </tr></thead>
     <tbody>${rows}</tbody>`;
 }
-renderStandings("groupA", GROUP_A);
-renderStandings("groupB", GROUP_B);
 
 function formatLocalTime(iso){
   try{
@@ -535,7 +775,7 @@ function formatLocalTime(iso){
   }catch(e){ return iso; }
 }
 
-function renderSchedule(group){
+function renderSchedule(group, matchesData){
   const container = document.getElementById(`schedule-${group}`);
   WEEKS.forEach((week, wi)=>{
     const day = group === "A" ? week.dayA : week.dayB;
@@ -545,9 +785,7 @@ function renderSchedule(group){
       <div class="week-bar">
         <div class="wk-row">
           <span class="wk-label"><span class="lang-ko">${esc(week.ko)}</span><span class="lang-en">${esc(week.en)}</span></span>
-          <span class="sep">//</span>
           <span class="wk-date">2026.${esc(day)}</span>
-          <span class="sep">//</span>
           <span class="wk-time">
             <span class="lang-ko">한국시간(KST) ${esc(week.time)} 시작</span>
             <span class="lang-en">Kickoff ${esc(week.time)} (Korea Standard Time)</span>
@@ -563,20 +801,24 @@ function renderSchedule(group){
       const [t1,t2] = m[group].t;
       const v1 = m[group].v;
       const v2 = v1 === "SC2" ? "SC1" : "SC2";
+      const matchKey = `w${wi+1}-m${mi+1}-${group}`;
+      const md = (matchesData && matchesData[matchKey]) || null;
       const matchEl = document.createElement("div");
       matchEl.className = "match";
       matchEl.innerHTML = `
-        <div class="match-head"><span>MATCH ${mi+1} // BO5</span><span>${wi+1}-${mi+1}</span></div>
+        <div class="match-head"><span>MATCH ${mi+1} · BO5</span><span>${wi+1}-${mi+1}</span></div>
         <div class="submatch">
           <div class="sm-top">
-            <div class="sm-side">
+            <div class="sm-side left">
+              <img src="./assets/team_logos/${TEAM_LOGO[t1]}" class="team-logo">
               <span class="teamname">${teamNameHTML(t1)}</span>
               <span class="start-ver ${v1==='SC2'?'sc2':'sc1'}">
                 <span class="lang-ko">${v1} 시작</span><span class="lang-en">${v1} Start</span>
               </span>
             </div>
             <span class="vs">VS</span>
-            <div class="sm-side">
+            <div class="sm-side right">
+              <img src="./assets/team_logos/${TEAM_LOGO[t2]}" class="team-logo">
               <span class="teamname">${teamNameHTML(t2)}</span>
               <span class="start-ver ${v2==='SC2'?'sc2':'sc1'}">
                 <span class="lang-ko">${v2} 시작</span><span class="lang-en">${v2} Start</span>
@@ -585,42 +827,52 @@ function renderSchedule(group){
           </div>
           <div class="set-list">
             ${m.maps.map((map,si)=>{
-              if(si===4){
-                return `
-                <div class="set-row ace" data-set="${si}">
-                  <div class="set-num"><span class="lang-ko">세트 5<br>에이스</span><span class="lang-en">SET 5<br>ACE</span></div>
-                  <div class="side">
-                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">-</span>
-                    <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">TBD</span>
-                  </div>
-                  <div class="mid">
-                    <div class="mapname">${esc(map)}</div>
-                    <div class="ace-note"><span class="lang-ko">코인플립 선택</span><span class="lang-en">Coin-Flip Pick</span></div>
-                  </div>
-                  <div class="side right">
-                    <span class="player" data-team="${esc(t2)}" data-set="${si}" data-field="player">TBD</span>
-                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">-</span>
-                  </div>
-                </div>`;
-              }
+              const sd = md && md.sets && md.sets[si] ? md.sets[si] : {winner:null,p1:"",race1:"",p2:"",race2:""};
+              const p1 = sd.p1 || "TBD";
+              const p2 = sd.p2 || "TBD";
+              const r1 = sd.race1 || "-";
+              const r2 = sd.race2 || "-";
+              const win1 = sd.winner === "1" ? " win" : "";
+              const win2 = sd.winner === "2" ? " win" : "";
               const ver1 = si % 2 === 0 ? v1 : v2;
               const ver2 = si % 2 === 0 ? v2 : v1;
               const verClass = v => v==="SC2" ? "sc2" : v==="SC1" ? "sc1" : "";
+              const r1Class = r1 && r1 !== "-" ? ` r-bg-left r-${r1}` : "";
+              const r2Class = r2 && r2 !== "-" ? ` r-bg-right r-${r2}` : "";
+              if(si===4){
+                return `
+                <div class="set-row ace" data-set="${si}">
+                  
+                  <div class="side${win1}${r1Class}">
+                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(r1, ver1)}</span>
+                    <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">${esc(p1)}</span>
+                  </div>
+                  <div class="mid">
+                    <div class="set-num-center ace"><span class="lang-ko">에이스결정전</span><span class="lang-en">ACE MATCH</span></div>
+                    <div class="mapname">${esc(cleanMapName(map))}</div>
+                    <div class="ace-note"><span class="lang-ko">코인플립 선택</span><span class="lang-en">Coin-Flip Pick</span></div>
+                  </div>
+                  <div class="side right${win2}${r2Class}">
+                    <span class="player" data-team="${esc(t2)}" data-set="${si}" data-field="player">${esc(p2)}</span>
+                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">${getRaceIcon(r2, ver2)}</span>
+                  </div>
+                </div>`;
+              }
               return `
                 <div class="set-row" data-set="${si}">
-                  <div class="set-num"><span class="lang-ko">세트</span><span class="lang-en">SET</span><br>${si+1}</div>
-                  <div class="side">
-                    <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">TBD</span>
-                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">-</span>
+                  <div class="side${win1}${r1Class}">
+                    <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">${esc(p1)}</span>
+                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(r1, ver1)}</span>
                     <span class="ver-chip ${verClass(ver1)}" data-team="${esc(t1)}" data-set="${si}" data-field="version">${ver1}</span>
                   </div>
                   <div class="mid">
-                    <div class="mapname">${esc(map)}</div>
+                    <div class="set-num-center"><span class="lang-ko">${si+1}세트</span><span class="lang-en">SET ${si+1}</span></div>
+                    <div class="mapname">${esc(cleanMapName(map))}</div>
                   </div>
-                  <div class="side right">
+                  <div class="side right${win2}${r2Class}">
                     <span class="ver-chip ${verClass(ver2)}" data-team="${esc(t2)}" data-set="${si}" data-field="version">${ver2}</span>
-                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">-</span>
-                    <span class="player" data-team="${esc(t2)}" data-set="${si}" data-field="player">TBD</span>
+                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">${getRaceIcon(r2, ver2)}</span>
+                    <span class="player" data-team="${esc(t2)}" data-set="${si}" data-field="player">${esc(p2)}</span>
                   </div>
                 </div>`;
             }).join("")}
@@ -630,11 +882,18 @@ function renderSchedule(group){
     });
   });
 }
-renderSchedule("A");
-renderSchedule("B");
 
-// entry deadline banner: Monday 23:00 KST before Week 1 (2026-07-06)
-document.getElementById("deadline-local").textContent = formatLocalTime("2026-07-06T23:00:00+09:00");
+(async function loadDataAndRender(){
+  let data = null;
+  try{
+    const res = await fetch("./data.json", { cache: "no-store" });
+    if(res.ok) data = await res.json();
+  }catch(e){ }
+  renderStandings("groupA", GROUP_A, data && data.standings);
+  renderStandings("groupB", GROUP_B, data && data.standings);
+  renderSchedule("A", data && data.matches);
+  renderSchedule("B", data && data.matches);
+})();
 
 // ---- group tabs ----
 document.querySelectorAll(".group-tab").forEach(tab=>{
@@ -648,15 +907,26 @@ document.querySelectorAll(".group-tab").forEach(tab=>{
 });
 
 // ---- language toggle ----
-document.getElementById("btn-ko").addEventListener("click", ()=>{
-  document.body.dataset.lang = "ko";
-  document.getElementById("btn-ko").classList.add("active");
-  document.getElementById("btn-en").classList.remove("active");
-});
-document.getElementById("btn-en").addEventListener("click", ()=>{
-  document.body.dataset.lang = "en";
-  document.getElementById("btn-en").classList.add("active");
-  document.getElementById("btn-ko").classList.remove("active");
+function setLanguage(lang) {
+  document.body.dataset.lang = lang;
+  localStorage.setItem('ccm_lang', lang);
+  if(lang === 'ko'){
+    document.getElementById("btn-ko").classList.add("active");
+    document.getElementById("btn-en").classList.remove("active");
+  } else {
+    document.getElementById("btn-en").classList.add("active");
+    document.getElementById("btn-ko").classList.remove("active");
+  }
+}
+document.getElementById("btn-ko").addEventListener("click", () => setLanguage('ko'));
+document.getElementById("btn-en").addEventListener("click", () => setLanguage('en'));
+
+// initialize language from localStorage
+const savedLang = localStorage.getItem('ccm_lang') || 'ko';
+setLanguage(savedLang);
+
+document.querySelectorAll('.local-time').forEach(el => {
+  el.textContent = formatLocalTime(el.dataset.iso);
 });
 
 document.querySelectorAll(".section-head .num").forEach(n=>{ n.textContent = "›"; });

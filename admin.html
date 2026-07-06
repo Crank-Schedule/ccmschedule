@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크총모 S4 · 관리자</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0708; --panel:#181011; --panel2:#221416; --line:#3a2224;
+    --red:#e5202e; --red-dark:#8f1119; --amber:#f18f3c;
+    --text:#efe7e5; --dim:#9c8283; --ok:#3fbf6f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Noto Sans KR',sans-serif; font-weight:400; line-height:1.55;
+  }
+  h1,h2,h3{font-weight:800; margin:0;}
+  header{
+    padding:0 18px; height:52px; border-bottom:2px solid var(--red); display:flex; align-items:center;
+    justify-content:space-between; gap:12px; flex-wrap:wrap; position:sticky; top:0; background:#000; z-index:10;
+  }
+  header h1{font-size:16px; color:#fff;}
+  header a{color:var(--dim); font-size:13px; text-decoration:none; font-weight:700;}
+  header a:hover{color:#fff;}
+  .status-pill{
+    font-size:12px; font-weight:700; padding:3px 10px; border-radius:2px;
+    background:var(--panel2); color:var(--dim);
+  }
+  .status-pill.ok{color:#fff; background:var(--ok);}
+  .status-pill.err{color:#fff; background:var(--red);}
+  main{max-width:960px; margin:0 auto; padding:24px 18px 90px;}
+
+  /* ---- login gate ---- */
+  .login-box{
+    max-width:440px; margin:56px auto; padding:24px; background:var(--panel);
+    border-top:3px solid var(--red); border-radius:2px;
+  }
+  .login-box h2{font-size:18px; margin-bottom:6px; color:#fff;}
+  .login-box p{font-size:13.5px; color:var(--dim); margin:0 0 18px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--dim); margin-bottom:5px;}
+  .field input, .field select{
+    width:100%; padding:10px; background:var(--bg); border:1px solid var(--line); color:var(--text);
+    font-family:'Noto Sans KR',sans-serif; font-size:14px; border-radius:2px;
+  }
+  .field input:focus, .field select:focus{outline:none; border-color:var(--red);}
+  .field .hint{font-size:12px; color:var(--dim); margin-top:4px;}
+  .btn{
+    background:var(--red); color:#fff; border:none; padding:10px 18px; font-weight:800;
+    font-family:'Noto Sans KR',sans-serif; font-size:14px; cursor:pointer; border-radius:2px;
+  }
+  .btn:hover{filter:brightness(1.12);}
+  .btn.secondary{background:var(--panel2); color:var(--text);}
+  .btn.secondary:hover{color:#fff;}
+  .btn:disabled{opacity:.5; cursor:not-allowed;}
+  .login-err{color:var(--red); font-size:13px; margin-top:10px; display:none; font-weight:700;}
+
+  /* ---- editor ---- */
+  #editor{display:none;}
+  .toolbar{
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:22px;
+    padding:10px 14px; background:var(--panel); border-radius:2px;
+    position:sticky; top:60px; z-index:9;
+  }
+  .toolbar .repo-tag{font-size:12px; color:var(--dim); overflow:hidden; text-overflow:ellipsis;}
+  .toolbar .spacer{flex:1;}
+
+  .section{margin-bottom:36px;}
+  .section h2{font-size:17px; color:#fff; padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:16px;}
+  .section h2 .accent{color:var(--red);}
+
+  .standings-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
+  .standings-grid .grp{background:var(--panel); border-radius:2px; overflow:hidden;}
+  .standings-grid .grp .gh{padding:9px 14px; font-weight:800; font-size:13.5px; color:#fff; background:var(--red);}
+  .team-edit-row{display:grid; grid-template-columns:1fr 48px 48px 48px 48px; gap:6px; align-items:center; padding:8px 14px; border-bottom:1px solid var(--line);}
+  .team-edit-row:last-child{border-bottom:none;}
+  .team-edit-row .tname{font-size:13.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .team-edit-row input{width:100%; padding:6px 4px; background:var(--bg); border:1px solid var(--line); color:var(--text); text-align:center; font-size:13px; border-radius:2px; font-variant-numeric:tabular-nums;}
+  .standings-labels{display:grid; grid-template-columns:1fr 48px 48px 48px 48px; gap:6px; padding:7px 14px; font-size:11px; font-weight:700; color:var(--dim); text-align:center; background:var(--panel2);}
+  .standings-labels span:first-child{text-align:left;}
+
+  .group-tabs2{display:flex; margin-bottom:18px; max-width:400px; border-radius:2px; overflow:hidden;}
+  .group-tabs2 button{flex:1; padding:10px; background:var(--panel); border:none; color:var(--dim); font-weight:800; cursor:pointer; font-size:13.5px;}
+  .group-tabs2 button.active{color:#fff; background:var(--red);}
+
+  .match-block{background:var(--panel); margin-bottom:14px; border-radius:2px; overflow:hidden;}
+  .match-block .mh{padding:8px 14px; background:var(--panel2); font-size:12.5px; color:var(--dim); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .match-block .mh b{color:#fff;}
+  .set-edit-row{padding:10px 14px; border-top:1px solid var(--line); display:grid; grid-template-columns:70px 1fr 1fr; gap:10px; align-items:center;}
+  .set-edit-row .sn{font-size:12px; font-weight:800; color:var(--red);}
+  .set-edit-row .map{font-size:11px; color:var(--dim); margin-top:2px; line-height:1.3;}
+  .pside{display:flex; gap:6px; align-items:center;}
+  .pside input[type=text]{flex:1; min-width:0; padding:7px 8px; background:var(--bg); border:1px solid var(--line); color:var(--text); font-size:13px; border-radius:2px;}
+  .pside select{padding:7px 4px; background:var(--bg); border:1px solid var(--line); color:var(--text); font-size:13px; width:54px; border-radius:2px;}
+  .winner-row{grid-column:1 / -1; display:flex; gap:8px; align-items:center; margin-top:4px; font-size:12.5px; font-weight:700; color:var(--dim);}
+  .winner-row select{padding:5px 8px; background:var(--bg); border:1px solid var(--line); color:var(--text); font-size:13px; border-radius:2px;}
+
+  .save-bar{
+    position:fixed; bottom:0; left:0; right:0; padding:13px 18px; background:#000;
+    border-top:2px solid var(--red); display:flex; align-items:center; gap:14px; justify-content:center; z-index:20; flex-wrap:wrap;
+  }
+  .save-bar .msg{font-size:13px; font-weight:700; color:var(--dim);}
+  .save-bar .msg.ok{color:var(--ok);}
+  .save-bar .msg.err{color:var(--red);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>크총모 S4 <span style="color:var(--dim); font-weight:500; font-size:13px;">· 관리자</span></h1>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <span class="status-pill" id="conn-status">연결 안 됨</span>
+    <a href="./index.html">← 대회 페이지로</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- LOGIN -->
+  <div class="login-box" id="login-box">
+    <h2>관리자 로그인</h2>
+    <p>GitHub 토큰은 Cloudflare Worker에만 저장돼요. 이 브라우저에는 비밀번호만 저장됩니다 (이중 보안).</p>
+    <div class="field">
+      <label>WORKER URL</label>
+      <input type="text" id="in-worker" placeholder="https://ccm-admin.yourname.workers.dev">
+      <div class="hint">Cloudflare Worker 배포 후 나오는 주소</div>
+    </div>
+    <div class="field">
+      <label>비밀번호</label>
+      <input type="password" id="in-password" placeholder="Worker에 설정한 ADMIN_PASSWORD">
+    </div>
+    <button class="btn" id="btn-login">연결하기</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="editor">
+    <div class="toolbar">
+      <span class="repo-tag" id="repo-tag"></span>
+      <span class="spacer"></span>
+      <button class="btn secondary" id="btn-reload">새로고침 (원격에서 다시 불러오기)</button>
+      <button class="btn secondary" id="btn-logout">로그아웃</button>
+    </div>
+
+    <div class="section">
+      <h2><span class="accent">01</span> · 순위표 (승 / 패 / 세트승 / 세트패)</h2>
+      <div class="standings-grid">
+        <div class="grp">
+          <div class="gh">GROUP A</div>
+          <div class="standings-labels"><span>팀</span><span>승</span><span>패</span><span>SW</span><span>SL</span></div>
+          <div id="standings-A"></div>
+        </div>
+        <div class="grp">
+          <div class="gh">GROUP B</div>
+          <div class="standings-labels"><span>팀</span><span>승</span><span>패</span><span>SW</span><span>SL</span></div>
+          <div id="standings-B"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="accent">02</span> · 경기 결과 / 라인업</h2>
+      <div class="group-tabs2">
+        <button class="active" data-g="A">GROUP A</button>
+        <button data-g="B">GROUP B</button>
+      </div>
+      <div id="matches-A"></div>
+      <div id="matches-B" style="display:none;"></div>
+    </div>
+  </div>
+</main>
+
+<div class="save-bar" id="save-bar" style="display:none;">
+  <button class="btn" id="btn-save">변경사항 저장 (GitHub에 반영)</button>
+  <span class="msg" id="save-msg"></span>
+</div>
+
+<script src="./players_db.js"></script>
+<script>
+// ---------------- static tournament structure (mirrors the public page) ----------------
+const GROUP_A = ["Shopify","ONSYDE","If we lose, it's Crank's fault","StalnieBalls"];
+const GROUP_B = ["Team Liquid","Basilisk","CRHB","Team Red White Blue"];
+function blankStats(){ return { w:0, l:0, sw:0, sl:0 }; }
+
+const WEEKS = [
+ {
+  ko:"1주차", en:"Week 1", dayA:"7/9", dayB:"7/10", time:"20:00 KST", isoA:"2026-07-09T20:00:00+09:00", isoB:"2026-07-10T20:00:00+09:00",
+  matches:[
+   {maps:["Blackrock LE","[SC:Evo] Polypoid","Washout LE","[SC:Evo] Match Point","Fear and Faith LE"],
+    A:{t:["Shopify","StalnieBalls"], v:"SC2"}, B:{t:["Team Liquid","Team Red White Blue"], v:"SC2"}},
+   {maps:["[SC:Evo] Fighting Spirit","Fear and Faith LE","[SC:Evo] Sylphid","Blackrock LE","[SC:Evo] Match Point"],
+    A:{t:["ONSYDE","If we lose, it's Crank's fault"], v:"SC2"}, B:{t:["Basilisk","CRHB"], v:"SC2"}},
+   {maps:["Washout LE","[SC:Evo] Match Point","[SC:Evo] Polypoid","[SC:Evo] Sylphid","[SC:Evo] Fighting Spirit"],
+    A:{t:["Shopify","If we lose, it's Crank's fault"], v:"SC1"}, B:{t:["Team Liquid","CRHB"], v:"SC1"}},
+  ]
+ },
+ {
+  ko:"2주차", en:"Week 2", dayA:"7/16", dayB:"7/17", time:"20:00 KST", isoA:"2026-07-16T20:00:00+09:00", isoB:"2026-07-17T20:00:00+09:00",
+  matches:[
+   {maps:["[SC:Evo] Sylphid","Blackrock LE","[SC:Evo] Fighting Spirit","Washout LE","Fear and Faith LE"],
+    A:{t:["ONSYDE","StalnieBalls"], v:"SC1"}, B:{t:["Basilisk","Team Red White Blue"], v:"SC1"}},
+   {maps:["Fear and Faith LE","[SC:Evo] Polypoid","Blackrock LE","[SC:Evo] Match Point","Washout LE"],
+    A:{t:["If we lose, it's Crank's fault","StalnieBalls"], v:"SC2"}, B:{t:["CRHB","Team Red White Blue"], v:"SC2"}},
+   {maps:["[SC:Evo] Match Point","[SC:Evo] Fighting Spirit","Washout LE","[SC:Evo] Sylphid","[SC:Evo] Polypoid"],
+    A:{t:["Shopify","ONSYDE"], v:"SC2"}, B:{t:["Team Liquid","Basilisk"], v:"SC2"}},
+  ]
+ }
+];
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function blankStats(){ return {w:0,l:0,sw:0,sl:0}; }
+function blankSet(){ return {winner:null,p1:"",race1:"",p2:"",race2:""}; }
+
+// ---------------- worker connection state ----------------
+let GH = { workerUrl:"", password:"" };
+let currentData = null;
+
+function workerHeaders(extra){
+  return {
+    "X-Admin-Password": GH.password,
+    ...(extra || {}),
+  };
+}
+
+async function ghFetchFile(){
+  const url = `${GH.workerUrl.replace(/\/$/,"")}/data`;
+  const res = await fetch(url, { headers: workerHeaders() });
+  const body = await res.json().catch(()=>({}));
+  if(!res.ok){
+    if(res.status === 401) throw new Error("비밀번호가 틀렸습니다.");
+    throw new Error(body.error || `연결 오류 (${res.status})`);
+  }
+  currentData = body.data;
+  return currentData;
+}
+
+async function ghSaveFile(dataObj){
+  const url = `${GH.workerUrl.replace(/\/$/,"")}/data`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: workerHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(dataObj),
+  });
+  const body = await res.json().catch(()=>({}));
+  if(!res.ok){
+    if(res.status === 401) throw new Error("비밀번호가 틀렸습니다.");
+    throw new Error(body.error || `저장 실패 (${res.status})`);
+  }
+  return body;
+}
+
+// ---------------- login ----------------
+function loadSavedCreds(){
+  try{
+    const raw = localStorage.getItem("ccm_admin_creds");
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return null;
+}
+function saveCreds(){
+  localStorage.setItem("ccm_admin_creds", JSON.stringify(GH));
+}
+function clearCreds(){
+  localStorage.removeItem("ccm_admin_creds");
+}
+
+document.getElementById("btn-login").addEventListener("click", async ()=>{
+  const workerUrl = document.getElementById("in-worker").value.trim();
+  const password = document.getElementById("in-password").value;
+  const errEl = document.getElementById("login-err");
+  errEl.style.display = "none";
+  if(!workerUrl || !password){
+    errEl.textContent = "Worker URL과 비밀번호는 필수입니다.";
+    errEl.style.display = "block";
+    return;
+  }
+  GH = { workerUrl, password };
+  const btn = document.getElementById("btn-login");
+  btn.disabled = true; btn.textContent = "연결 중...";
+  try{
+    await ghFetchFile();
+    saveCreds();
+    enterEditor();
+  }catch(e){
+    errEl.textContent = e.message;
+    errEl.style.display = "block";
+  }finally{
+    btn.disabled = false; btn.textContent = "연결하기";
+  }
+});
+
+document.getElementById("btn-logout").addEventListener("click", ()=>{
+  clearCreds();
+  location.reload();
+});
+
+document.getElementById("btn-reload").addEventListener("click", async ()=>{
+  setStatus("불러오는 중...", "");
+  try{
+    await ghFetchFile();
+    renderEditor();
+    setStatus("연결됨", "ok");
+    setSaveMsg("원격 데이터를 다시 불러왔습니다.", "ok");
+  }catch(e){
+    setStatus("오류", "err");
+    setSaveMsg(e.message, "err");
+  }
+});
+
+document.getElementById("btn-save").addEventListener("click", async ()=>{
+  const btn = document.getElementById("btn-save");
+  btn.disabled = true; btn.textContent = "저장 중...";
+  setSaveMsg("", "");
+  try{
+    const updated = collectAll();
+    await ghSaveFile(updated);
+    currentData = updated;
+    setSaveMsg("✓ 저장 완료 — 실제 사이트에 반영됐습니다.", "ok");
+  }catch(e){
+    setSaveMsg(e.message, "err");
+  }finally{
+    btn.disabled = false; btn.textContent = "변경사항 저장 (GitHub에 반영)";
+  }
+});
+
+function setStatus(text, cls){
+  const el = document.getElementById("conn-status");
+  el.textContent = text;
+  el.className = "status-pill" + (cls ? " " + cls : "");
+}
+function setSaveMsg(text, cls){
+  const el = document.getElementById("save-msg");
+  el.textContent = text;
+  el.className = "msg" + (cls ? " " + cls : "");
+}
+
+function enterEditor(){
+  document.getElementById("login-box").style.display = "none";
+  document.getElementById("editor").style.display = "block";
+  document.getElementById("save-bar").style.display = "flex";
+  document.getElementById("repo-tag").textContent = GH.workerUrl;
+  setStatus("연결됨", "ok");
+  renderEditor();
+
+  if(!document.getElementById("player-names") && window.PLAYER_DB){
+    const dl = document.createElement("datalist");
+    dl.id = "player-names";
+    let opts = "";
+    for(let k in window.PLAYER_DB){
+      opts += `<option value="${window.PLAYER_DB[k].officialId}">`;
+    }
+    dl.innerHTML = opts;
+    document.body.appendChild(dl);
+  }
+}
+
+// Auto-fill race based on PLAYER_DB when player name is selected
+document.addEventListener("input", e => {
+  if(e.target.tagName === "INPUT" && (e.target.dataset.field === "p1" || e.target.dataset.field === "p2")){
+    if(!window.PLAYER_DB) return;
+    const pName = e.target.value.toLowerCase();
+    const dbEntry = window.PLAYER_DB[pName] || Object.values(window.PLAYER_DB).find(p => p.officialId.toLowerCase() === pName);
+    if(dbEntry){
+      const raceMap = {"Icons/zerg.png":"Z", "Icons/terran.png":"T", "Icons/protoss.png":"P"};
+      const race = raceMap[dbEntry.race];
+      if(race){
+        const selectField = e.target.dataset.field === "p1" ? "race1" : "race2";
+        const select = e.target.closest(".pside").querySelector(`select[data-field="${selectField}"]`);
+        if(select) select.value = race;
+      }
+    }
+  }
+});
+
+// ---------------- editor rendering ----------------
+function renderEditor(){
+  renderStandingsEditor("standings-A", GROUP_A);
+  renderStandingsEditor("standings-B", GROUP_B);
+  renderMatchesEditor("matches-A", "A");
+  renderMatchesEditor("matches-B", "B");
+}
+
+function renderStandingsEditor(elId, teams){
+  const standings = (currentData && currentData.standings) || {};
+  document.getElementById(elId).innerHTML = teams.map(t=>{
+    const s = standings[t] || blankStats();
+    return `
+      <div class="team-edit-row" data-team="${esc(t)}">
+        <span class="tname">${esc(t)}</span>
+        <input type="number" min="0" data-field="w" value="${s.w}">
+        <input type="number" min="0" data-field="l" value="${s.l}">
+        <input type="number" min="0" data-field="sw" value="${s.sw}">
+        <input type="number" min="0" data-field="sl" value="${s.sl}">
+      </div>`;
+  }).join("");
+}
+
+function renderMatchesEditor(elId, group){
+  const matches = (currentData && currentData.matches) || {};
+  let html = "";
+  WEEKS.forEach((week, wi)=>{
+    week.matches.forEach((m, mi)=>{
+      const [t1,t2] = m[group].t;
+      const key = `w${wi+1}-m${mi+1}-${group}`;
+      const md = matches[key] || { sets: [blankSet(),blankSet(),blankSet(),blankSet(),blankSet()] };
+      html += `
+        <div class="match-block" data-key="${key}">
+          <div class="mh"><b>${esc(week.label)} · MATCH ${mi+1}</b><span>${esc(t1)} vs ${esc(t2)}</span></div>
+          ${m.maps.map((map,si)=>{
+            const sd = md.sets[si] || blankSet();
+            return `
+            <div class="set-edit-row" data-set="${si}">
+              <div><div class="sn">SET ${si+1}</div><div class="map">${esc(map)}</div></div>
+              <div class="pside">
+                <input type="text" data-field="p1" list="player-names" placeholder="${esc(t1)} 선수명" value="${esc(sd.p1||"")}">
+                <select data-field="race1">
+                  <option value="" ${!sd.race1?"selected":""}>-</option>
+                  <option value="T" ${sd.race1==="T"?"selected":""}>T</option>
+                  <option value="P" ${sd.race1==="P"?"selected":""}>P</option>
+                  <option value="Z" ${sd.race1==="Z"?"selected":""}>Z</option>
+                </select>
+              </div>
+              <div class="pside">
+                <select data-field="race2">
+                  <option value="" ${!sd.race2?"selected":""}>-</option>
+                  <option value="T" ${sd.race2==="T"?"selected":""}>T</option>
+                  <option value="P" ${sd.race2==="P"?"selected":""}>P</option>
+                  <option value="Z" ${sd.race2==="Z"?"selected":""}>Z</option>
+                </select>
+                <input type="text" data-field="p2" list="player-names" placeholder="${esc(t2)} 선수명" value="${esc(sd.p2||"")}">
+              </div>
+              <div class="winner-row">
+                승자:
+                <select data-field="winner">
+                  <option value="" ${!sd.winner?"selected":""}>미정</option>
+                  <option value="1" ${sd.winner==="1"?"selected":""}>${esc(t1)}</option>
+                  <option value="2" ${sd.winner==="2"?"selected":""}>${esc(t2)}</option>
+                </select>
+              </div>
+            </div>`;
+          }).join("")}
+        </div>`;
+    });
+  });
+  document.getElementById(elId).innerHTML = html;
+}
+
+// ---------------- data collection ----------------
+function collectStandings(){
+  const out = {};
+  document.querySelectorAll(".team-edit-row").forEach(row=>{
+    const team = row.dataset.team;
+    const get = f => parseInt(row.querySelector(`[data-field="${f}"]`).value, 10) || 0;
+    out[team] = { w:get("w"), l:get("l"), sw:get("sw"), sl:get("sl") };
+  });
+  return out;
+}
+
+function collectMatches(){
+  const out = {};
+  document.querySelectorAll(".match-block").forEach(block=>{
+    const key = block.dataset.key;
+    const sets = [];
+    block.querySelectorAll(".set-edit-row").forEach(row=>{
+      const get = f => row.querySelector(`[data-field="${f}"]`).value;
+      sets.push({
+        winner: get("winner") || null,
+        p1: get("p1"), race1: get("race1"),
+        p2: get("p2"), race2: get("race2"),
+      });
+    });
+    out[key] = { sets };
+  });
+  return out;
+}
+
+function collectAll(){
+  return { standings: collectStandings(), matches: collectMatches() };
+}
+
+// ---------------- group tab switching ----------------
+document.querySelectorAll(".group-tabs2 button").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".group-tabs2 button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const g = btn.dataset.g;
+    document.getElementById("matches-A").style.display = g === "A" ? "block" : "none";
+    document.getElementById("matches-B").style.display = g === "B" ? "block" : "none";
+  });
+});
+
+// ---------------- boot ----------------
+(function boot(){
+  const saved = loadSavedCreds();
+  if(saved && saved.workerUrl && saved.password){
+    document.getElementById("in-worker").value = saved.workerUrl;
+    document.getElementById("in-password").value = saved.password;
+    GH = saved;
+    setStatus("불러오는 중...", "");
+    ghFetchFile().then(()=>{
+      enterEditor();
+    }).catch(e=>{
+      document.getElementById("login-err").textContent = e.message;
+      document.getElementById("login-err").style.display = "block";
+      setStatus("연결 안 됨", "");
+    });
+  }
+})();
+</script>
+</body>
+</html>

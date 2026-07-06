@@ -1,0 +1,522 @@
+{
+  "standings": {
+    "Shopify": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "ONSYDE": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "If we lose, it's Crank's fault": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "StalnieBalls": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "Team Liquid": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "Basilisk": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "CRHB": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    },
+    "Team Red White Blue": {
+      "w": 0,
+      "l": 0,
+      "sw": 0,
+      "sl": 0
+    }
+  },
+  "matches": {
+    "w1-m1-A": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w1-m2-A": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "Ryung",
+          "race1": "T",
+          "p2": "Percival",
+          "race2": "T"
+        },
+        {
+          "winner": null,
+          "p1": "Maru",
+          "race1": "T",
+          "p2": "Rogue",
+          "race2": "Z"
+        },
+        {
+          "winner": null,
+          "p1": "Zoun",
+          "race1": "P",
+          "p2": "sOs",
+          "race2": "P"
+        },
+        {
+          "winner": null,
+          "p1": "Ryung",
+          "race1": "T",
+          "p2": "Creator",
+          "race2": "P"
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w1-m3-A": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "Scarlett",
+          "race1": "Z",
+          "p2": "Rogue",
+          "race2": "Z"
+        },
+        {
+          "winner": null,
+          "p1": "Harstem",
+          "race1": "P",
+          "p2": "Trap",
+          "race2": "P"
+        },
+        {
+          "winner": null,
+          "p1": "ByuN",
+          "race1": "T",
+          "p2": "Creator",
+          "race2": "T"
+        },
+        {
+          "winner": null,
+          "p1": "Lambo",
+          "race1": "Z",
+          "p2": "Percival",
+          "race2": "T"
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w2-m1-A": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w2-m2-A": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w2-m3-A": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w1-m1-B": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w1-m2-B": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w1-m3-B": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w2-m1-B": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w2-m2-B": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    },
+    "w2-m3-B": {
+      "sets": [
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        },
+        {
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
+        }
+      ]
+    }
+  }
+}
