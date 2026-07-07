@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>크총모 S4 · 관리자</title>
+<title>CCM S4 · Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -114,10 +114,10 @@
 <body>
 
 <header>
-  <h1>크총모 S4 <span style="color:var(--dim); font-weight:500; font-size:13px;">· 관리자 / Admin</span></h1>
+  <h1>CCM S4 <span style="color:var(--dim); font-weight:500; font-size:13px;">· Admin</span></h1>
   <div style="display:flex; align-items:center; gap:10px;">
-    <span class="status-pill" id="conn-status">연결 안 됨 / Disconnected</span>
-    <a href="./index.html">← 대회 페이지로 / Back to Tournament</a>
+    <span class="status-pill" id="conn-status">Disconnected</span>
+    <a href="./index.html">← Back to Tournament</a>
   </div>
 </header>
 
@@ -125,19 +125,19 @@
 
   <!-- LOGIN -->
   <div class="login-box" id="login-box">
-    <h2>관리자 로그인 / Admin Login</h2>
-    <p>GitHub 토큰은 Cloudflare Worker에만 저장돼요. 이 브라우저에는 비밀번호만 저장됩니다 (이중 보안).<br>
+    <h2>Admin Login</h2>
+    <p>GitHub tokens are securely stored in the Cloudflare Worker. Only the password is saved in your browser.<br>
        GitHub tokens are safely stored in Cloudflare Worker. Only the password is kept in this browser.</p>
     <div class="field">
       <label>WORKER URL</label>
       <input type="text" id="in-worker" placeholder="https://ccm-admin.yourname.workers.dev">
-      <div class="hint">Cloudflare Worker 배포 후 나오는 주소 / The URL of your deployed Cloudflare Worker</div>
+      <div class="hint">The URL of your deployed Cloudflare Worker</div>
     </div>
     <div class="field">
-      <label>비밀번호 / Password</label>
-      <input type="password" id="in-password" placeholder="Worker에 설정한 ADMIN_PASSWORD / Password set in Worker">
+      <label>Password</label>
+      <input type="password" id="in-password" placeholder="ADMIN_PASSWORD set in Worker">
     </div>
-    <button class="btn" id="btn-login">연결하기 / Connect</button>
+    <button class="btn" id="btn-login">Connect</button>
     <div class="login-err" id="login-err"></div>
   </div>
 
@@ -146,28 +146,28 @@
     <div class="toolbar">
       <span class="repo-tag" id="repo-tag"></span>
       <span class="spacer"></span>
-      <button class="btn secondary" id="btn-reload">새로고침 / Reload (원격에서 다시 불러오기)</button>
-      <button class="btn secondary" id="btn-logout">로그아웃 / Logout</button>
+      <button class="btn secondary" id="btn-reload">Reload (Fetch from remote)</button>
+      <button class="btn secondary" id="btn-logout">Logout</button>
     </div>
 
     <div class="section">
-      <h2><span class="accent">01</span> · 순위표 / Standings (승 / 패 / 세트승 / 세트패)</h2>
+      <h2><span class="accent">01</span> · Standings (W / L / SW / SL)</h2>
       <div class="standings-grid">
         <div class="grp">
           <div class="gh">GROUP A</div>
-          <div class="standings-labels"><span>팀</span><span>승</span><span>패</span><span>SW</span><span>SL</span></div>
+          <div class="standings-labels"><span>Team</span><span>W</span><span>L</span><span>SW</span><span>SL</span></div>
           <div id="standings-A"></div>
         </div>
         <div class="grp">
           <div class="gh">GROUP B</div>
-          <div class="standings-labels"><span>팀</span><span>승</span><span>패</span><span>SW</span><span>SL</span></div>
+          <div class="standings-labels"><span>Team</span><span>W</span><span>L</span><span>SW</span><span>SL</span></div>
           <div id="standings-B"></div>
         </div>
       </div>
     </div>
 
     <div class="section">
-      <h2><span class="accent">02</span> · 경기 결과 및 라인업 / Match Results & Lineups</h2>
+      <h2><span class="accent">02</span> · Match Results & Lineups</h2>
       <div class="group-tabs2">
         <button class="active" data-g="A">GROUP A</button>
         <button data-g="B">GROUP B</button>
@@ -179,7 +179,7 @@
 </main>
 
 <div class="save-bar" id="save-bar" style="display:none;">
-  <button class="btn" id="btn-save">변경사항 저장 (GitHub에 반영) / Save Changes to GitHub</button>
+  <button class="btn" id="btn-save">Save Changes to GitHub</button>
   <span class="msg" id="save-msg"></span>
 </div>
 
@@ -235,8 +235,8 @@ async function ghFetchFile(){
   const res = await fetch(url, { headers: workerHeaders() });
   const body = await res.json().catch(()=>({}));
   if(!res.ok){
-    if(res.status === 401) throw new Error("비밀번호가 틀렸습니다.");
-    throw new Error(body.error || `연결 오류 (${res.status})`);
+    if(res.status === 401) throw new Error("Incorrect password.");
+    throw new Error(body.error || `Connection error (${res.status})`);
   }
   currentData = body.data;
   return currentData;
@@ -251,8 +251,8 @@ async function ghSaveFile(dataObj){
   });
   const body = await res.json().catch(()=>({}));
   if(!res.ok){
-    if(res.status === 401) throw new Error("비밀번호가 틀렸습니다.");
-    throw new Error(body.error || `저장 실패 (${res.status})`);
+    if(res.status === 401) throw new Error("Incorrect password.");
+    throw new Error(body.error || `Save failed (${res.status})`);
   }
   return body;
 }
@@ -278,13 +278,13 @@ document.getElementById("btn-login").addEventListener("click", async ()=>{
   const errEl = document.getElementById("login-err");
   errEl.style.display = "none";
   if(!workerUrl || !password){
-    errEl.textContent = "Worker URL과 비밀번호는 필수입니다.";
+    errEl.textContent = "Worker URL and Password are required.";
     errEl.style.display = "block";
     return;
   }
   GH = { workerUrl, password };
   const btn = document.getElementById("btn-login");
-  btn.disabled = true; btn.textContent = "연결 중...";
+  btn.disabled = true; btn.textContent = "Connecting...";
   try{
     await ghFetchFile();
     saveCreds();
@@ -293,7 +293,7 @@ document.getElementById("btn-login").addEventListener("click", async ()=>{
     errEl.textContent = e.message;
     errEl.style.display = "block";
   }finally{
-    btn.disabled = false; btn.textContent = "연결하기";
+    btn.disabled = false; btn.textContent = "Connect";
   }
 });
 
@@ -303,31 +303,31 @@ document.getElementById("btn-logout").addEventListener("click", ()=>{
 });
 
 document.getElementById("btn-reload").addEventListener("click", async ()=>{
-  setStatus("불러오는 중...", "");
+  setStatus("Loading...", "");
   try{
     await ghFetchFile();
     renderEditor();
-    setStatus("연결됨", "ok");
-    setSaveMsg("원격 데이터를 다시 불러왔습니다.", "ok");
+    setStatus("Connected", "ok");
+    setSaveMsg("Reloaded remote data.", "ok");
   }catch(e){
-    setStatus("오류", "err");
+    setStatus("Error", "err");
     setSaveMsg(e.message, "err");
   }
 });
 
 document.getElementById("btn-save").addEventListener("click", async ()=>{
   const btn = document.getElementById("btn-save");
-  btn.disabled = true; btn.textContent = "저장 중...";
+  btn.disabled = true; btn.textContent = "Saving...";
   setSaveMsg("", "");
   try{
     const updated = collectAll();
     await ghSaveFile(updated);
     currentData = updated;
-    setSaveMsg("✓ 저장 완료 — 실제 사이트에 반영됐습니다.", "ok");
+    setSaveMsg("✓ Saved successfully.", "ok");
   }catch(e){
     setSaveMsg(e.message, "err");
   }finally{
-    btn.disabled = false; btn.textContent = "변경사항 저장 (GitHub에 반영)";
+    btn.disabled = false; btn.textContent = "Save Changes to GitHub";
   }
 });
 
@@ -347,7 +347,7 @@ function enterEditor(){
   document.getElementById("editor").style.display = "block";
   document.getElementById("save-bar").style.display = "flex";
   document.getElementById("repo-tag").textContent = GH.workerUrl;
-  setStatus("연결됨", "ok");
+  setStatus("Connected", "ok");
   renderEditor();
 }
 
@@ -476,7 +476,7 @@ function renderMatchesEditor(elId, group){
               <div class="players-wrap">
                 <div class="pside">
                   <select data-field="p1" style="width:110px;">
-                    <option value="" ${!sd.p1?"selected":""}>선수 선택</option>
+                    <option value="" ${!sd.p1?"selected":""}>Select Player</option>
                     ${p1FinalOpts}
                   </select>
                   <select data-field="race1">
@@ -495,15 +495,15 @@ function renderMatchesEditor(elId, group){
                     <option value="Z" ${sd.race2==="Z"?"selected":""}>Z</option>
                   </select>
                   <select data-field="p2" style="width:110px;">
-                    <option value="" ${!sd.p2?"selected":""}>선수 선택</option>
+                    <option value="" ${!sd.p2?"selected":""}>Select Player</option>
                     ${p2FinalOpts}
                   </select>
                 </div>
               </div>
               <div class="winner-row">
-                <span style="color:var(--dim);">승자:</span>
+                <span style="color:var(--dim);">Winner:</span>
                 <select data-field="winner" style="width:110px;">
-                  <option value="" ${!sd.winner?"selected":""}>미정</option>
+                  <option value="" ${!sd.winner?"selected":""}>TBD</option>
                   <option value="1" ${sd.winner==="1"?"selected":""}>${esc(t1)}</option>
                   <option value="2" ${sd.winner==="2"?"selected":""}>${esc(t2)}</option>
                 </select>
@@ -567,13 +567,13 @@ document.querySelectorAll(".group-tabs2 button").forEach(btn=>{
     document.getElementById("in-worker").value = saved.workerUrl;
     document.getElementById("in-password").value = saved.password;
     GH = saved;
-    setStatus("불러오는 중...", "");
+    setStatus("Loading...", "");
     ghFetchFile().then(()=>{
       enterEditor();
     }).catch(e=>{
       document.getElementById("login-err").textContent = e.message;
       document.getElementById("login-err").style.display = "block";
-      setStatus("연결 안 됨", "");
+      setStatus("Disconnected", "");
     });
   }
 })();
