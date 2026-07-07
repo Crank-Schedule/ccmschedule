@@ -60,7 +60,7 @@
 
   /* ---- editor ---- */
   #editor{display:none;}
-  .toolbar{
+  .toolbar{ display: none !important; 
     display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:22px;
     padding:10px 14px; background:var(--panel); border-radius:2px;
     position:sticky; top:60px; z-index:9;
@@ -75,11 +75,11 @@
   .standings-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
   .standings-grid .grp{background:var(--panel); border-radius:2px; overflow:hidden;}
   .standings-grid .grp .gh{padding:9px 14px; font-weight:800; font-size:13.5px; color:#fff; background:var(--red);}
-  .team-edit-row{display:grid; grid-template-columns:1fr 48px 48px 48px 48px; gap:6px; align-items:center; padding:8px 14px; border-bottom:1px solid var(--line);}
+  .team-edit-row{display:grid; grid-template-columns:1fr 48px 48px 48px 48px 48px; gap:6px; align-items:center; padding:8px 14px; border-bottom:1px solid var(--line);}
   .team-edit-row:last-child{border-bottom:none;}
   .team-edit-row .tname{font-size:13.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .team-edit-row input{width:100%; padding:6px 4px; background:var(--bg); border:1px solid var(--line); color:var(--text); text-align:center; font-size:13px; border-radius:2px; font-variant-numeric:tabular-nums;}
-  .standings-labels{display:grid; grid-template-columns:1fr 48px 48px 48px 48px; gap:6px; padding:7px 14px; font-size:11px; font-weight:700; color:var(--dim); text-align:center; background:var(--panel2);}
+  .standings-labels{display:grid; grid-template-columns:1fr 48px 48px 48px 48px 48px; gap:6px; padding:7px 14px; font-size:11px; font-weight:700; color:var(--dim); text-align:center; background:var(--panel2);}
   .standings-labels span:first-child{text-align:left;}
 
   .group-tabs2{display:flex; margin-bottom:18px; max-width:400px; border-radius:2px; overflow:hidden;}
@@ -155,12 +155,12 @@
       <div class="standings-grid">
         <div class="grp">
           <div class="gh">GROUP A</div>
-          <div class="standings-labels"><span>Team</span><span>W</span><span>L</span><span>SW</span><span>SL</span></div>
+          <div class="standings-labels"><span>Team</span><span>W</span><span>L</span><span>SW</span><span>SL</span><span>Diff</span></div>
           <div id="standings-A"></div>
         </div>
         <div class="grp">
           <div class="gh">GROUP B</div>
-          <div class="standings-labels"><span>Team</span><span>W</span><span>L</span><span>SW</span><span>SL</span></div>
+          <div class="standings-labels"><span>Team</span><span>W</span><span>L</span><span>SW</span><span>SL</span><span>Diff</span></div>
           <div id="standings-B"></div>
         </div>
       </div>
@@ -397,6 +397,7 @@ document.addEventListener("change", (e) => {
 // ---------------- editor rendering ----------------
 
 
+
 function recalcStandings() {
   const stats = {};
   [...GROUP_A, ...GROUP_B].forEach(t => stats[t] = {w:0, l:0, sw:0, sl:0});
@@ -417,15 +418,23 @@ function recalcStandings() {
     if (t1_sw >= 3) { stats[t1].w++; stats[t2].l++; }
     else if (t2_sw >= 3) { stats[t2].w++; stats[t1].l++; }
   });
-  document.querySelectorAll(".team-edit-row").forEach(row => {
-    const t = row.dataset.team;
-    if(stats[t]) {
-      row.querySelector('[data-field="w"]').value = stats[t].w;
-      row.querySelector('[data-field="l"]').value = stats[t].l;
-      row.querySelector('[data-field="sw"]').value = stats[t].sw;
-      row.querySelector('[data-field="sl"]').value = stats[t].sl;
-    }
-  });
+  
+  // Sort teams
+  const sortFn = (a, b) => {
+    if (stats[b].w !== stats[a].w) return stats[b].w - stats[a].w;
+    const diffA = stats[a].sw - stats[a].sl;
+    const diffB = stats[b].sw - stats[b].sl;
+    if (diffA !== diffB) return diffB - diffA;
+    if (stats[b].sw !== stats[a].sw) return stats[b].sw - stats[a].sw;
+    return 0; // fallback
+  };
+  
+  const sortedA = [...GROUP_A].sort(sortFn);
+  const sortedB = [...GROUP_B].sort(sortFn);
+  
+  // Re-render
+  renderStandingsEditor("standings-A", sortedA, stats);
+  renderStandingsEditor("standings-B", sortedB, stats);
 }
 
 function renderEditor(){
@@ -436,7 +445,8 @@ function renderEditor(){
   recalcStandings();
 }
 
-function renderStandingsEditor(elId, teams){
+function renderStandingsEditor(elId, teams, statsOverride){
+  const standings = statsOverride || (currentData && currentData.standings) || {};
   const standings = (currentData && currentData.standings) || {};
   document.getElementById(elId).innerHTML = teams.map(t=>{
     const s = standings[t] || blankStats();
