@@ -32,14 +32,14 @@
     },
     "Basilisk": {
       "w": 0,
-      "l": 0,
+      "l": 1,
       "sw": 2,
-      "sl": 2
+      "sl": 3
     },
     "CRHB": {
-      "w": 0,
+      "w": 1,
       "l": 0,
-      "sw": 2,
+      "sw": 3,
       "sl": 2
     },
     "Team Red White Blue": {
@@ -354,7 +354,7 @@
           "race2": "Z"
         },
         {
-          "winner": "",
+          "winner": "2",
           "p1": "Serral",
           "race1": "Z",
           "p2": "Classic",
