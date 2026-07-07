@@ -32,15 +32,15 @@
     },
     "Basilisk": {
       "w": 0,
-      "l": 1,
-      "sw": 2,
-      "sl": 3
+      "l": 0,
+      "sw": 0,
+      "sl": 0
     },
     "CRHB": {
-      "w": 1,
+      "w": 0,
       "l": 0,
-      "sw": 3,
-      "sl": 2
+      "sw": 0,
+      "sl": 0
     },
     "Team Red White Blue": {
       "w": 0,
@@ -326,39 +326,39 @@
     "w1-m2-B": {
       "sets": [
         {
-          "winner": "1",
-          "p1": "Reynor",
-          "race1": "Z",
-          "p2": "herO",
-          "race2": "P"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "2",
-          "p1": "Serral",
-          "race1": "Z",
-          "p2": "SHIN",
-          "race2": "Z"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "1",
-          "p1": "Reynor",
-          "race1": "Z",
-          "p2": "Classic",
-          "race2": "P"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "2",
-          "p1": "trigger",
-          "race1": "P",
-          "p2": "Solar",
-          "race2": "Z"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "2",
-          "p1": "Serral",
-          "race1": "Z",
-          "p2": "Classic",
-          "race2": "P"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         }
       ]
     },
@@ -386,7 +386,7 @@
           "race2": "Z"
         },
         {
-          "winner": "",
+          "winner": null,
           "p1": "SKillous",
           "race1": "P",
           "p2": "Classic",
