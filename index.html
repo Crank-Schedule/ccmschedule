@@ -125,17 +125,17 @@
     width: 18px; height: 18px; object-fit: contain; 
     filter: drop-shadow(1px 0 0 rgba(255,255,255,0.9)) drop-shadow(-1px 0 0 rgba(255,255,255,0.9)) drop-shadow(0 1px 0 rgba(255,255,255,0.9)) drop-shadow(0 -1px 0 rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(0,0,0,0.8));
   }
-  .standings-adv {
+  .standings-benefit {
     margin: 12px 16px 4px; padding: 10px 12px; 
     background: rgba(241,143,60,0.1); border: 1px solid var(--amber); border-radius: 4px;
     display: flex; gap: 10px; align-items: center;
   }
-  .adv-badge {
+  .benefit-badge {
     background: var(--amber); color: #000; font-weight: 900; font-size: 11px;
     padding: 3px 6px; border-radius: 2px; white-space: nowrap;
   }
-  .adv-text { font-size: 13px; color: var(--text); line-height: 1.4; }
-  .adv-text b { color: var(--amber); }
+  .benefit-text { font-size: 13px; color: var(--text); line-height: 1.4; }
+  .benefit-text b { color: var(--amber); }
 
   /* ---------- week bar ---------- */
   .week-bar{
@@ -364,9 +364,9 @@
   <div class="group-view active" id="view-A">
     <div class="group-panel a"><div class="gh"><span class="lang-ko">A조 순위</span><span class="lang-en">Group A Standings</span></div>
       <div style="overflow-x:auto;"><table class="standings" id="groupA"></table></div>
-      <div class="standings-adv">
-        <div class="adv-badge"><span class="lang-ko">1위 혜택</span><span class="lang-en">1st Place</span></div>
-        <div class="adv-text">
+      <div class="standings-benefit">
+        <div class="benefit-badge"><span class="lang-ko">1위 혜택</span><span class="lang-en">1st Place</span></div>
+        <div class="benefit-text">
           <span class="lang-ko">조 1위는 <b>승자조 결승(UB Finals)</b>에 직행하며, 승리 시 최종 결승 다이렉트 진출 및 <b>상대 선봉 지목권</b>을 얻게 됩니다!</span>
           <span class="lang-en">Group 1st advances to <b>UB Finals</b>. A win there grants a direct Grand Finals spot & <b>the right to designate the opponent's Set 1 player!</b></span>
         </div>
@@ -386,9 +386,9 @@
   <div class="group-view" id="view-B">
     <div class="group-panel b"><div class="gh"><span class="lang-ko">B조 순위</span><span class="lang-en">Group B Standings</span></div>
       <div style="overflow-x:auto;"><table class="standings" id="groupB"></table></div>
-      <div class="standings-adv">
-        <div class="adv-badge"><span class="lang-ko">1위 혜택</span><span class="lang-en">1st Place</span></div>
-        <div class="adv-text">
+      <div class="standings-benefit">
+        <div class="benefit-badge"><span class="lang-ko">1위 혜택</span><span class="lang-en">1st Place</span></div>
+        <div class="benefit-text">
           <span class="lang-ko">조 1위는 <b>승자조 결승(UB Finals)</b>에 직행하며, 승리 시 최종 결승 다이렉트 진출 및 <b>상대 선봉 지목권</b>을 얻게 됩니다!</span>
           <span class="lang-en">Group 1st advances to <b>UB Finals</b>. A win there grants a direct Grand Finals spot & <b>the right to designate the opponent's Set 1 player!</b></span>
         </div>
@@ -748,7 +748,18 @@ wireRulesToggle("toggle-rules", "rules-grid");
 wireRulesToggle("toggle-playoff-rules", "playoff-rules-grid");
 
 function renderStandings(elId, teams, standingsData){
-  const rows = teams.map((t,i)=>{
+  const sortedTeams = [...teams].sort((a, b) => {
+    const sA = (standingsData && standingsData[a]) || {w:0, l:0, sw:0, sl:0};
+    const sB = (standingsData && standingsData[b]) || {w:0, l:0, sw:0, sl:0};
+    if (sA.w !== sB.w) return sB.w - sA.w;
+    const diffA = sA.sw - sA.sl;
+    const diffB = sB.sw - sB.sl;
+    if (diffA !== diffB) return diffB - diffA;
+    if (sA.sw !== sB.sw) return sB.sw - sA.sw;
+    if (sA.l !== sB.l) return sA.l - sB.l;
+    return 0;
+  });
+  const rows = sortedTeams.map((t,i)=>{
     const s = (standingsData && standingsData[t]) || blankStats();
     const diff = s.sw - s.sl;
     const diffStr = diff > 0 ? `+${diff}` : diff;
