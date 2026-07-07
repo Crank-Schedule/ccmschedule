@@ -191,9 +191,13 @@
   .set-row.ace .set-num{color:var(--amber); font-weight:900;}
   .set-row .side{display:flex; align-items:center; gap:6px; min-width:0; padding:2px 8px; border-radius:3px;}
   .set-row .side.right{flex-direction:row-reverse; text-align:right;}
-  .set-row .side.win .player{color:var(--amber);}
-  .set-row .side.win .player::after{content:" ✓";}
+  /* Default (Unplayed) */
   .set-row .side .player{font-size:15px; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  /* Played: Winner */
+  .set-row.played .side.win .player{font-weight:900; color:#fff;}
+  .set-row.played .side.win .player::after{content:" ✓";}
+  /* Played: Loser */
+  .set-row.played .side:not(.win) .player{font-weight:500; color:var(--dim);}
   .set-row .side .race{
     flex-shrink:0; display:flex; align-items:center; justify-content:center;
   }
@@ -235,6 +239,7 @@
   /* ---------- WTL Example ---------- */
   .wtl-match{background:var(--panel); border:1px solid var(--border); border-radius:6px; margin-top:20px; overflow:hidden;}
   .wtl-header{display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-bottom:1px solid var(--line); background:#1a110a;}
+  .wtl-header .sm-side{flex:1;}
   .wtl-score{text-align:center;}
   .wtl-score-num{font-size:22px; font-weight:900; letter-spacing:2px; line-height:1.2;}
   .wtl-score-desc{font-size:12px; color:var(--dim); font-weight:700;}
@@ -252,15 +257,23 @@
   .wtl-map-row .res-wrap.right{justify-content:flex-end;}
   .wtl-map-row .map-name{width:140px; text-align:center; font-size:13px; font-weight:600; color:#ccc; flex-shrink:0;}
   .map-res{width:24px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; line-height:1; flex-shrink:0;}
-  .map-res.win{background:#2a442a; color:#85d685;}
-  .map-res.lose{background:#442a2a; color:#d68585;}
+  .map-res.win{background:var(--panel2); color:#fff; font-weight:900;}
+  .map-res.lose{background:var(--panel2); color:var(--dim); font-weight:400;}
   .map-res.empty{background:transparent; color:transparent;}
 
+  /* Player name default (Unplayed) */
+  .wtl-sub-head .pname { font-weight: 700; color: var(--text); }
   
-  /* ---------- WTL Example Colors ---------- */
-  .wtl-sub.win-left { border-left: 4px solid #85d685; background: linear-gradient(90deg, rgba(133,214,133,0.15) 0%, transparent 60%); }
-  .wtl-sub.win-right { border-right: 4px solid #85d685; background: linear-gradient(270deg, rgba(133,214,133,0.15) 0%, transparent 60%); }
-  .wtl-sub.draw { border-left: 4px solid var(--dim); border-right: 4px solid var(--dim); background: rgba(255,255,255,0.03); }
+  /* Played matches: Winners */
+  .wtl-sub.win-left .wtl-sub-head .player-left .pname { font-weight: 900; color: #fff; }
+  .wtl-sub.win-right .wtl-sub-head .player-right .pname { font-weight: 900; color: #fff; }
+  
+  /* Played matches: Losers */
+  .wtl-sub.win-left .wtl-sub-head .player-right .pname { font-weight: 500; color: var(--dim); }
+  .wtl-sub.win-right .wtl-sub-head .player-left .pname { font-weight: 500; color: var(--dim); }
+  
+  /* Played matches: Draw */
+  .wtl-sub.draw .wtl-sub-head .pname { font-weight: 500; color: var(--dim); }
   /* ---------- playoff note ---------- */
   .po-note{
     max-width:560px; margin:20px auto 0; padding:12px 16px;
@@ -396,7 +409,7 @@
 <section id="playoffs-section">
   <div class="section-head">
     <span class="num">03</span>
-    <h2><span class="lang-ko">플레이오프 진행 방식 <span style="color:var(--amber);">(필독)</span></span><span class="lang-en">Playoff Format <span style="color:var(--amber);">(Must Read)</span></span></h2>
+    <h2><span class="lang-ko">플레이오프 진행 방식 <span style="color:var(--amber);">(WTL 포맷 / 필독)</span></span><span class="lang-en">Playoff Format <span style="color:var(--amber);">(WTL Format / Must Read)</span></span></h2>
     <div class="rule"></div>
     <button class="rules-toggle" id="toggle-playoff-rules">
       <span class="lang-ko">전체 보기</span><span class="lang-en">Show All</span>
@@ -407,8 +420,8 @@
       <!-- WTL Example -->
       <div style="max-width:1040px; margin:0 auto;">
       <h3 class="section-head" style="margin-top:40px; margin-bottom:12px;">
-        <span class="lang-ko">플레이오프 경기 방식 (예시)</span>
-        <span class="lang-en">Playoff Format (Example)</span>
+        <span class="lang-ko">플레이오프 경기 방식 (WTL 포맷 / 예시)</span>
+        <span class="lang-en">Playoff Format (WTL Format / Example)</span>
       </h3>
       <div class="wtl-match">
         <div class="wtl-header">
@@ -417,8 +430,8 @@
             <span class="teamname"><span class="lang-ko">턱돌호범</span><span class="lang-en">CRHB</span></span>
           </div>
           <div class="wtl-score">
-            <div class="wtl-score-num">4 : 5</div>
-            <div class="wtl-score-desc">(Bo7)</div>
+            <div class="wtl-score-num">6 : 7</div>
+            <div class="wtl-score-desc"></div>
           </div>
           <div class="sm-side right" style="flex-direction:row-reverse; justify-content:flex-start;">
             <img src="./assets/team_logos/BASILISK.png" class="team-logo">
@@ -429,9 +442,9 @@
         <!-- Set 1: Classic vs Serral -->
         <div class="wtl-sub win-right">
           <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-P"><span style="color:var(--dim);">Classic</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">0 | 2</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:#85d685;">Serral</span></div>
+            <div class="player-left r-bg-left r-P"><span class="pname">Classic</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score">0 | 2</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Serral</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
@@ -440,7 +453,7 @@
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Polypoid</div>
+            <div class="map-name">Blackrock</div>
             <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
           </div>
         </div>
@@ -448,13 +461,13 @@
         <!-- Set 2: herO vs Serral -->
         <div class="wtl-sub win-left">
           <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-P"><span style="color:#85d685;">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">2 | 0</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:var(--dim);">Serral</span></div>
+            <div class="player-left r-bg-left r-P"><span class="pname">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score">2 | 0</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Serral</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res win">W</div></div>
-            <div class="map-name">Blackrock</div>
+            <div class="map-name">Polypoid</div>
             <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc2">SC2</span></div>
           </div>
           <div class="wtl-map-row">
@@ -467,18 +480,18 @@
         <!-- Set 3: herO vs Reynor (Middle 1:1) -->
         <div class="wtl-sub draw">
           <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-P"><span style="color:var(--dim);">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">1 | 1</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:var(--dim);">Reynor</span></div>
+            <div class="player-left r-bg-left r-P"><span class="pname">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score">1 | 1</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Reynor</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Blackrock</div>
+            <div class="map-name">Sylphid</div>
             <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Polypoid</div>
+            <div class="map-name">Sylphid</div>
             <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
           </div>
         </div>
@@ -486,18 +499,18 @@
         <!-- Set 4: Solar vs trigger -->
         <div class="wtl-sub win-right">
           <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-Z"><span style="color:var(--dim);">Solar</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">0 | 2</div>
-            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span style="color:#85d685;">trigger</span></div>
+            <div class="player-left r-bg-left r-Z"><span class="pname">Solar</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
+            <div class="sub-score">0 | 2</div>
+            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span class="pname">trigger</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Blackrock</div>
+            <div class="map-name">Washout LE</div>
             <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc1">SC1</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Polypoid</div>
+            <div class="map-name">Washout LE</div>
             <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
           </div>
         </div>
@@ -505,18 +518,18 @@
         <!-- Set 5: SHIN vs trigger -->
         <div class="wtl-sub win-left">
           <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-Z"><span style="color:#85d685;">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">2 | 0</div>
-            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span style="color:var(--dim);">trigger</span></div>
+            <div class="player-left r-bg-left r-Z"><span class="pname">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
+            <div class="sub-score">2 | 0</div>
+            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span class="pname">trigger</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res win">W</div></div>
-            <div class="map-name">Blackrock</div>
+            <div class="map-name">Fighting Spirit</div>
             <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc2">SC2</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Polypoid</div>
+            <div class="map-name">Fighting Spirit</div>
             <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
           </div>
         </div>
@@ -524,18 +537,18 @@
         <!-- Set 6: 4th Players Tie -->
         <div class="wtl-sub draw">
           <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-Z"><span style="color:var(--dim);">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">1 | 1</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:var(--dim);">Serral</span></div>
+            <div class="player-left r-bg-left r-Z"><span class="pname">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
+            <div class="sub-score">1 | 1</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Serral</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc1">SC1</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Blackrock</div>
+            <div class="map-name">Match Point</div>
             <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
           </div>
           <div class="wtl-map-row">
             <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Polypoid</div>
+            <div class="map-name">Match Point</div>
             <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc1">SC1</span></div>
           </div>
         </div>
@@ -544,14 +557,14 @@
         <div class="wtl-sub win-right ace" style="padding-bottom:12px;">
           <div class="set-num-center ace" style="text-align:center; margin-top:16px;">SUPER ACE MATCH</div>
           <div class="wtl-sub-head" style="padding-top:4px;">
-            <div class="player-left r-bg-left r-P"><span style="color:var(--dim);">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score" style="color:var(--text);">0 | 1</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span style="color:#85d685;">Serral</span></div>
+            <div class="player-left r-bg-left r-P"><span class="pname">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
+            <div class="sub-score">0 | 1</div>
+            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Reynor</span></div>
           </div>
           <div class="wtl-map-row" style="flex-direction:column; gap:4px; margin-bottom:8px; margin-top:8px;">
             <div style="display:flex; gap:16px; align-items:center; width:100%;">
               <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
-              <div class="map-name" style="color:var(--amber);">Alcyone LE</div>
+              <div class="map-name" style="color:var(--amber);">Fear and Faith LE</div>
               <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc1">SC1</span></div>
             </div>
           </div>
@@ -640,6 +653,7 @@ const RULES = [
 const PLAYOFF_RULES = [
   {ko:"각 세트(선수 매치업)는 WTL 포맷(2세트 진행)으로 진행", en:"Each set (player matchup) is played in WTL format (2 games).", k_ko:"경기 포맷", k_en:"Match Format"},
   {ko:"세트당 2게임 진행, 스타2 · 스타1 버전을 번갈아 진행", en:"Each set consists of 2 games, alternating SC2 and SC1.", k_ko:"버전 로테이션", k_en:"Version Rotation"},
+  {ko:"1세트 맵은 주최측이 지정하며, 2세트부터는 이전 세트 패자가 맵을 선택합니다 (직전 세트에 사용된 맵 금지). 이전 세트가 무승부였거나 슈퍼 에이스 결정전인 경우 주최측이 랜덤으로 지정합니다.", en:"The map for Set 1 is chosen by the organizers. From Set 2 onwards, the loser of the previous set chooses the map (the map from the immediately preceding set is banned). In case of a draw or a Super Ace Match, the organizers will pick randomly.", k_ko:"맵 선택 방식", k_en:"Map Selection"},
   {ko:"서버 2개를 번갈아 사용해야 할 경우, 스타2 버전을 고른 쪽이 조금 더 좋은 서버에서 진행", en:"When alternating between 2 servers, the side that plays the SC2 game gets the slightly better server.", k_ko:"서버 배정", k_en:"Server Assignment"},
   {ko:"1~3번째로 출전하는 선수는 서로 중복될 수 없음 (조별리그와 동일)", en:"The 1st-3rd players to compete cannot be the same person twice, same as in the group stage.", k_ko:"엔트리 (1~3번째 출전선수)", k_en:"Entry (1st-3rd Players)"},
   {ko:"4번째 선수 매치업이 무승부일 경우 에이스결정전 진행. 이미 2경기를 뛴 선수를 제외한 선수 출전 가능. 버전(스타2/스타1)은 코인플립로 결정합니다(선택권 아님) — Grand Finals 단판 에이스결정전에도 동일 적용. 서버는 위 '서버 배정' 규정을 따름", en:"An Ace decider is played if the 4th player matchup ends in a tie. Any player who hasn't already played 2 sets may take part. The version (SC2/SC1) is decided by a coin flip, not a choice — this also applies to the single-game Ace decider in Grand Finals. Servers follow the Server Assignment rule above.", k_ko:"에이스결정전 발동 조건", k_en:"Ace Decider Trigger"},
@@ -834,6 +848,7 @@ function renderSchedule(group, matchesData){
               const r2 = sd.race2 || "-";
               const win1 = sd.winner === "1" ? " win" : "";
               const win2 = sd.winner === "2" ? " win" : "";
+              const isPlayed = (sd.winner === "1" || sd.winner === "2") ? " played" : "";
               const ver1 = si % 2 === 0 ? v1 : v2;
               const ver2 = si % 2 === 0 ? v2 : v1;
               const verClass = v => v==="SC2" ? "sc2" : v==="SC1" ? "sc1" : "";
@@ -841,7 +856,7 @@ function renderSchedule(group, matchesData){
               const r2Class = r2 && r2 !== "-" ? ` r-bg-right r-${r2}` : "";
               if(si===4){
                 return `
-                <div class="set-row ace" data-set="${si}">
+                <div class="set-row ace${isPlayed}" data-set="${si}">
                   
                   <div class="side${win1}${r1Class}">
                     <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(r1, ver1)}</span>
@@ -859,7 +874,7 @@ function renderSchedule(group, matchesData){
                 </div>`;
               }
               return `
-                <div class="set-row" data-set="${si}">
+                <div class="set-row${isPlayed}" data-set="${si}">
                   <div class="side${win1}${r1Class}">
                     <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">${esc(p1)}</span>
                     <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(r1, ver1)}</span>

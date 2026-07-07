@@ -89,9 +89,13 @@
   .match-block{background:var(--panel); margin-bottom:14px; border-radius:2px; overflow:hidden;}
   .match-block .mh{padding:8px 14px; background:var(--panel2); font-size:12.5px; color:var(--dim); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
   .match-block .mh b{color:#fff;}
-  .set-edit-row{padding:10px 14px; border-top:1px solid var(--line); display:grid; grid-template-columns:70px 1fr 1fr; gap:10px; align-items:center;}
+  .set-edit-row{padding:12px 14px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; align-items:center;}
+  .set-edit-row .set-info{width:110px; flex-shrink:0;}
   .set-edit-row .sn{font-size:12px; font-weight:800; color:var(--red);}
-  .set-edit-row .map{font-size:11px; color:var(--dim); margin-top:2px; line-height:1.3;}
+  .set-edit-row .map{font-size:11px; color:var(--dim); margin-top:2px; line-height:1.3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .set-edit-row .players-wrap{display:flex; flex:1; min-width:280px; gap:20px; align-items:center; justify-content:center;}
+  .set-edit-row .pside{display:flex; gap:6px; align-items:center;}
+  .set-edit-row .winner-row{display:flex; align-items:center; gap:8px; font-size:12px; margin-left:auto;}
   .pside{display:flex; gap:6px; align-items:center;}
   .pside input[type=text]{flex:1; min-width:0; padding:7px 8px; background:var(--bg); border:1px solid var(--line); color:var(--text); font-size:13px; border-radius:2px;}
   .pside select{padding:7px 4px; background:var(--bg); border:1px solid var(--line); color:var(--text); font-size:13px; width:54px; border-radius:2px;}
@@ -110,10 +114,10 @@
 <body>
 
 <header>
-  <h1>크총모 S4 <span style="color:var(--dim); font-weight:500; font-size:13px;">· 관리자</span></h1>
+  <h1>크총모 S4 <span style="color:var(--dim); font-weight:500; font-size:13px;">· 관리자 / Admin</span></h1>
   <div style="display:flex; align-items:center; gap:10px;">
-    <span class="status-pill" id="conn-status">연결 안 됨</span>
-    <a href="./index.html">← 대회 페이지로</a>
+    <span class="status-pill" id="conn-status">연결 안 됨 / Disconnected</span>
+    <a href="./index.html">← 대회 페이지로 / Back to Tournament</a>
   </div>
 </header>
 
@@ -121,18 +125,19 @@
 
   <!-- LOGIN -->
   <div class="login-box" id="login-box">
-    <h2>관리자 로그인</h2>
-    <p>GitHub 토큰은 Cloudflare Worker에만 저장돼요. 이 브라우저에는 비밀번호만 저장됩니다 (이중 보안).</p>
+    <h2>관리자 로그인 / Admin Login</h2>
+    <p>GitHub 토큰은 Cloudflare Worker에만 저장돼요. 이 브라우저에는 비밀번호만 저장됩니다 (이중 보안).<br>
+       GitHub tokens are safely stored in Cloudflare Worker. Only the password is kept in this browser.</p>
     <div class="field">
       <label>WORKER URL</label>
       <input type="text" id="in-worker" placeholder="https://ccm-admin.yourname.workers.dev">
-      <div class="hint">Cloudflare Worker 배포 후 나오는 주소</div>
+      <div class="hint">Cloudflare Worker 배포 후 나오는 주소 / The URL of your deployed Cloudflare Worker</div>
     </div>
     <div class="field">
-      <label>비밀번호</label>
-      <input type="password" id="in-password" placeholder="Worker에 설정한 ADMIN_PASSWORD">
+      <label>비밀번호 / Password</label>
+      <input type="password" id="in-password" placeholder="Worker에 설정한 ADMIN_PASSWORD / Password set in Worker">
     </div>
-    <button class="btn" id="btn-login">연결하기</button>
+    <button class="btn" id="btn-login">연결하기 / Connect</button>
     <div class="login-err" id="login-err"></div>
   </div>
 
@@ -141,12 +146,12 @@
     <div class="toolbar">
       <span class="repo-tag" id="repo-tag"></span>
       <span class="spacer"></span>
-      <button class="btn secondary" id="btn-reload">새로고침 (원격에서 다시 불러오기)</button>
-      <button class="btn secondary" id="btn-logout">로그아웃</button>
+      <button class="btn secondary" id="btn-reload">새로고침 / Reload (원격에서 다시 불러오기)</button>
+      <button class="btn secondary" id="btn-logout">로그아웃 / Logout</button>
     </div>
 
     <div class="section">
-      <h2><span class="accent">01</span> · 순위표 (승 / 패 / 세트승 / 세트패)</h2>
+      <h2><span class="accent">01</span> · 순위표 / Standings (승 / 패 / 세트승 / 세트패)</h2>
       <div class="standings-grid">
         <div class="grp">
           <div class="gh">GROUP A</div>
@@ -162,7 +167,7 @@
     </div>
 
     <div class="section">
-      <h2><span class="accent">02</span> · 경기 결과 / 라인업</h2>
+      <h2><span class="accent">02</span> · 경기 결과 및 라인업 / Match Results & Lineups</h2>
       <div class="group-tabs2">
         <button class="active" data-g="A">GROUP A</button>
         <button data-g="B">GROUP B</button>
@@ -174,7 +179,7 @@
 </main>
 
 <div class="save-bar" id="save-bar" style="display:none;">
-  <button class="btn" id="btn-save">변경사항 저장 (GitHub에 반영)</button>
+  <button class="btn" id="btn-save">변경사항 저장 (GitHub에 반영) / Save Changes to GitHub</button>
   <span class="msg" id="save-msg"></span>
 </div>
 
@@ -344,24 +349,31 @@ function enterEditor(){
   document.getElementById("repo-tag").textContent = GH.workerUrl;
   setStatus("연결됨", "ok");
   renderEditor();
+}
 
-  if(!document.getElementById("player-names") && window.PLAYER_DB){
-    const dl = document.createElement("datalist");
-    dl.id = "player-names";
-    let opts = "";
-    for(let k in window.PLAYER_DB){
-      opts += `<option value="${window.PLAYER_DB[k].officialId}">`;
-    }
-    dl.innerHTML = opts;
-    document.body.appendChild(dl);
-  }
+// Map frontend team names to DB team/eventTeam
+function getTeamPlayers(teamName) {
+  if(!window.PLAYER_DB) return [];
+  return Object.values(window.PLAYER_DB).filter(p => {
+    const tStr = (p.team + " " + p.eventTeam).toLowerCase();
+    if (teamName === "Shopify") return tStr.includes("shopify");
+    if (teamName === "ONSYDE") return tStr.includes("onsyde");
+    if (teamName === "If we lose, it's Crank's fault") return tStr.includes("지면 크랭크탓");
+    if (teamName === "StalnieBalls") return tStr.includes("stalnieballs");
+    if (teamName === "Team Liquid") return tStr.includes("team liquid");
+    if (teamName === "Basilisk") return tStr.includes("basilisk");
+    if (teamName === "CRHB") return tStr.includes("턱돌호범");
+    if (teamName === "Team Red White Blue") return tStr.includes("team rwb");
+    return false;
+  }).map(p => p.officialId).sort((a, b) => a.localeCompare(b));
 }
 
 // Auto-fill race based on PLAYER_DB when player name is selected
-document.addEventListener("input", e => {
-  if(e.target.tagName === "INPUT" && (e.target.dataset.field === "p1" || e.target.dataset.field === "p2")){
+document.addEventListener("change", e => {
+  if(e.target.tagName === "SELECT" && (e.target.dataset.field === "p1" || e.target.dataset.field === "p2")){
     if(!window.PLAYER_DB) return;
     const pName = e.target.value.toLowerCase();
+    if(!pName) return;
     const dbEntry = window.PLAYER_DB[pName] || Object.values(window.PLAYER_DB).find(p => p.officialId.toLowerCase() === pName);
     if(dbEntry){
       const raceMap = {"Icons/zerg.png":"Z", "Icons/terran.png":"T", "Icons/protoss.png":"P"};
@@ -408,33 +420,48 @@ function renderMatchesEditor(elId, group){
       const md = matches[key] || { sets: [blankSet(),blankSet(),blankSet(),blankSet(),blankSet()] };
       html += `
         <div class="match-block" data-key="${key}">
-          <div class="mh"><b>${esc(week.label)} · MATCH ${mi+1}</b><span>${esc(t1)} vs ${esc(t2)}</span></div>
+          <div class="mh"><b>${esc(week.ko)} / ${esc(week.en)} · MATCH ${mi+1}</b><span>${esc(t1)} vs ${esc(t2)}</span></div>
           ${m.maps.map((map,si)=>{
             const sd = md.sets[si] || blankSet();
+            const p1Opts = getTeamPlayers(t1).map(p => `<option value="${esc(p)}" ${sd.p1===p?"selected":""}>${esc(p)}</option>`).join("");
+            const p2Opts = getTeamPlayers(t2).map(p => `<option value="${esc(p)}" ${sd.p2===p?"selected":""}>${esc(p)}</option>`).join("");
+            // Add manually entered players if they aren't in the DB list
+            const p1FinalOpts = p1Opts + (sd.p1 && !getTeamPlayers(t1).includes(sd.p1) ? `<option value="${esc(sd.p1)}" selected>${esc(sd.p1)}</option>` : "");
+            const p2FinalOpts = p2Opts + (sd.p2 && !getTeamPlayers(t2).includes(sd.p2) ? `<option value="${esc(sd.p2)}" selected>${esc(sd.p2)}</option>` : "");
+
             return `
             <div class="set-edit-row" data-set="${si}">
-              <div><div class="sn">SET ${si+1}</div><div class="map">${esc(map)}</div></div>
-              <div class="pside">
-                <input type="text" data-field="p1" list="player-names" placeholder="${esc(t1)} 선수명" value="${esc(sd.p1||"")}">
-                <select data-field="race1">
-                  <option value="" ${!sd.race1?"selected":""}>-</option>
-                  <option value="T" ${sd.race1==="T"?"selected":""}>T</option>
-                  <option value="P" ${sd.race1==="P"?"selected":""}>P</option>
-                  <option value="Z" ${sd.race1==="Z"?"selected":""}>Z</option>
-                </select>
-              </div>
-              <div class="pside">
-                <select data-field="race2">
-                  <option value="" ${!sd.race2?"selected":""}>-</option>
-                  <option value="T" ${sd.race2==="T"?"selected":""}>T</option>
-                  <option value="P" ${sd.race2==="P"?"selected":""}>P</option>
-                  <option value="Z" ${sd.race2==="Z"?"selected":""}>Z</option>
-                </select>
-                <input type="text" data-field="p2" list="player-names" placeholder="${esc(t2)} 선수명" value="${esc(sd.p2||"")}">
+              <div class="set-info"><div class="sn">SET ${si+1}</div><div class="map" title="${esc(map)}">${esc(map)}</div></div>
+              <div class="players-wrap">
+                <div class="pside">
+                  <select data-field="p1" style="width:110px;">
+                    <option value="" ${!sd.p1?"selected":""}>선수 선택</option>
+                    ${p1FinalOpts}
+                  </select>
+                  <select data-field="race1">
+                    <option value="" ${!sd.race1?"selected":""}>-</option>
+                    <option value="T" ${sd.race1==="T"?"selected":""}>T</option>
+                    <option value="P" ${sd.race1==="P"?"selected":""}>P</option>
+                    <option value="Z" ${sd.race1==="Z"?"selected":""}>Z</option>
+                  </select>
+                </div>
+                <div style="font-size:12px; color:var(--dim); font-weight:bold;">VS</div>
+                <div class="pside">
+                  <select data-field="race2">
+                    <option value="" ${!sd.race2?"selected":""}>-</option>
+                    <option value="T" ${sd.race2==="T"?"selected":""}>T</option>
+                    <option value="P" ${sd.race2==="P"?"selected":""}>P</option>
+                    <option value="Z" ${sd.race2==="Z"?"selected":""}>Z</option>
+                  </select>
+                  <select data-field="p2" style="width:110px;">
+                    <option value="" ${!sd.p2?"selected":""}>선수 선택</option>
+                    ${p2FinalOpts}
+                  </select>
+                </div>
               </div>
               <div class="winner-row">
-                승자:
-                <select data-field="winner">
+                <span style="color:var(--dim);">승자:</span>
+                <select data-field="winner" style="width:110px;">
                   <option value="" ${!sd.winner?"selected":""}>미정</option>
                   <option value="1" ${sd.winner==="1"?"selected":""}>${esc(t1)}</option>
                   <option value="2" ${sd.winner==="2"?"selected":""}>${esc(t2)}</option>
