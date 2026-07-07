@@ -844,8 +844,8 @@ function renderSchedule(group, matchesData){
               const sd = md && md.sets && md.sets[si] ? md.sets[si] : {winner:null,p1:"",race1:"",p2:"",race2:""};
               const p1 = sd.p1 || "TBD";
               const p2 = sd.p2 || "TBD";
-              const r1 = sd.race1 || "-";
-              const r2 = sd.race2 || "-";
+              const r1 = (p1 === "TBD") ? "-" : (sd.race1 || "-");
+              const r2 = (p2 === "TBD") ? "-" : (sd.race2 || "-");
               const win1 = sd.winner === "1" ? " win" : "";
               const win2 = sd.winner === "2" ? " win" : "";
               const isPlayed = (sd.winner === "1" || sd.winner === "2") ? " played" : "";
