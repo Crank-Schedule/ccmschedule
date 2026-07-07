@@ -712,7 +712,7 @@ function teamNameHTML(name){
 }
 
 function getRaceIcon(race, ver) {
-  if(!race || race === "-") return "-";
+  if(!race || race === "-") return "";
   const prefix = ver === "SC1" ? "bw_" : "";
   const r = race.toLowerCase();
   const raceMap = { "t": "terran", "p": "protoss", "z": "zerg" };
@@ -820,7 +820,7 @@ function renderSchedule(group, matchesData){
       const matchEl = document.createElement("div");
       matchEl.className = "match";
       matchEl.innerHTML = `
-        <div class="match-head"><span>MATCH ${mi+1} · BO5</span><span>${wi+1}-${mi+1}</span></div>
+        <div class="match-head"><span>MATCH ${mi+1} · BO5</span></div>
         <div class="submatch">
           <div class="sm-top">
             <div class="sm-side left">
