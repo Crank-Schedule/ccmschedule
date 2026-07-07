@@ -53,32 +53,32 @@
     "w1-m1-A": {
       "sets": [
         {
-          "winner": "1",
-          "p1": "ByuN",
-          "race1": "T",
-          "p2": "Shameless",
-          "race2": "P"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "2",
-          "p1": "Harstem",
-          "race1": "P",
-          "p2": "ZaRDieNT",
-          "race2": "T"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "2",
-          "p1": "Harstem",
-          "race1": "P",
-          "p2": "Shameless",
-          "race2": "P"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
-          "winner": "2",
-          "p1": "Lambo",
-          "race1": "Z",
-          "p2": "YoungYakov",
-          "race2": "Z"
+          "winner": null,
+          "p1": "",
+          "race1": "",
+          "p2": "",
+          "race2": ""
         },
         {
           "winner": null,
