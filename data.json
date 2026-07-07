@@ -2,9 +2,9 @@
   "standings": {
     "Shopify": {
       "w": 0,
-      "l": 1,
-      "sw": 2,
-      "sl": 3
+      "l": 0,
+      "sw": 0,
+      "sl": 0
     },
     "ONSYDE": {
       "w": 0,
@@ -19,10 +19,10 @@
       "sl": 0
     },
     "StalnieBalls": {
-      "w": 1,
+      "w": 0,
       "l": 0,
-      "sw": 3,
-      "sl": 2
+      "sw": 0,
+      "sl": 0
     },
     "Team Liquid": {
       "w": 0,
@@ -53,35 +53,35 @@
     "w1-m1-A": {
       "sets": [
         {
-          "winner": "1",
+          "winner": "",
           "p1": "ByuN",
           "race1": "T",
           "p2": "YoungYakov",
           "race2": "Z"
         },
         {
-          "winner": "2",
+          "winner": "",
           "p1": "Scarlett",
           "race1": "Z",
           "p2": "GgMaChine",
           "race2": "Z"
         },
         {
-          "winner": "1",
+          "winner": "",
           "p1": "Lambo",
           "race1": "Z",
           "p2": "ZaRDieNT",
           "race2": "T"
         },
         {
-          "winner": "2",
+          "winner": "",
           "p1": "Harstem",
           "race1": "P",
           "p2": "YoungYakov",
           "race2": "Z"
         },
         {
-          "winner": "2",
+          "winner": "",
           "p1": "",
           "race1": "",
           "p2": "",
