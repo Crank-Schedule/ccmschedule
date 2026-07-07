@@ -447,7 +447,6 @@ function renderEditor(){
 
 function renderStandingsEditor(elId, teams, statsOverride){
   const standings = statsOverride || (currentData && currentData.standings) || {};
-  const standings = (currentData && currentData.standings) || {};
   document.getElementById(elId).innerHTML = teams.map(t=>{
     const s = standings[t] || blankStats();
     return `
