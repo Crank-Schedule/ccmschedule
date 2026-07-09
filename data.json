@@ -4,7 +4,7 @@
       "w": 0,
       "l": 0,
       "sw": 2,
-      "sl": 1
+      "sl": 2
     },
     "ONSYDE": {
       "w": 0,
@@ -21,7 +21,7 @@
     "StalnieBalls": {
       "w": 0,
       "l": 0,
-      "sw": 1,
+      "sw": 2,
       "sl": 2
     },
     "Team Liquid": {
@@ -74,18 +74,20 @@
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Harstem",
           "race1": "P",
           "p2": "YoungYakov",
           "race2": "Z"
         },
         {
-          "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "winner": "",
+          "p1": "ByuN",
+          "race1": "T",
+          "p2": "ZaRDieNT",
+          "race2": "T",
+          "ver1": "SC2",
+          "ver2": "BW"
         }
       ]
     },
