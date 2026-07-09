@@ -3,7 +3,7 @@
     "Shopify": {
       "w": 0,
       "l": 1,
-      "sw": 3,
+      "sw": 4,
       "sl": 5
     },
     "ONSYDE": {
@@ -16,7 +16,7 @@
       "w": 0,
       "l": 1,
       "sw": 4,
-      "sl": 4
+      "sl": 5
     },
     "StalnieBalls": {
       "w": 1,
@@ -156,18 +156,20 @@
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Lambo",
           "race1": "Z",
           "p2": "Percival",
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "",
           "p1": "",
           "race1": "",
           "p2": "",
-          "race2": ""
+          "race2": "",
+          "ver2": "SC2",
+          "ver1": "BW"
         }
       ]
     },
