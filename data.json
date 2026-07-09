@@ -3,8 +3,8 @@
     "Shopify": {
       "w": 0,
       "l": 1,
-      "sw": 2,
-      "sl": 3
+      "sw": 3,
+      "sl": 5
     },
     "ONSYDE": {
       "w": 1,
@@ -15,8 +15,8 @@
     "If we lose, it's Crank's fault": {
       "w": 0,
       "l": 1,
-      "sw": 2,
-      "sl": 3
+      "sw": 4,
+      "sl": 4
     },
     "StalnieBalls": {
       "w": 1,
@@ -135,21 +135,21 @@
     "w1-m3-A": {
       "sets": [
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Scarlett",
           "race1": "P",
           "p2": "Rogue",
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Harstem",
           "race1": "P",
           "p2": "Trap",
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "ByuN",
           "race1": "T",
           "p2": "Creator",
