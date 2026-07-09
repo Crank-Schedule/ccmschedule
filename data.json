@@ -2,9 +2,9 @@
   "standings": {
     "Shopify": {
       "w": 0,
-      "l": 1,
+      "l": 2,
       "sw": 4,
-      "sl": 5
+      "sl": 6
     },
     "ONSYDE": {
       "w": 1,
@@ -13,9 +13,9 @@
       "sl": 2
     },
     "If we lose, it's Crank's fault": {
-      "w": 0,
+      "w": 1,
       "l": 1,
-      "sw": 4,
+      "sw": 5,
       "sl": 5
     },
     "StalnieBalls": {
@@ -163,7 +163,7 @@
           "race2": "T"
         },
         {
-          "winner": "",
+          "winner": "2",
           "p1": "ByuN",
           "race1": "T",
           "p2": "Rogue",
