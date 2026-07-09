@@ -7,16 +7,16 @@
       "sl": 3
     },
     "ONSYDE": {
-      "w": 0,
+      "w": 1,
       "l": 0,
-      "sw": 2,
-      "sl": 1
+      "sw": 3,
+      "sl": 2
     },
     "If we lose, it's Crank's fault": {
       "w": 0,
-      "l": 0,
-      "sw": 1,
-      "sl": 2
+      "l": 1,
+      "sw": 2,
+      "sl": 3
     },
     "StalnieBalls": {
       "w": 1,
@@ -115,18 +115,20 @@
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Ryung",
           "race1": "T",
           "p2": "Creator",
           "race2": "P"
         },
         {
-          "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "winner": "1",
+          "p1": "Maru",
+          "race1": "T",
+          "p2": "Creator",
+          "race2": "P",
+          "ver1": "BW",
+          "ver2": "SC2"
         }
       ]
     },
