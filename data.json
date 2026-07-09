@@ -81,11 +81,11 @@
           "race2": "Z"
         },
         {
-          "winner": null,
-          "p1": "Lambo",
-          "race1": "Z",
-          "p2": "ZaRDieNT",
-          "race2": "T"
+          "winner": "",
+          "p1": "",
+          "race1": "-",
+          "p2": "",
+          "race2": "-"
         }
       ]
     },
