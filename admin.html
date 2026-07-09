@@ -200,14 +200,14 @@ const WEEKS = [
    {maps:["[SC:Evo] Fighting Spirit","Fear and Faith LE","[SC:Evo] Sylphid","Blackrock LE","[SC:Evo] Match Point"],
     A:{t:["ONSYDE","If we lose, it's Crank's fault"], v:"SC2"}, B:{t:["Basilisk","CRHB"], v:"SC2"}},
    {maps:["Washout LE","[SC:Evo] Match Point","[SC:Evo] Polypoid","[SC:Evo] Sylphid","[SC:Evo] Fighting Spirit"],
-    A:{t:["Shopify","If we lose, it's Crank's fault"], v:"SC1"}, B:{t:["Team Liquid","CRHB"], v:"SC1"}},
+    A:{t:["Shopify","If we lose, it's Crank's fault"], v:"BW"}, B:{t:["Team Liquid","CRHB"], v:"BW"}},
   ]
  },
  {
   ko:"2주차", en:"Week 2", dayA:"7/16", dayB:"7/17", time:"20:00 KST", isoA:"2026-07-16T20:00:00+09:00", isoB:"2026-07-17T20:00:00+09:00",
   matches:[
    {maps:["[SC:Evo] Sylphid","Blackrock LE","[SC:Evo] Fighting Spirit","Washout LE","Fear and Faith LE"],
-    A:{t:["ONSYDE","StalnieBalls"], v:"SC1"}, B:{t:["Basilisk","Team Red White Blue"], v:"SC1"}},
+    A:{t:["ONSYDE","StalnieBalls"], v:"BW"}, B:{t:["Basilisk","Team Red White Blue"], v:"BW"}},
    {maps:["Fear and Faith LE","[SC:Evo] Polypoid","Blackrock LE","[SC:Evo] Match Point","Washout LE"],
     A:{t:["If we lose, it's Crank's fault","StalnieBalls"], v:"SC2"}, B:{t:["CRHB","Team Red White Blue"], v:"SC2"}},
    {maps:["[SC:Evo] Match Point","[SC:Evo] Fighting Spirit","Washout LE","[SC:Evo] Sylphid","[SC:Evo] Polypoid"],
@@ -217,7 +217,6 @@ const WEEKS = [
 ];
 
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-function blankStats(){ return {w:0,l:0,sw:0,sl:0}; }
 function blankSet(){ return {winner:null,p1:"",race1:"",p2:"",race2:""}; }
 
 // ---------------- worker connection state ----------------
