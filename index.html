@@ -861,8 +861,6 @@ function renderSchedule(group, matchesData){
               const win1 = sd.winner === "1" ? " win" : "";
               const win2 = sd.winner === "2" ? " win" : "";
               const isPlayed = (sd.winner === "1" || sd.winner === "2") ? " played" : "";
-              const ver1 = si % 2 === 0 ? v1 : v2;
-              const ver2 = si % 2 === 0 ? v2 : v1;
               const verClass = v => v==="SC2" ? "sc2" : v==="BW" ? "bw" : "";
               const r1Class = r1 && r1 !== "-" ? ` r-bg-left r-${r1}` : "";
               let ver1 = si % 2 === 0 ? v1 : v2;
