@@ -913,7 +913,7 @@ function renderSchedule(group, matchesData){
 (async function loadDataAndRender(){
   let data = null;
   try{
-    const res = await fetch("./data.json", { cache: "no-store" });
+    const res = await fetch("./data.json?t=" + Date.now(), { cache: "no-store" });
     if(res.ok) data = await res.json();
   }catch(e){ }
   renderStandings("groupA", GROUP_A, data && data.standings);
