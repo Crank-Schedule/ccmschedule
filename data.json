@@ -4,7 +4,7 @@
       "w": 0,
       "l": 1,
       "sw": 0,
-      "sl": 4
+      "sl": 5
     },
     "ONSYDE": {
       "w": 0,
@@ -21,7 +21,7 @@
     "StalnieBalls": {
       "w": 1,
       "l": 0,
-      "sw": 4,
+      "sw": 5,
       "sl": 0
     },
     "Team Liquid": {
@@ -81,7 +81,7 @@
           "race2": "Z"
         },
         {
-          "winner": "",
+          "winner": "2",
           "p1": "ByuN",
           "race1": "T",
           "p2": "GgMaChine",
