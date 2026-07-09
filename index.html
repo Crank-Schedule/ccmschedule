@@ -865,6 +865,12 @@ function renderSchedule(group, matchesData){
               const ver2 = si % 2 === 0 ? v2 : v1;
               const verClass = v => v==="SC2" ? "sc2" : v==="BW" ? "bw" : "";
               const r1Class = r1 && r1 !== "-" ? ` r-bg-left r-${r1}` : "";
+              let ver1 = si % 2 === 0 ? v1 : v2;
+              let ver2 = si % 2 === 0 ? v2 : v1;
+              if(si === 4) {
+                  ver1 = sd.ver1 || "SC2";
+                  ver2 = sd.ver2 || "BW";
+              }
               const r2Class = r2 && r2 !== "-" ? ` r-bg-right r-${r2}` : "";
               if(si===4){
                 return `
