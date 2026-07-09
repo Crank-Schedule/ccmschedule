@@ -9,14 +9,14 @@
     "ONSYDE": {
       "w": 0,
       "l": 0,
-      "sw": 0,
-      "sl": 0
+      "sw": 2,
+      "sl": 1
     },
     "If we lose, it's Crank's fault": {
       "w": 0,
       "l": 0,
-      "sw": 0,
-      "sl": 0
+      "sw": 1,
+      "sl": 2
     },
     "StalnieBalls": {
       "w": 1,
@@ -94,21 +94,21 @@
     "w1-m2-A": {
       "sets": [
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Ryung",
           "race1": "T",
           "p2": "Percival",
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Maru",
           "race1": "T",
           "p2": "Rogue",
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Zoun",
           "race1": "P",
           "p2": "sOs",
