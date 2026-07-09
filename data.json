@@ -3,8 +3,8 @@
     "Shopify": {
       "w": 0,
       "l": 0,
-      "sw": 1,
-      "sl": 0
+      "sw": 2,
+      "sl": 1
     },
     "ONSYDE": {
       "w": 0,
@@ -21,8 +21,8 @@
     "StalnieBalls": {
       "w": 0,
       "l": 0,
-      "sw": 0,
-      "sl": 1
+      "sw": 1,
+      "sl": 2
     },
     "Team Liquid": {
       "w": 0,
@@ -60,14 +60,14 @@
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Scarlett",
           "race1": "P",
           "p2": "GgMaChine",
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Lambo",
           "race1": "Z",
           "p2": "ZaRDieNT",
