@@ -535,7 +535,9 @@
       "t2": "",
       "sets": [
         {
-          "map": "[SC:Evo] Fighting Spirit"
+          "map": "[SC:Evo] Fighting Spirit",
+          "g1w": "",
+          "g2w": ""
         },
         {
           "map": "[SC:Evo] Match Point"
@@ -604,41 +606,32 @@
       "sets": [
         {
           "map": "[SC:Evo] Fighting Spirit",
-          "p1": "Crank",
-          "race1": "P",
-          "g1w": "1",
-          "g2w": "1",
-          "p2": "ByuN",
-          "race2": "T"
+          "p1": "",
+          "race1": "-",
+          "g1w": "",
+          "g2w": "",
+          "p2": "",
+          "race2": "-"
         },
         {
           "map": "[SC:Evo] Match Point",
-          "p1": "Crank",
-          "race1": "P",
-          "autoP1From": 0,
-          "g1w": "1",
-          "g2w": "1",
-          "p2": "Lambo",
-          "race2": "Z"
+          "g1w": "",
+          "g2w": "",
+          "p2": "",
+          "race2": "-"
         },
         {
           "map": "Washout LE",
-          "p1": "Crank",
-          "race1": "P",
-          "autoP1From": 1,
-          "g1w": "1",
-          "g2w": "1",
-          "p2": "Scarlett",
-          "race2": "Z"
+          "g1w": "",
+          "g2w": "",
+          "p2": "",
+          "race2": "-"
         },
         {
           "map": "Fear and Faith LE",
-          "p1": "Crank",
-          "race1": "P",
-          "autoP1From": 2,
-          "g1w": "1",
-          "p2": "ByuN",
-          "race2": "T"
+          "g1w": "",
+          "p2": "",
+          "race2": "-"
         },
         {
           "map": "[SC:Evo] Sylphid"
@@ -653,14 +646,14 @@
           "map": "[SC:Evo] Fighting Spirit"
         }
       ],
-      "score1": 4,
+      "score1": 0,
       "score2": 0
     },
     "p-m4": {
       "title_ko": "최종 결승전",
       "title_en": "Grand Finals",
       "t1": "",
-      "t2": "ONSYDE",
+      "t2": "",
       "sets": [
         {
           "map": "[SC:Evo] Fighting Spirit"
@@ -688,8 +681,7 @@
         }
       ],
       "score1": 0,
-      "score2": 0,
-      "_auto_t2": true
+      "score2": 0
     },
     "_mapOrder": [
       "[SC:Evo] Fighting Spirit",
