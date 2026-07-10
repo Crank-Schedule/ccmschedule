@@ -363,7 +363,7 @@
           "winner": "2",
           "p1": "Reynor",
           "race1": "Z",
-          "p2": "herO",
+          "p2": "Classic",
           "race2": "P",
           "ver1": "BW",
           "ver2": "SC2"
@@ -387,7 +387,7 @@
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "",
           "p1": "Cure",
           "race1": "T",
           "p2": "Solar",
