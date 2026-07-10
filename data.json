@@ -25,28 +25,28 @@
       "sl": 2
     },
     "Team Liquid": {
-      "w": 0,
+      "w": 1,
       "l": 0,
-      "sw": 2,
+      "sw": 3,
       "sl": 1
     },
     "Basilisk": {
       "w": 0,
-      "l": 0,
-      "sw": 0,
-      "sl": 0
+      "l": 1,
+      "sw": 2,
+      "sl": 3
     },
     "CRHB": {
-      "w": 0,
+      "w": 1,
       "l": 0,
-      "sw": 0,
-      "sl": 0
+      "sw": 3,
+      "sl": 2
     },
     "Team Red White Blue": {
       "w": 0,
-      "l": 0,
+      "l": 1,
       "sw": 1,
-      "sl": 2
+      "sl": 3
     }
   },
   "matches": {
@@ -314,7 +314,7 @@
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Elazer",
           "race1": "Z",
           "p2": "goblin",
@@ -332,39 +332,41 @@
     "w1-m2-B": {
       "sets": [
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Reynor",
           "race1": "Z",
           "p2": "herO",
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Serral",
           "race1": "Z",
           "p2": "SHIN",
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "trigger",
           "race1": "P",
           "p2": "Classic",
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Serral",
           "race1": "Z",
           "p2": "Solar",
           "race2": "Z"
         },
         {
-          "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "winner": "2",
+          "p1": "Reynor",
+          "race1": "Z",
+          "p2": "herO",
+          "race2": "P",
+          "ver1": "BW",
+          "ver2": "SC2"
         }
       ]
     },
@@ -597,20 +599,46 @@
     "p-m3": {
       "title_ko": "최종 진출전",
       "title_en": "LB Finals",
-      "t1": "",
-      "t2": "",
+      "t1": "ONSYDE",
+      "t2": "Shopify",
       "sets": [
         {
-          "map": "[SC:Evo] Fighting Spirit"
+          "map": "[SC:Evo] Fighting Spirit",
+          "p1": "Crank",
+          "race1": "P",
+          "g1w": "1",
+          "g2w": "1",
+          "p2": "ByuN",
+          "race2": "T"
         },
         {
-          "map": "[SC:Evo] Match Point"
+          "map": "[SC:Evo] Match Point",
+          "p1": "Crank",
+          "race1": "P",
+          "autoP1From": 0,
+          "g1w": "1",
+          "g2w": "1",
+          "p2": "Lambo",
+          "race2": "Z"
         },
         {
-          "map": "Washout LE"
+          "map": "Washout LE",
+          "p1": "Crank",
+          "race1": "P",
+          "autoP1From": 1,
+          "g1w": "1",
+          "g2w": "1",
+          "p2": "Scarlett",
+          "race2": "Z"
         },
         {
-          "map": "Fear and Faith LE"
+          "map": "Fear and Faith LE",
+          "p1": "Crank",
+          "race1": "P",
+          "autoP1From": 2,
+          "g1w": "1",
+          "p2": "ByuN",
+          "race2": "T"
         },
         {
           "map": "[SC:Evo] Sylphid"
@@ -625,14 +653,14 @@
           "map": "[SC:Evo] Fighting Spirit"
         }
       ],
-      "score1": 0,
+      "score1": 4,
       "score2": 0
     },
     "p-m4": {
       "title_ko": "최종 결승전",
       "title_en": "Grand Finals",
       "t1": "",
-      "t2": "",
+      "t2": "ONSYDE",
       "sets": [
         {
           "map": "[SC:Evo] Fighting Spirit"
@@ -660,7 +688,8 @@
         }
       ],
       "score1": 0,
-      "score2": 0
+      "score2": 0,
+      "_auto_t2": true
     },
     "_mapOrder": [
       "[SC:Evo] Fighting Spirit",
