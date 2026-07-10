@@ -27,7 +27,7 @@
     "Team Liquid": {
       "w": 0,
       "l": 0,
-      "sw": 1,
+      "sw": 2,
       "sl": 1
     },
     "Basilisk": {
@@ -46,7 +46,7 @@
       "w": 0,
       "l": 0,
       "sw": 1,
-      "sl": 1
+      "sl": 2
     }
   },
   "matches": {
@@ -307,7 +307,7 @@
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Cure",
           "race1": "T",
           "p2": "uThermal",
