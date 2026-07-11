@@ -88,12 +88,14 @@
   .rule-card .v{font-size:14.5px; color:var(--text);}
 
   /* ---------- group tabs ---------- */
-  .group-tabs{display:flex; margin-bottom:22px; max-width:460px; margin-left:auto; margin-right:auto; border-radius:2px; overflow:hidden;}
+  .group-tabs{display:flex; margin-bottom:22px; max-width:760px; margin-left:auto; margin-right:auto; border-radius:2px; overflow:hidden;}
   .group-tab{
     flex:1; text-align:center; padding:11px 10px; background:var(--panel);
     font-weight:800; font-size:14.5px; color:var(--dim); cursor:pointer; border:none;
   }
   .group-tab.active.a, .group-tab.active.b{color:#fff; background:var(--red);}
+  .group-tab.active.p{color:#fff; background:#552288 !important;}
+  .group-tab.active.s{color:#fff; background:#1f7a5c !important;}
 
   .group-view{display:none;}
   .group-view.active{display:block;}
@@ -175,7 +177,7 @@
   .vs{color:var(--red); font-size:13px; font-weight:900; text-align:center;}
   .start-ver{font-size:11.5px; font-weight:700; padding:1px 8px; border-radius:2px;}
   .start-ver.sc2{color:#fff; background:var(--red-dark);}
-  .start-ver.bw{color:var(--text); background:#a87b00;}
+  .start-ver.sc1{color:var(--text); background:#3a2e24;}
 
   /* ---------- set rows ---------- */
   .set-list{display:flex; flex-direction:column;}
@@ -206,7 +208,7 @@
     flex-shrink:0; font-size:10.5px; font-weight:700; padding:1px 6px; border-radius:2px; color:var(--dim); background:var(--panel2);
   }
   .set-row .side .ver-chip.sc2{color:#fff; background:var(--red-dark);}
-  .set-row .side .ver-chip.bw{color:var(--text); background:#a87b00;}
+  .set-row .side .ver-chip.sc1{color:var(--text); background:#3a2e24;}
   
   .set-row .mapname{font-size:13px; font-weight:700; color:#fff; text-align:center; line-height:1.3;}
   .set-row.ace .mapname{color:var(--amber);}
@@ -274,6 +276,61 @@
   
   /* Played matches: Draw */
   .wtl-sub.draw .wtl-sub-head .pname { font-weight: 500; color: var(--dim); }
+  /* ---------- Playoff WTL (매치당 2게임) ---------- */
+  .po-games{display:inline-flex; gap:6px; flex-shrink:0; margin:0 8px;}
+  .po-game-box{
+    width:54px; height:38px; border-radius:4px; display:inline-flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:1px;
+    font-weight:900; background:var(--panel2); color:var(--dim);
+    border:1px solid var(--line);
+  }
+  .po-game-ver{font-size:9px; line-height:1; letter-spacing:.3px; opacity:.75;}
+  .po-game-result{font-size:14px; line-height:1;}
+  .po-game-box.sc2{background:rgba(143,17,25,.18); border-color:var(--red-dark);}
+  .po-game-box.bw{background:rgba(168,123,0,.18); border-color:#a87b00;}
+  .po-game-box.sc2.win{background:var(--red-dark); color:#fff; border-color:var(--red);}
+  .po-game-box.bw.win{background:#a87b00; color:#fff; border-color:#d5a51b;}
+  .po-game-box.lose{opacity:0.55;}
+  .po-hearts{display:inline-flex; gap:3px; white-space:nowrap; flex-shrink:0; font-size:20px; line-height:1;}
+  .match[data-isplayoff="true"] .sm-top{grid-template-columns:minmax(0,1fr) 300px minmax(0,1fr);}
+  .po-scoreboard{display:flex; align-items:center; justify-content:center; gap:11px; font-size:28px; color:#fff; white-space:nowrap;}
+  .po-score-side{display:inline-flex; align-items:center; gap:9px;}
+  .po-score-num{min-width:22px; text-align:center; font-size:30px; font-variant-numeric:tabular-nums;}
+  .set-row.ace-locked .side{opacity:.55;}
+
+  /* ---------- Individual Statistics ---------- */
+  .version-record{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:20px; background:var(--panel); border:1px solid var(--line); padding:22px 28px; margin-bottom:22px;}
+  .version-side{text-align:center;}
+  .version-name{font-size:20px; font-weight:900; margin-bottom:4px;}
+  .version-name.sc2{color:var(--red);}
+  .version-name.bw{color:#d5a51b;}
+  .version-score{font-size:28px; font-weight:900; color:#fff; font-variant-numeric:tabular-nums;}
+  .version-detail{font-size:13px; color:var(--dim);}
+  .version-vs{font-size:17px; font-weight:900; color:var(--dim); text-align:center;}
+  .stats-table-title{font-size:18px; font-weight:900; color:#fff; margin:26px 0 10px;}
+  .stats-table-wrap{overflow-x:auto; background:var(--panel); border:1px solid var(--line);}
+  .stats-table{width:100%; border-collapse:collapse; font-size:14px;}
+  .stats-table th{padding:11px 12px; background:var(--panel2); color:var(--dim); border-bottom:1px solid var(--line); text-align:center; white-space:nowrap;}
+  .stats-table td{padding:11px 12px; border-bottom:1px solid var(--line); text-align:center; font-variant-numeric:tabular-nums;}
+  .stats-table tr:last-child td{border-bottom:none;}
+  .stats-table .ps-player{text-align:left; color:#fff; font-weight:800; white-space:nowrap;}
+  .stats-table .ps-team{text-align:left; color:var(--dim); font-size:12px;}
+  .stats-table .ps-win{color:#85d685; font-weight:900;}
+  .stats-table .ps-loss{color:#e78a8a; font-weight:900;}
+  .race-stat-label{display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:800; color:#fff;}
+  .race-stat-label .race-icon{width:22px; height:22px;}
+  .race-version-chip{display:inline-block; min-width:42px; padding:2px 7px; border-radius:3px; font-size:11px; font-weight:900;}
+  .race-version-chip.sc2{background:var(--red-dark); color:#fff;}
+  .race-version-chip.bw{background:#a87b00; color:#fff;}
+  .stats-empty{padding:36px; text-align:center; color:var(--dim); background:var(--panel); border:1px solid var(--line);}
+  @media(max-width:640px){
+    .version-record{gap:10px; padding:18px 12px;}
+    .version-score{font-size:20px;}
+    .version-name{font-size:17px;}
+    .stats-table{font-size:12px;}
+    .stats-table th,.stats-table td{padding:9px 8px;}
+  }
+
   /* ---------- playoff note ---------- */
   .po-note{
     max-width:560px; margin:20px auto 0; padding:12px 16px;
@@ -304,7 +361,7 @@
 <body data-lang="en">
 
 <div class="floating-lang">
-  <button class="lang-btn" id="btn-ko">한국어</button>
+  <button class="lang-btn" id="btn-ko">KO</button>
   <button class="lang-btn active" id="btn-en">ENG</button>
 </div>
 
@@ -360,6 +417,8 @@
   <div class="group-tabs">
     <button class="group-tab a active" data-group="A"><span class="lang-ko">A조</span><span class="lang-en">Group A</span></button>
     <button class="group-tab b" data-group="B"><span class="lang-ko">B조</span><span class="lang-en">Group B</span></button>
+    <button class="group-tab p" data-group="P" style="background:#2f1748; color:#fff;"><span class="lang-ko">플레이오프</span><span class="lang-en">Playoffs</span></button>
+    <button class="group-tab s" data-group="S" style="background:#173f35; color:#fff;"><span class="lang-ko">개인성적</span><span class="lang-en">Player Stats</span></button>
   </div>
 
   <div class="group-view active" id="view-A">
@@ -399,7 +458,8 @@
         <span class="lang-en">* Pre-tournament — placeholder values (0-0) until results are in</span>
       </div>
     </div>
-    <div class="schedule-panel active" id="schedule-B"></div>
+    <div class="schedule-panel active" id="schedule-B"></div> 
+    
     <div class="po-note b">
       <span class="lang-ko"><b>플레이오프 진출</b> — B조 1위는 <b>UB Finals</b>, B조 2위는 <b>LB Semifinals</b>에 진출합니다. 자세한 대진은 아래 플레이오프 섹션 참고.</span>
       <span class="lang-en"><b>Playoff spots</b> — Group B's 1st place advances to <b>UB Finals</b>, 2nd place to <b>LB Semifinals</b>. See the Playoffs section below for the full bracket.</span>
@@ -407,6 +467,7 @@
   </div>
 </section>
 
+<div class="group-view" id="view-P">
 <section id="playoffs-section">
   <div class="section-head">
     <span class="num">03</span>
@@ -418,172 +479,7 @@
     </button>
   </div>
   <div class="rules" id="playoff-rules-grid" style="margin-bottom:34px;"></div>
-      <!-- WTL Example -->
-      <div style="max-width:1040px; margin:0 auto;">
-      <h3 class="section-head" style="margin-top:40px; margin-bottom:12px;">
-        <span class="lang-ko">플레이오프 경기 방식 (WTL 포맷 / 예시)</span>
-        <span class="lang-en">Playoff Format (WTL Format / Example)</span>
-      </h3>
-      <div class="wtl-match">
-        <div class="wtl-header">
-          <div class="sm-side left">
-            <img src="./assets/team_logos/턱돌호범.png" class="team-logo">
-            <span class="teamname"><span class="lang-ko">턱돌호범</span><span class="lang-en">CRHB</span></span>
-          </div>
-          <div class="wtl-score">
-            <div class="wtl-score-num">6 : 7</div>
-            <div class="wtl-score-desc"></div>
-          </div>
-          <div class="sm-side right" style="flex-direction:row-reverse; justify-content:flex-start;">
-            <img src="./assets/team_logos/BASILISK.png" class="team-logo">
-            <span class="teamname">BASILISK</span>
-          </div>
-        </div>
-
-        <!-- Set 1: Classic vs Serral -->
-        <div class="wtl-sub win-right">
-          <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-P"><span class="pname">Classic</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score">0 | 2</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Serral</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Blackrock</div>
-            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver bw">BW</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver bw">BW</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Blackrock</div>
-            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
-          </div>
-        </div>
-
-        <!-- Set 2: herO vs Serral -->
-        <div class="wtl-sub win-left">
-          <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-P"><span class="pname">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score">2 | 0</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Serral</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver bw">BW</span><div class="map-res win">W</div></div>
-            <div class="map-name">Polypoid</div>
-            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc2">SC2</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Polypoid</div>
-            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver bw">BW</span></div>
-          </div>
-        </div>
-
-        <!-- Set 3: herO vs Reynor (Middle 1:1) -->
-        <div class="wtl-sub draw">
-          <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-P"><span class="pname">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score">1 | 1</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Reynor</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver bw">BW</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Sylphid</div>
-            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Sylphid</div>
-            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver bw">BW</span></div>
-          </div>
-        </div>
-
-        <!-- Set 4: Solar vs trigger -->
-        <div class="wtl-sub win-right">
-          <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-Z"><span class="pname">Solar</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
-            <div class="sub-score">0 | 2</div>
-            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span class="pname">trigger</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Washout LE</div>
-            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver bw">BW</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver bw">BW</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Washout LE</div>
-            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
-          </div>
-        </div>
-
-        <!-- Set 5: SHIN vs trigger -->
-        <div class="wtl-sub win-left">
-          <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-Z"><span class="pname">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
-            <div class="sub-score">2 | 0</div>
-            <div class="player-right r-bg-right r-P"><img src="./assets/icons/protoss.png" class="race-icon"> <span class="pname">trigger</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver bw">BW</span><div class="map-res win">W</div></div>
-            <div class="map-name">Fighting Spirit</div>
-            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver sc2">SC2</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Fighting Spirit</div>
-            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver bw">BW</span></div>
-          </div>
-        </div>
-
-        <!-- Set 6: 4th Players Tie -->
-        <div class="wtl-sub draw">
-          <div class="wtl-sub-head">
-            <div class="player-left r-bg-left r-Z"><span class="pname">SHIN</span> <img src="./assets/icons/zerg.png" class="race-icon"></div>
-            <div class="sub-score">1 | 1</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Serral</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver bw">BW</span><div class="map-res lose">L</div></div>
-            <div class="map-name">Match Point</div>
-            <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver sc2">SC2</span></div>
-          </div>
-          <div class="wtl-map-row">
-            <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res win">W</div></div>
-            <div class="map-name">Match Point</div>
-            <div class="res-wrap right"><div class="map-res lose">L</div><span class="start-ver bw">BW</span></div>
-          </div>
-        </div>
-
-        <!-- SUPER ACE MATCH -->
-        <div class="wtl-sub win-right ace" style="padding-bottom:12px;">
-          <div class="set-num-center ace" style="text-align:center; margin-top:16px;">SUPER ACE MATCH</div>
-          <div class="wtl-sub-head" style="padding-top:4px;">
-            <div class="player-left r-bg-left r-P"><span class="pname">herO</span> <img src="./assets/icons/protoss.png" class="race-icon"></div>
-            <div class="sub-score">0 | 1</div>
-            <div class="player-right r-bg-right r-Z"><img src="./assets/icons/zerg.png" class="race-icon"> <span class="pname">Reynor</span></div>
-          </div>
-          <div class="wtl-map-row" style="flex-direction:column; gap:4px; margin-bottom:8px; margin-top:8px;">
-            <div style="display:flex; gap:16px; align-items:center; width:100%;">
-              <div class="res-wrap left"><span class="start-ver sc2">SC2</span><div class="map-res lose">L</div></div>
-              <div class="map-name" style="color:var(--amber);">Fear and Faith LE</div>
-              <div class="res-wrap right"><div class="map-res win">W</div><span class="start-ver bw">BW</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-  <div class="section-head" style="margin-top:60px;">
-    <span class="num">04</span>
-    <h2>
-      <span class="lang-ko">플레이오프 대진표</span><span class="lang-en">Playoff Bracket</span>
-      <span style="font-size:13px; color:var(--amber); font-weight:700; margin-left:8px;">
-        <span class="lang-ko">(WTL 포맷: 승리시 연승도전 / 무승부, 패배시 다음 선수 출전)</span>
-        <span class="lang-en">(WTL Format)</span>
-      </span>
-    </h2>
-  </div>
-</section>
-
+      
 <!-- Playoff Bracket -->
 <section class="bracket-container">
   <div class="bracket-canvas">
@@ -637,6 +533,29 @@
 
 </section>
 
+<!-- Playoff Detailed View -->
+<div class="schedule-panel active" id="schedule-P" style="margin-top:40px;"></div>
+</section>
+</div>
+
+<div class="group-view" id="view-S">
+<section id="individual-stats-section">
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2><span class="lang-ko">개인 성적</span><span class="lang-en">Player Statistics</span></h2>
+    <div class="rule"></div>
+  </div>
+  <div id="version-record"></div>
+  <div id="race-stats-table"></div>
+  <div id="player-stats-table"></div>
+</section>
+</div>
+
+
+
+
+
+<script src="./players_db.js"></script>
 <script>
 const RULES = [
   {ko:"매 경기일 오후 8:00 (KST) 시작", en:"Matches start 8:00 PM KST each match day.", k_ko:"시작 시간", k_en:"Start Time"},
@@ -648,16 +567,14 @@ const RULES = [
   {ko:"피치 못할 사정 시 선행 플레이 후 리플레이 중계 가능", en:"Pre-playing with a replay broadcast is allowed if necessary.", k_ko:"사전 플레이", k_en:"Pre-Play"},
   {ko:"양 팀 동의 시 라인업 조기 교환 및 이른 시간 진행 가능", en:"Early lineup exchange and start time allowed with mutual agreement.", k_ko:"조기 진행", k_en:"Early Start"},
   {ko:"서버 선택이 필요할 경우, 스타2로 진행하는 팀이 조금 더 좋은 서버를 선택", en:"If a server choice is needed, the team playing SC2 selects the better server.", k_ko:"서버 선택", k_en:"Server Selection"},
-  {ko:"에이스결정전(5세트)의 버전(스타2/스타1)은 코인플립로 결정합니다 (선택권 아님). 서버는 위 '서버 선택' 규정을 따름", en:"The version (SC2/BW) for the Ace decider (Set 5) is decided by a coin flip, not a choice. Servers follow the Server Selection rule above.", k_ko:"에이스결정전 규정", k_en:"Ace Decider Rule"},
+  {ko:"에이스결정전(5세트)의 버전(SC2/BW)은 코인플립으로 결정합니다 (선택권 아님). 서버는 위 '서버 선택' 규정을 따름", en:"The version (SC2/BW) for the Ace decider (Set 5) is decided by a coin flip, not a choice. Servers follow the Server Selection rule above.", k_ko:"에이스결정전 규정", k_en:"Ace Decider Rule"},
 ];
 
 const PLAYOFF_RULES = [
-  {ko:"각 세트(선수 매치업)는 WTL 포맷(2세트 진행)으로 진행", en:"Each set (player matchup) is played in WTL format (2 games).", k_ko:"경기 포맷", k_en:"Match Format"},
-  {ko:"세트당 2게임 진행, 스타2 · 스타1 버전을 번갈아 진행", en:"Each set consists of 2 games, alternating SC2 and BW.", k_ko:"버전 로테이션", k_en:"Version Rotation"},
-  {ko:"1세트 맵은 주최측이 지정하며, 2세트부터는 이전 세트 패자가 맵을 선택합니다 (직전 세트에 사용된 맵 금지). 이전 세트가 무승부였거나 슈퍼 에이스 결정전인 경우 주최측이 랜덤으로 지정합니다.", en:"The map for Set 1 is chosen by the organizers. From Set 2 onwards, the loser of the previous set chooses the map (the map from the immediately preceding set is banned). In case of a draw or a Super Ace Match, the organizers will pick randomly.", k_ko:"맵 선택 방식", k_en:"Map Selection"},
+  {ko:"최대 7경기로 진행하며, 1경기당 같은 맵에서 2세트를 플레이합니다. 양 팀은 SC2와 BW 버전을 번갈아 사용하고, 각 경기에서 1승 이상 기록한 팀이 1점을 획득합니다.", en:"Up to 7 matches are played. Each match consists of 2 games on the same map, with both teams alternating between SC2 and BW. A team earns 1 point by winning at least one game in the match.", k_ko:"경기 포맷", k_en:"Match Format"},
   {ko:"서버 2개를 번갈아 사용해야 할 경우, 스타2 버전을 고른 쪽이 조금 더 좋은 서버에서 진행", en:"When alternating between 2 servers, the side that plays the SC2 game gets the slightly better server.", k_ko:"서버 배정", k_en:"Server Assignment"},
   {ko:"1~3번째로 출전하는 선수는 서로 중복될 수 없음 (조별리그와 동일)", en:"The 1st-3rd players to compete cannot be the same person twice, same as in the group stage.", k_ko:"엔트리 (1~3번째 출전선수)", k_en:"Entry (1st-3rd Players)"},
-  {ko:"4번째 선수 매치업이 무승부일 경우 에이스결정전 진행. 이미 2경기를 뛴 선수를 제외한 선수 출전 가능. 버전(스타2/스타1)은 코인플립로 결정합니다(선택권 아님) — Grand Finals 단판 에이스결정전에도 동일 적용. 서버는 위 '서버 배정' 규정을 따름", en:"An Ace decider is played if the 4th player matchup ends in a tie. Any player who hasn't already played 2 sets may take part. The version (SC2/BW) is decided by a coin flip, not a choice — this also applies to the single-game Ace decider in Grand Finals. Servers follow the Server Assignment rule above.", k_ko:"에이스결정전 발동 조건", k_en:"Ace Decider Trigger"},
+  {ko:"한 팀이 4점을 먼저 얻으면 종료합니다. 최대 7경기 후 4:4 동점이면 슈퍼 에이스 결정전을 진행하며, 버전(SC2/BW)은 코인플립으로 결정합니다.", en:"The match ends when a team reaches 4 points. If the score is 4-4 after up to 7 matches, a Super Ace Match is played; its SC2/BW version is decided by coin flip.", k_ko:"슈퍼 에이스 발동 조건", k_en:"Super Ace Trigger"},
   {ko:"Grand Finals 당일, 먼저 진출한 팀(UB Finals 승자)이 상대팀 선봉(1세트) 선수 지명권을 가짐", en:"On the day of Grand Finals, the team that arrived first (the UB Finals winner) has the right to designate the opponent's Set 1 lead-off player.", k_ko:"Grand Finals 어드밴티지", k_en:"Grand Finals Advantage"},
 ];
 
@@ -690,7 +607,7 @@ const WEEKS = [
  }
 ];
 
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function esc(s){if(!s) return ""; return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
 const TEAM_KO = {
   "If we lose, it's Crank's fault": "지면 크랭크탓",
@@ -721,9 +638,30 @@ function getRaceIcon(race, ver) {
   return `<img src="./assets/icons/${prefix}${rName}.png" class="race-icon" alt="${race}">`;
 }
 
-function cleanMapName(map) {
-  return map.replace(/\[SC:Evo\]\s*/i, "").replace(/\s*LE$/i, "");
+// SC1(BW)에서 주종이 다른 선수(PLAYER_DB의 raceSC1)는 버전에 맞는 종족을 자동 반환
+function getRaceForVer(playerName, sc2Race, ver) {
+  if(!(ver === "SC1" || ver === "BW")) return sc2Race;
+  if(!playerName || playerName === "TBD" || !window.PLAYER_DB) return sc2Race;
+  const db = window.PLAYER_DB[playerName.toLowerCase()];
+  if(db && db.raceSC1) {
+    const m = { "Icons/zerg.png": "Z", "Icons/terran.png": "T", "Icons/protoss.png": "P" };
+    return m[db.raceSC1] || sc2Race;
+  }
+  return sc2Race;
 }
+
+// 한 매치에서 두 버전을 모두 플레이할 때: SC2 종족 아이콘 + (SC1 주종이 다르면) SC1 아이콘 함께 표시
+function dualRaceIcons(playerName, sc2Race) {
+  const sc1Race = getRaceForVer(playerName, sc2Race, "SC1");
+  let html = getRaceIcon(sc2Race, "SC2");
+  if(sc1Race !== sc2Race) html += getRaceIcon(sc1Race, "SC1");
+  return html;
+}
+
+function cleanMapName(map) {
+  return map.replace(/\[?(?:S?C)\s*:\s*Evo\]?\s*/gi, "").replace(/\s*LE$/gi, "").trim();
+}
+
 
 document.getElementById("rules-grid").innerHTML = RULES.map(r=>`
   <div class="rule-card">
@@ -776,7 +714,8 @@ function renderStandings(elId, teams, standingsData){
         <td><span class="stat" data-team="${esc(t)}" data-field="w">${s.w}</span></td>
         <td><span class="stat" data-team="${esc(t)}" data-field="l">${s.l}</span></td>
         <td>
-          <div style="white-space: nowrap;"><span class="stat" data-team="${esc(t)}" data-field="setdiff">${s.sw}-${s.sl}</span><span class="set-diff">(${diffStr})</span></div>
+          <span class="stat" data-team="${esc(t)}" data-field="setdiff">${s.sw}-${s.sl}</span>
+          <span class="set-diff">(${diffStr})</span>
         </td>
       </tr>`;
   }).join("");
@@ -786,14 +725,14 @@ function renderStandings(elId, teams, standingsData){
       <th class="c-team"><span class="lang-ko">팀</span><span class="lang-en">TEAM</span></th>
       <th><span class="lang-ko">승</span><span class="lang-en">W</span></th>
       <th><span class="lang-ko">패</span><span class="lang-en">L</span></th>
-      <th style="white-space: nowrap;"><span class="lang-ko">세트(득실)</span><span class="lang-en">SET(DIFF)</span></th>
+      <th><span class="lang-ko">세트(득실)</span><span class="lang-en">SET(DIFF)</span></th>
     </tr></thead>
     <tbody>${rows}</tbody>`;
 }
 
-function formatLocalTime(iso){
+function formatLocalTime(iso, lang = document.body.dataset.lang){
   try{
-    return new Date(iso).toLocaleString(undefined, {
+    return new Date(iso).toLocaleString(lang === "en" ? "en-US" : "ko-KR", {
       month:"short", day:"numeric", weekday:"short",
       hour:"2-digit", minute:"2-digit", timeZoneName:"short"
     });
@@ -817,7 +756,7 @@ function renderSchedule(group, matchesData){
           </span>
         </div>
         <div class="wk-local">
-          <span class="lang-ko">내 시간대 기준: </span><span class="lang-en">Your local time: </span><span class="wk-local-val">${esc(formatLocalTime(iso))}</span>
+          <span class="lang-ko">내 시간대 기준: </span><span class="lang-en">Your local time: </span><span class="wk-local-val" data-iso="${esc(iso)}">${esc(formatLocalTime(iso))}</span>
         </div>
       </div>`;
     container.appendChild(wrap);
@@ -828,14 +767,6 @@ function renderSchedule(group, matchesData){
       const v2 = v1 === "SC2" ? "BW" : "SC2";
       const matchKey = `w${wi+1}-m${mi+1}-${group}`;
       const md = (matchesData && matchesData[matchKey]) || null;
-      
-      let score1 = 0; let score2 = 0;
-      if (md && md.sets) {
-          Object.values(md.sets).forEach(s => {
-              if (s.winner === "1") score1++;
-              if (s.winner === "2") score2++;
-          });
-      }
       const matchEl = document.createElement("div");
       matchEl.className = "match";
       matchEl.innerHTML = `
@@ -845,15 +776,15 @@ function renderSchedule(group, matchesData){
             <div class="sm-side left">
               <img src="./assets/team_logos/${TEAM_LOGO[t1]}" class="team-logo">
               <span class="teamname">${teamNameHTML(t1)}</span>
-              <span class="start-ver ${v1==='SC2'?'sc2':'bw'}">
+              <span class="start-ver ${v1==='SC2'?'sc2':'sc1'}">
                 <span class="lang-ko">${v1} 시작</span><span class="lang-en">${v1} Start</span>
               </span>
             </div>
-            <span class="vs" style="font-size:36px; color:#fff;">${score1} <span style="font-size:0.6em; margin:0 4px; opacity:0.7;">VS</span> ${score2}</span>
+            <span class="vs">VS</span>
             <div class="sm-side right">
               <img src="./assets/team_logos/${TEAM_LOGO[t2]}" class="team-logo">
               <span class="teamname">${teamNameHTML(t2)}</span>
-              <span class="start-ver ${v2==='SC2'?'sc2':'bw'}">
+              <span class="start-ver ${v2==='SC2'?'sc2':'sc1'}">
                 <span class="lang-ko">${v2} 시작</span><span class="lang-en">${v2} Start</span>
               </span>
             </div>
@@ -869,22 +800,26 @@ function renderSchedule(group, matchesData){
               const win2 = sd.winner === "2" ? " win" : "";
               const isPlayed = (sd.winner === "1" || sd.winner === "2") ? " played" : "";
               const verClass = v => v==="SC2" ? "sc2" : (v==="SC1" || v==="BW") ? "sc1" : "";
-              const r1Class = r1 && r1 !== "-" ? ` r-bg-left r-${r1}` : "";
               let ver1 = si % 2 === 0 ? v1 : v2;
               let ver2 = si % 2 === 0 ? v2 : v1;
               if(si === 4) {
                   ver1 = sd.ver1 || "SC2";
                   ver2 = sd.ver2 || "BW";
               }
-              const r2Class = r2 && r2 !== "-" ? ` r-bg-right r-${r2}` : "";
+              const vLabel1 = ver1 === "SC1" ? "BW" : ver1;
+              const vLabel2 = ver2 === "SC1" ? "BW" : ver2;
+              // 각자 플레이하는 버전에 맞는 주종으로 자동 전환 (예: Scarlett SC1=P, Blask SC1=Z)
+              const vr1 = getRaceForVer(p1, r1, ver1);
+              const vr2 = getRaceForVer(p2, r2, ver2);
+              const r1Class = vr1 && vr1 !== "-" ? ` r-bg-left r-${vr1}` : "";
+              const r2Class = vr2 && vr2 !== "-" ? ` r-bg-right r-${vr2}` : "";
               if(si===4){
                 return `
                 <div class="set-row ace${isPlayed}" data-set="${si}">
                   
                   <div class="side${win1}${r1Class}">
+                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(vr1, ver1)}</span>
                     <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">${esc(p1)}</span>
-                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(r1, ver1)}</span>
-                    <span class="ver-chip ${verClass(ver1)}" data-team="${esc(t1)}" data-set="${si}" data-field="version">${ver1}</span>
                   </div>
                   <div class="mid">
                     <div class="set-num-center ace"><span class="lang-ko">에이스결정전</span><span class="lang-en">ACE MATCH</span></div>
@@ -892,9 +827,8 @@ function renderSchedule(group, matchesData){
                     <div class="ace-note"><span class="lang-ko">코인플립 선택</span><span class="lang-en">Coin-Flip Pick</span></div>
                   </div>
                   <div class="side right${win2}${r2Class}">
-                    <span class="ver-chip ${verClass(ver2)}" data-team="${esc(t2)}" data-set="${si}" data-field="version">${ver2}</span>
-                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">${getRaceIcon(r2, ver2)}</span>
                     <span class="player" data-team="${esc(t2)}" data-set="${si}" data-field="player">${esc(p2)}</span>
+                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">${getRaceIcon(vr2, ver2)}</span>
                   </div>
                 </div>`;
               }
@@ -902,16 +836,16 @@ function renderSchedule(group, matchesData){
                 <div class="set-row${isPlayed}" data-set="${si}">
                   <div class="side${win1}${r1Class}">
                     <span class="player" data-team="${esc(t1)}" data-set="${si}" data-field="player">${esc(p1)}</span>
-                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(r1, ver1)}</span>
-                    <span class="ver-chip ${verClass(ver1)}" data-team="${esc(t1)}" data-set="${si}" data-field="version">${ver1}</span>
+                    <span class="race" data-team="${esc(t1)}" data-set="${si}" data-field="race">${getRaceIcon(vr1, ver1)}</span>
+                    <span class="ver-chip ${verClass(ver1)}" data-team="${esc(t1)}" data-set="${si}" data-field="version">${vLabel1}</span>
                   </div>
                   <div class="mid">
                     <div class="set-num-center"><span class="lang-ko">${si+1}세트</span><span class="lang-en">SET ${si+1}</span></div>
                     <div class="mapname">${esc(cleanMapName(map))}</div>
                   </div>
                   <div class="side right${win2}${r2Class}">
-                    <span class="ver-chip ${verClass(ver2)}" data-team="${esc(t2)}" data-set="${si}" data-field="version">${ver2}</span>
-                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">${getRaceIcon(r2, ver2)}</span>
+                    <span class="ver-chip ${verClass(ver2)}" data-team="${esc(t2)}" data-set="${si}" data-field="version">${vLabel2}</span>
+                    <span class="race" data-team="${esc(t2)}" data-set="${si}" data-field="race">${getRaceIcon(vr2, ver2)}</span>
                     <span class="player" data-team="${esc(t2)}" data-set="${si}" data-field="player">${esc(p2)}</span>
                   </div>
                 </div>`;
@@ -921,6 +855,427 @@ function renderSchedule(group, matchesData){
       container.appendChild(matchEl);
     });
   });
+}
+
+
+// ===== 플레이오프 (WTL 포맷, super_admin과 동일 규칙) =====
+const PLAYOFF_REGULAR_MATCHES = 7;
+const PLAYOFF_ACE_INDEX = 7;
+const PLAYOFF_SET_COUNT = 8;
+const DEFAULT_PLAYOFF_MAP_ORDERS = {
+  "p-m1": ["[SC:Evo] Sylphid", "[SC:Evo] Fighting Spirit", "[SC:Evo] Polypoid", "[SC:Evo] Match Point", "Blackrock LE", "Washout LE", "Fear and Faith LE"],
+  "p-m2": ["Fear and Faith LE", "[SC:Evo] Match Point", "[SC:Evo] Polypoid", "Washout LE", "Blackrock LE", "[SC:Evo] Fighting Spirit", "[SC:Evo] Sylphid"],
+  "p-m3": ["Washout LE", "[SC:Evo] Polypoid", "Fear and Faith LE", "[SC:Evo] Fighting Spirit", "[SC:Evo] Match Point", "Blackrock LE", "[SC:Evo] Sylphid"],
+  "p-m4": ["[SC:Evo] Fighting Spirit", "Blackrock LE", "Washout LE", "[SC:Evo] Sylphid", "[SC:Evo] Match Point", "[SC:Evo] Polypoid", "Fear and Faith LE"]
+};
+const DEFAULT_PLAYOFF_ACE_MAPS = { "p-m1":"Blackrock LE", "p-m2":"Fear and Faith LE", "p-m3":"Fear and Faith LE", "p-m4":"[SC:Evo] Fighting Spirit" };
+const TEAM_ALIAS = { "Shopify Rebellion": "Shopify", "BASILISK": "Basilisk", "Team RWB": "Team Red White Blue" };
+
+function normalizePlayoffSets(md) {
+  const oldSets = Array.isArray(md.sets) ? md.sets : [];
+  if(oldSets.length <= 5) {
+    const legacyAce = oldSets[4] || {};
+    md.sets = [oldSets[0] || {}, oldSets[1] || {}, oldSets[2] || {}, oldSets[3] || {}, {}, {}, {}, legacyAce];
+  } else {
+    md.sets = oldSets;
+    while(md.sets.length < PLAYOFF_SET_COUNT) md.sets.push({});
+  }
+  return md.sets;
+}
+
+function getPlayoffRegularScore(md) {
+  normalizePlayoffSets(md);
+  let score1 = 0;
+  let score2 = 0;
+  for(let i = 0; i < PLAYOFF_REGULAR_MATCHES; i++) {
+    const sd = md.sets[i] || {};
+    if(sd.g1w === "1" || sd.g2w === "1") score1++;
+    if(sd.g1w === "2" || sd.g2w === "2") score2++;
+  }
+  return [score1, score2];
+}
+
+function getPlayoffTotalScore(md) {
+  const [r1, r2] = getPlayoffRegularScore(md);
+  let s1 = r1, s2 = r2;
+  const ace = (md.sets && md.sets[PLAYOFF_ACE_INDEX]) || {};
+  if(ace.winner === "1") s1++;
+  if(ace.winner === "2") s2++;
+  return [s1, s2];
+}
+
+// 매치 확정 시 [승자, 패자], 아니면 [null, null]
+function playoffWinnerLoser(md) {
+  if(!md || !md.t1 || !md.t2) return [null, null];
+  const [s1, s2] = getPlayoffTotalScore(md);
+  if((s1 >= 4 || s2 >= 4) && s1 !== s2) return s1 > s2 ? [md.t1, md.t2] : [md.t2, md.t1];
+  return [null, null];
+}
+
+// 자동 진출 슬롯 채우기 (저장 데이터에 수동 지정된 팀은 유지)
+function fillAutoSlot(md, slot, team) {
+  const flag = "_auto_" + slot;
+  if(team) {
+    if(!md[slot] || md[flag]) { md[slot] = team; md[flag] = true; }
+  } else if(md[flag]) {
+    md[slot] = "";
+    delete md[flag];
+  }
+}
+
+// UB 승자→GF, UB 패자→LB Finals, LB SF 승자→LB Finals, LB Finals 승자→GF
+function syncPlayoffProgression(pData) {
+  const [ubWinner, ubLoser] = playoffWinnerLoser(pData["p-m1"]);
+  const [sfWinner] = playoffWinnerLoser(pData["p-m2"]);
+  if(pData["p-m3"]) { fillAutoSlot(pData["p-m3"], "t1", ubLoser); fillAutoSlot(pData["p-m3"], "t2", sfWinner); }
+  const [lbfWinner] = playoffWinnerLoser(pData["p-m3"]);
+  if(pData["p-m4"]) { fillAutoSlot(pData["p-m4"], "t1", ubWinner); fillAutoSlot(pData["p-m4"], "t2", lbfWinner); }
+}
+
+function renderPlayoffs(pData) {
+  pData = pData || {};
+  const container = document.getElementById('schedule-P');
+  if(!container) return;
+  container.innerHTML = `<h3 class="section-head" style="margin-top:40px; margin-bottom:12px;">
+    <span class="lang-ko">플레이오프 경기 상세</span>
+    <span class="lang-en">Playoff Match Details</span>
+  </h3>`;
+
+  const defaultTitles = {
+    "p-m1": { ko: "결승전 직행전", en: "UB Finals" },
+    "p-m2": { ko: "패자조 준결승", en: "LB Semifinals" },
+    "p-m3": { ko: "최종 진출전", en: "LB Finals" },
+    "p-m4": { ko: "최종 결승전", en: "Grand Finals" }
+  };
+  const mKeys = ["p-m1", "p-m2", "p-m3", "p-m4"];
+  mKeys.forEach(k => {
+    if(!pData[k]) {
+      pData[k] = {
+        title_ko: defaultTitles[k].ko, title_en: defaultTitles[k].en,
+        t1: "", t2: "", sets: Array.from({length:PLAYOFF_SET_COUNT}, () => ({}))
+      };
+    }
+    normalizePlayoffSets(pData[k]);
+  });
+  syncPlayoffProgression(pData);
+
+  mKeys.forEach(mKey => {
+    const md = pData[mKey];
+    if(!md) return;
+    md.t1 = TEAM_ALIAS[md.t1] || md.t1 || "";
+    md.t2 = TEAM_ALIAS[md.t2] || md.t2 || "";
+
+    const [reg1, reg2] = getPlayoffRegularScore(md);
+    let s1 = reg1, s2 = reg2;
+    const aceSd = md.sets[PLAYOFF_ACE_INDEX] || {};
+    if(aceSd.winner === "1") s1++;
+    if(aceSd.winner === "2") s2++;
+    md.score1 = s1;
+    md.score2 = s2;
+
+    const getP = (p) => {
+      if(!p || p === "TBD") return "TBD";
+      const k = p.toLowerCase();
+      let nameHTML = esc(p);
+      if(window.PLAYER_DB && window.PLAYER_DB[k] && window.PLAYER_DB[k].realName) {
+        nameHTML += ' <span class="lang-ko" style="font-size:0.6em; color:#999; font-weight:300;">' + esc(window.PLAYER_DB[k].realName) + '</span>';
+      }
+      return nameHTML;
+    };
+
+    const gameBox = (w, sideCode, version) => {
+      const state = w === sideCode ? " win" : (w ? " lose" : "");
+      const label = w === sideCode ? "W" : (w ? "L" : "·");
+      const versionClass = version === "SC2" ? " sc2" : " bw";
+      return `<span class="po-game-box${versionClass}${state}"><span class="po-game-ver">${version}</span><span class="po-game-result">${label}</span></span>`;
+    };
+
+    let setsHTML = "";
+    for(let i = 0; i < PLAYOFF_REGULAR_MATCHES; i++) {
+      const sd = md.sets[i] || {};
+      const p1 = sd.p1 || "TBD";
+      const p2 = sd.p2 || "TBD";
+      const r1 = (p1 === "TBD") ? "-" : (sd.race1 || "-");
+      const r2 = (p2 === "TBD") ? "-" : (sd.race2 || "-");
+      const savedOrder = pData._mapOrders && Array.isArray(pData._mapOrders[mKey]) ? pData._mapOrders[mKey] : (pData._mapOrder || DEFAULT_PLAYOFF_MAP_ORDERS[mKey]);
+      const map = sd.map || (Array.isArray(savedOrder) ? savedOrder[i] : "") || "";
+      const w1 = (sd.g1w === "1" ? 1 : 0) + (sd.g2w === "1" ? 1 : 0);
+      const w2 = (sd.g1w === "2" ? 1 : 0) + (sd.g2w === "2" ? 1 : 0);
+      const isPlayed = (sd.g1w || sd.g2w) ? " played" : "";
+      const win1 = w1 > w2 ? " win" : "";
+      const win2 = w2 > w1 ? " win" : "";
+      const r1Class = r1 !== "-" ? ` r-bg-left r-${r1}` : "";
+      const r2Class = r2 !== "-" ? ` r-bg-right r-${r2}` : "";
+
+      // 버전 교대 배치: 매 게임 양팀은 서로 반대 버전, 매치마다 시작 버전 교대
+      const lv1 = i % 2 === 0 ? "SC2" : "BW";
+      const lv2 = lv1 === "SC2" ? "BW" : "SC2";
+      const rv1 = lv2, rv2 = lv1;
+
+      setsHTML += `
+        <div class="set-row${isPlayed}" data-set="${i}">
+          <div class="side${win1}${r1Class}">
+            <span class="race">${dualRaceIcons(p1, r1)}</span>
+            <span class="player">${getP(p1)}</span>
+            <span class="po-games">${gameBox(sd.g1w, "1", lv1)}${gameBox(sd.g2w, "1", lv2)}</span>
+          </div>
+          <div class="mid">
+            <div class="set-num-center"><span class="lang-ko">${i+1}경기 · 2세트</span><span class="lang-en">MATCH ${i+1} · Bo2</span></div>
+            <div class="mapname">${esc(cleanMapName(map || "TBD"))}</div>
+          </div>
+          <div class="side right${win2}${r2Class}">
+            <span class="race">${dualRaceIcons(p2, r2)}</span>
+            <span class="player">${getP(p2)}</span>
+            <span class="po-games">${gameBox(sd.g2w, "2", rv2)}${gameBox(sd.g1w, "2", rv1)}</span>
+          </div>
+        </div>`;
+    }
+
+    // 슈퍼 에이스 결정전 (최대 7경기 후 4-4 동점 시 단판)
+    {
+      const sd = aceSd;
+      const p1 = sd.p1 || "TBD";
+      const p2 = sd.p2 || "TBD";
+      const r1 = (p1 === "TBD") ? "-" : (sd.race1 || "-");
+      const r2 = (p2 === "TBD") ? "-" : (sd.race2 || "-");
+      const ver1 = sd.ver1 === "SC1" ? "BW" : (sd.ver1 || "SC2");
+      const ver2 = sd.ver2 === "SC1" ? "BW" : (sd.ver2 || "BW");
+      const aceMap = sd.map || DEFAULT_PLAYOFF_ACE_MAPS[mKey];
+      const win1 = sd.winner === "1" ? " win" : "";
+      const win2 = sd.winner === "2" ? " win" : "";
+      const isPlayed = (sd.winner === "1" || sd.winner === "2") ? " played" : "";
+      const verClass = v => v === "SC2" ? "sc2" : "sc1";
+      const vr1 = getRaceForVer(p1, r1, ver1);
+      const vr2 = getRaceForVer(p2, r2, ver2);
+      const r1Class = vr1 !== "-" ? ` r-bg-left r-${vr1}` : "";
+      const r2Class = vr2 !== "-" ? ` r-bg-right r-${vr2}` : "";
+      const aceReady = reg1 === 4 && reg2 === 4;
+
+      setsHTML += `
+        <div class="set-row ace${aceReady ? " ace-ready" : " ace-locked"}${isPlayed}" data-set="${PLAYOFF_ACE_INDEX}">
+          <div class="side${win1}${r1Class}">
+            <span class="race">${getRaceIcon(vr1, ver1)}</span>
+            <span class="ver-chip ${verClass(ver1)}" style="margin:0 5px;">${ver1}</span>
+            <span class="player">${getP(p1)}</span>
+          </div>
+          <div class="mid">
+            <div class="set-num-center ace"><span class="lang-ko">슈퍼 에이스 결정전</span><span class="lang-en">SUPER ACE MATCH</span></div>
+            <div class="mapname">${esc(cleanMapName(aceMap || "TBD"))}</div>
+            <div class="ace-note"><span class="lang-ko">버전 코인플립</span><span class="lang-en">Version by Coin-Flip</span></div>
+          </div>
+          <div class="side right${win2}${r2Class}">
+            <span class="race">${getRaceIcon(vr2, ver2)}</span>
+            <span class="ver-chip ${verClass(ver2)}" style="margin:0 5px;">${ver2}</span>
+            <span class="player">${getP(p2)}</span>
+          </div>
+        </div>`;
+    }
+
+    // 체력(하트 4개): 상대가 매치 점수를 얻을 때마다 하트 1개 소모
+    const hearts = (n, drainFrom) => Array.from({length:4}, (_, i) => {
+      const active = drainFrom === "left" ? i >= 4 - n : i < n;
+      return `<span style="color:${active ? '#e74c3c' : '#444'};">♥</span>`;
+    }).join("");
+    const h1 = Math.max(0, 4 - s2);
+    const h2 = Math.max(0, 4 - s1);
+
+    const logoHTML = team => TEAM_LOGO[team]
+      ? `<img src="./assets/team_logos/${TEAM_LOGO[team]}" class="team-logo">` : "";
+    const nameOrTBD = team => team ? teamNameHTML(team) : 'TBD';
+    const titleKo = md.title_ko || defaultTitles[mKey].ko;
+    const titleEn = md.title_en || defaultTitles[mKey].en;
+
+    const block = document.createElement("div");
+    block.dataset.matchkey = mKey;
+    block.dataset.isplayoff = "true";
+    block.className = "match";
+
+    block.innerHTML = `
+      <div class="match-head"><span><span class="lang-ko">${esc(titleKo)} · WTL 포맷 (최대 7경기 × Bo2, 4-4 시 슈퍼 에이스)</span><span class="lang-en">${esc(titleEn)} · WTL Format (Up to 7 Bo2s, Super Ace if 4-4)</span></span></div>
+      <div class="submatch">
+        <div class="sm-top">
+          <div class="sm-side left">
+            ${logoHTML(md.t1)}
+            <span class="teamname">${nameOrTBD(md.t1)}</span>
+          </div>
+          <span class="vs po-scoreboard">
+            <span class="po-score-side"><span class="po-hearts">${hearts(h1, "right")}</span><span class="po-score-num">${s1}</span></span>
+            <span style="font-size:0.55em; opacity:0.7;">VS</span>
+            <span class="po-score-side"><span class="po-score-num">${s2}</span><span class="po-hearts">${hearts(h2, "left")}</span></span>
+          </span>
+          <div class="sm-side right">
+            ${logoHTML(md.t2)}
+            <span class="teamname">${nameOrTBD(md.t2)}</span>
+          </div>
+        </div>
+        <div class="set-list">
+          ${setsHTML}
+        </div>
+      </div>
+    `;
+    container.appendChild(block);
+  });
+
+  // 상단 전체 대진표(브래킷)를 매치 데이터와 연동
+  const bMap = { "ub": "p-m1", "lbsf": "p-m2", "lbf": "p-m3", "gf": "p-m4" };
+  const bPlaceholder = {
+    "p-m1": [["A조 1위", "Group A 1st"], ["B조 1위", "Group B 1st"]],
+    "p-m2": [["A조 2위", "Group A 2nd"], ["B조 2위", "Group B 2nd"]],
+    "p-m3": [["UB 패자", "UB Loser"], ["LB SF 승자", "LB SF Winner"]],
+    "p-m4": [["UB 승자", "UB Winner"], ["LB 승자", "LB Winner"]]
+  };
+  for(const [cls, key] of Object.entries(bMap)) {
+    const box = document.querySelector(`.br-box.${cls} .br-match`);
+    const md = pData[key];
+    if(!box || !md) continue;
+    const ph = bPlaceholder[key];
+    const nameHTML = (t, i) => t
+      ? esc(t)
+      : `<span class="lang-ko">${ph[i][0]}</span><span class="lang-en">${ph[i][1]}</span>`;
+    const bs1 = md.score1 || 0, bs2 = md.score2 || 0;
+    const played = (md.t1 && md.t2) && (bs1 + bs2 > 0);
+    const [winner] = playoffWinnerLoser(md);
+    const wStyle = t => (winner && t === winner) ? ' style="color:var(--amber);"' : '';
+    box.innerHTML = `
+      <span${wStyle(md.t1)}>${nameHTML(md.t1, 0)}</span>
+      <span class="br-vs">${played ? `${bs1} : ${bs2}` : 'VS'}</span>
+      <span${wStyle(md.t2)}>${nameHTML(md.t2, 1)}</span>`;
+  }
+}
+
+function renderIndividualStats(data) {
+  const versionContainer = document.getElementById('version-record');
+  const raceContainer = document.getElementById('race-stats-table');
+  const tableContainer = document.getElementById('player-stats-table');
+  if(!versionContainer || !raceContainer || !tableContainer) return;
+
+  const playerStats = {};
+  const versionWins = { SC2: 0, BW: 0 };
+  const raceStats = {
+    SC2: { P: {wins:0, losses:0}, T: {wins:0, losses:0}, Z: {wins:0, losses:0} },
+    BW: { P: {wins:0, losses:0}, T: {wins:0, losses:0}, Z: {wins:0, losses:0} }
+  };
+  const normalizeVersion = ver => ver === "SC1" ? "BW" : (ver || "SC2");
+  const validPlayer = player => player && player !== "TBD";
+
+  const ensurePlayer = (player, team) => {
+    if(!validPlayer(player)) return null;
+    if(!playerStats[player]) {
+      playerStats[player] = {
+        player, teams: new Set(), wins: 0, losses: 0,
+        SC2: { wins: 0, losses: 0 }, BW: { wins: 0, losses: 0 }
+      };
+    }
+    if(team) playerStats[player].teams.add(team);
+    return playerStats[player];
+  };
+
+  const recordGame = (p1, p2, team1, team2, ver1, ver2, winner, baseRace1, baseRace2) => {
+    if(winner !== "1" && winner !== "2") return;
+    const v1 = normalizeVersion(ver1);
+    const v2 = normalizeVersion(ver2);
+    const race1 = getRaceForVer(p1, baseRace1 || "-", v1);
+    const race2 = getRaceForVer(p2, baseRace2 || "-", v2);
+    const s1 = ensurePlayer(p1, team1);
+    const s2 = ensurePlayer(p2, team2);
+    const winnerVersion = winner === "1" ? v1 : v2;
+    if(versionWins[winnerVersion] !== undefined) versionWins[winnerVersion]++;
+
+    if(s1) {
+      if(winner === "1") { s1.wins++; s1[v1].wins++; }
+      else { s1.losses++; s1[v1].losses++; }
+    }
+    if(s2) {
+      if(winner === "2") { s2.wins++; s2[v2].wins++; }
+      else { s2.losses++; s2[v2].losses++; }
+    }
+    if(raceStats[v1] && raceStats[v1][race1]) {
+      if(winner === "1") raceStats[v1][race1].wins++;
+      else raceStats[v1][race1].losses++;
+    }
+    if(raceStats[v2] && raceStats[v2][race2]) {
+      if(winner === "2") raceStats[v2][race2].wins++;
+      else raceStats[v2][race2].losses++;
+    }
+  };
+
+  WEEKS.forEach((week, wi) => {
+    week.matches.forEach((match, mi) => {
+      ["A", "B"].forEach(group => {
+        const matchup = match[group];
+        const [team1, team2] = matchup.t;
+        const md = data && data.matches && data.matches[`w${wi+1}-m${mi+1}-${group}`];
+        if(!md || !Array.isArray(md.sets)) return;
+        const start1 = normalizeVersion(matchup.v);
+        const start2 = start1 === "SC2" ? "BW" : "SC2";
+        md.sets.slice(0, 5).forEach((sd, setIdx) => {
+          if(!sd) return;
+          let ver1 = setIdx % 2 === 0 ? start1 : start2;
+          let ver2 = setIdx % 2 === 0 ? start2 : start1;
+          if(setIdx === 4) {
+            ver1 = normalizeVersion(sd.ver1 || "SC2");
+            ver2 = normalizeVersion(sd.ver2 || "BW");
+          }
+          recordGame(sd.p1, sd.p2, team1, team2, ver1, ver2, sd.winner, sd.race1, sd.race2);
+        });
+      });
+    });
+  });
+
+  const playoffData = data && data.playoffs;
+  ["p-m1", "p-m2", "p-m3", "p-m4"].forEach(matchKey => {
+    const md = playoffData && playoffData[matchKey];
+    if(!md || !Array.isArray(md.sets)) return;
+    normalizePlayoffSets(md);
+    for(let i = 0; i < PLAYOFF_REGULAR_MATCHES; i++) {
+      const sd = md.sets[i] || {};
+      const leftGame1 = i % 2 === 0 ? "SC2" : "BW";
+      const leftGame2 = leftGame1 === "SC2" ? "BW" : "SC2";
+      recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame1, leftGame2, sd.g1w, sd.race1, sd.race2);
+      recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame2, leftGame1, sd.g2w, sd.race1, sd.race2);
+    }
+    const ace = md.sets[PLAYOFF_ACE_INDEX] || {};
+    recordGame(ace.p1, ace.p2, md.t1, md.t2, normalizeVersion(ace.ver1 || "SC2"), normalizeVersion(ace.ver2 || "BW"), ace.winner, ace.race1, ace.race2);
+  });
+
+  const totalGames = versionWins.BW + versionWins.SC2;
+  const rate = wins => totalGames ? (wins / totalGames * 100).toFixed(1) : "0.0";
+  versionContainer.innerHTML = `
+    <div class="version-record">
+      <div class="version-side"><div class="version-name bw">BW</div><div class="version-score">${versionWins.BW}<span class="lang-ko">승</span><span class="lang-en">W</span> ${versionWins.SC2}<span class="lang-ko">패</span><span class="lang-en">L</span></div><div class="version-detail"><span class="lang-ko">승률</span><span class="lang-en">Win rate</span> ${rate(versionWins.BW)}%</div></div>
+      <div class="version-vs">VS<br><span style="font-size:12px;">${totalGames} GAMES</span></div>
+      <div class="version-side"><div class="version-name sc2">SC2</div><div class="version-score">${versionWins.SC2}<span class="lang-ko">승</span><span class="lang-en">W</span> ${versionWins.BW}<span class="lang-ko">패</span><span class="lang-en">L</span></div><div class="version-detail"><span class="lang-ko">승률</span><span class="lang-en">Win rate</span> ${rate(versionWins.SC2)}%</div></div>
+    </div>`;
+
+  const raceRows = ["SC2", "BW"].flatMap(version => ["P", "T", "Z"].map(race => {
+    const stat = raceStats[version][race];
+    const games = stat.wins + stat.losses;
+    return { version, race, wins:stat.wins, losses:stat.losses, games, winRate:games ? stat.wins / games : -1 };
+  })).sort((a,b) => b.winRate - a.winRate || b.wins - a.wins || b.games - a.games || a.version.localeCompare(b.version) || a.race.localeCompare(b.race));
+
+  raceContainer.innerHTML = `
+    <div class="stats-table-title"><span class="lang-ko">버전·종족별 승률 순위</span><span class="lang-en">Version & Race Win-Rate Ranking</span></div>
+    <div class="stats-table-wrap"><table class="stats-table"><thead><tr>
+      <th>#</th><th><span class="lang-ko">버전</span><span class="lang-en">Version</span></th><th><span class="lang-ko">종족</span><span class="lang-en">Race</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">경기</span><span class="lang-en">Games</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th>
+    </tr></thead><tbody>${raceRows.map((stat,index)=>`<tr><td>${stat.games ? index+1 : "-"}</td><td><span class="race-version-chip ${stat.version.toLowerCase()}">${stat.version}</span></td><td><span class="race-stat-label">${getRaceIcon(stat.race,stat.version)} ${stat.race}</span></td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${stat.games}</td><td>${stat.games ? (stat.winRate*100).toFixed(1)+"%" : "-"}</td></tr>`).join("")}</tbody></table></div>`;
+
+  const rows = Object.values(playerStats).filter(stat=>stat.wins+stat.losses>0).sort((a,b)=>{
+    const rateA=a.wins/(a.wins+a.losses), rateB=b.wins/(b.wins+b.losses);
+    return b.wins-a.wins || rateB-rateA || a.losses-b.losses || a.player.localeCompare(b.player);
+  });
+  const statsTitle = '<div class="stats-table-title"><span class="lang-ko">선수별 승·패 순위</span><span class="lang-en">Player Win-Loss Ranking</span></div>';
+  if(!rows.length) {
+    tableContainer.innerHTML = statsTitle + '<div class="stats-empty"><span class="lang-ko">아직 입력된 개인 경기 결과가 없습니다.</span><span class="lang-en">No individual results have been entered yet.</span></div>';
+    return;
+  }
+  const playerLabel = player => {
+    const key=player.toLowerCase();
+    const db=window.PLAYER_DB && (window.PLAYER_DB[key] || Object.values(window.PLAYER_DB).find(p=>p.officialId && p.officialId.toLowerCase()===key));
+    return esc(player)+(db&&db.realName?` <span class="lang-ko" style="font-size:.72em;color:var(--dim);font-weight:400;">${esc(db.realName)}</span>`:"");
+  };
+  tableContainer.innerHTML = statsTitle + `<div class="stats-table-wrap"><table class="stats-table"><thead><tr>
+    <th>#</th><th style="text-align:left;"><span class="lang-ko">선수</span><span class="lang-en">Player</span></th><th style="text-align:left;"><span class="lang-ko">팀</span><span class="lang-en">Team</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th><th>SC2</th><th>BW</th>
+  </tr></thead><tbody>${rows.map((stat,index)=>{const games=stat.wins+stat.losses;return `<tr><td>${index+1}</td><td class="ps-player">${playerLabel(stat.player)}</td><td class="ps-team">${Array.from(stat.teams).map(teamNameHTML).join(" / ")}</td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${(stat.wins/games*100).toFixed(1)}%</td><td>${stat.SC2.wins}-${stat.SC2.losses}</td><td>${stat.BW.wins}-${stat.BW.losses}</td></tr>`;}).join("")}</tbody></table></div>`;
 }
 
 (async function loadDataAndRender(){
@@ -933,6 +1288,8 @@ function renderSchedule(group, matchesData){
   renderStandings("groupB", GROUP_B, data && data.standings);
   renderSchedule("A", data && data.matches);
   renderSchedule("B", data && data.matches);
+  renderPlayoffs((data && data.playoffs) || {});
+  renderIndividualStats(data || {});
 })();
 
 // ---- group tabs ----
@@ -957,6 +1314,9 @@ function setLanguage(lang) {
     document.getElementById("btn-en").classList.add("active");
     document.getElementById("btn-ko").classList.remove("active");
   }
+  document.querySelectorAll('.local-time, .wk-local-val[data-iso]').forEach(el => {
+    el.textContent = formatLocalTime(el.dataset.iso, lang);
+  });
 }
 document.getElementById("btn-ko").addEventListener("click", () => setLanguage('ko'));
 document.getElementById("btn-en").addEventListener("click", () => setLanguage('en'));
