@@ -1,12 +1,12 @@
 {
   "standings": {
-    "Shopify": {
-      "w": 0,
-      "l": 2,
-      "sw": 4,
-      "sl": 6
-    },
     "ONSYDE": {
+      "w": 1,
+      "l": 0,
+      "sw": 3,
+      "sl": 2
+    },
+    "StalnieBalls": {
       "w": 1,
       "l": 0,
       "sw": 3,
@@ -18,11 +18,11 @@
       "sw": 5,
       "sl": 5
     },
-    "StalnieBalls": {
-      "w": 1,
-      "l": 0,
-      "sw": 3,
-      "sl": 2
+    "Shopify": {
+      "w": 0,
+      "l": 2,
+      "sw": 4,
+      "sl": 6
     },
     "Team Liquid": {
       "w": 2,
@@ -30,17 +30,17 @@
       "sw": 6,
       "sl": 3
     },
-    "Basilisk": {
-      "w": 0,
-      "l": 1,
-      "sw": 2,
-      "sl": 3
-    },
     "CRHB": {
       "w": 1,
       "l": 1,
       "sw": 5,
       "sl": 5
+    },
+    "Basilisk": {
+      "w": 0,
+      "l": 1,
+      "sw": 2,
+      "sl": 3
     },
     "Team Red White Blue": {
       "w": 0,
@@ -85,9 +85,7 @@
           "p1": "ByuN",
           "race1": "T",
           "p2": "ZaRDieNT",
-          "race2": "T",
-          "ver1": "SC2",
-          "ver2": "BW"
+          "race2": "T"
         }
       ]
     },
@@ -126,9 +124,7 @@
           "p1": "Maru",
           "race1": "T",
           "p2": "Creator",
-          "race2": "P",
-          "ver1": "BW",
-          "ver2": "SC2"
+          "race2": "P"
         }
       ]
     },
@@ -167,9 +163,7 @@
           "p1": "ByuN",
           "race1": "T",
           "p2": "Rogue",
-          "race2": "Z",
-          "ver2": "SC2",
-          "ver1": "BW"
+          "race2": "Z"
         }
       ]
     },
@@ -364,9 +358,7 @@
           "p1": "Reynor",
           "race1": "Z",
           "p2": "Classic",
-          "race2": "P",
-          "ver1": "BW",
-          "ver2": "SC2"
+          "race2": "P"
         }
       ]
     },
@@ -491,31 +483,31 @@
       "sets": [
         {
           "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "p1": "Clem",
+          "race1": "T",
+          "p2": "Serral",
+          "race2": "Z"
         },
         {
           "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "p1": "Cure",
+          "race1": "T",
+          "p2": "trigger",
+          "race2": "P"
         },
         {
           "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "p1": "Elazer",
+          "race1": "Z",
+          "p2": "Reynor",
+          "race2": "Z"
         },
         {
           "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "p1": "Cure",
+          "race1": "T",
+          "p2": "Serral",
+          "race2": "Z"
         },
         {
           "winner": null,
@@ -526,171 +518,5 @@
         }
       ]
     }
-  },
-  "playoffs": {
-    "p-m1": {
-      "title_ko": "결승전 직행전",
-      "title_en": "UB Finals",
-      "t1": "",
-      "t2": "",
-      "sets": [
-        {
-          "map": "[SC:Evo] Fighting Spirit",
-          "g1w": "",
-          "g2w": ""
-        },
-        {
-          "map": "[SC:Evo] Match Point"
-        },
-        {
-          "map": "Washout LE"
-        },
-        {
-          "map": "Fear and Faith LE"
-        },
-        {
-          "map": "[SC:Evo] Sylphid"
-        },
-        {
-          "map": "Blackrock LE"
-        },
-        {
-          "map": "[SC:Evo] Polypoid"
-        },
-        {
-          "map": "Fear and Faith LE"
-        }
-      ],
-      "score1": 0,
-      "score2": 0
-    },
-    "p-m2": {
-      "title_ko": "패자조 준결승",
-      "title_en": "LB Semifinals",
-      "t1": "",
-      "t2": "",
-      "sets": [
-        {
-          "map": "[SC:Evo] Fighting Spirit"
-        },
-        {
-          "map": "[SC:Evo] Match Point"
-        },
-        {
-          "map": "Washout LE"
-        },
-        {
-          "map": "Fear and Faith LE"
-        },
-        {
-          "map": "[SC:Evo] Sylphid"
-        },
-        {
-          "map": "Blackrock LE"
-        },
-        {
-          "map": "[SC:Evo] Polypoid"
-        },
-        {
-          "map": "[SC:Evo] Fighting Spirit"
-        }
-      ],
-      "score1": 0,
-      "score2": 0
-    },
-    "p-m3": {
-      "title_ko": "최종 진출전",
-      "title_en": "LB Finals",
-      "t1": "",
-      "t2": "",
-      "sets": [
-        {
-          "map": "[SC:Evo] Fighting Spirit",
-          "p1": "",
-          "race1": "-",
-          "g1w": "",
-          "g2w": "",
-          "p2": "",
-          "race2": "-"
-        },
-        {
-          "map": "[SC:Evo] Match Point",
-          "g1w": "",
-          "g2w": "",
-          "p2": "",
-          "race2": "-"
-        },
-        {
-          "map": "Washout LE",
-          "g1w": "",
-          "g2w": "",
-          "p2": "",
-          "race2": "-"
-        },
-        {
-          "map": "Fear and Faith LE",
-          "g1w": "",
-          "p2": "",
-          "race2": "-"
-        },
-        {
-          "map": "[SC:Evo] Sylphid"
-        },
-        {
-          "map": "Blackrock LE"
-        },
-        {
-          "map": "[SC:Evo] Polypoid"
-        },
-        {
-          "map": "[SC:Evo] Fighting Spirit"
-        }
-      ],
-      "score1": 0,
-      "score2": 0
-    },
-    "p-m4": {
-      "title_ko": "최종 결승전",
-      "title_en": "Grand Finals",
-      "t1": "",
-      "t2": "",
-      "sets": [
-        {
-          "map": "[SC:Evo] Fighting Spirit"
-        },
-        {
-          "map": "[SC:Evo] Match Point"
-        },
-        {
-          "map": "Washout LE"
-        },
-        {
-          "map": "Fear and Faith LE"
-        },
-        {
-          "map": "[SC:Evo] Sylphid"
-        },
-        {
-          "map": "Blackrock LE"
-        },
-        {
-          "map": "[SC:Evo] Polypoid"
-        },
-        {
-          "map": "[SC:Evo] Sylphid"
-        }
-      ],
-      "score1": 0,
-      "score2": 0
-    },
-    "_mapOrder": [
-      "[SC:Evo] Fighting Spirit",
-      "[SC:Evo] Match Point",
-      "Washout LE",
-      "Fear and Faith LE",
-      "[SC:Evo] Sylphid",
-      "Blackrock LE",
-      "[SC:Evo] Polypoid"
-    ]
   }
 }
