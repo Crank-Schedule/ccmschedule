@@ -96,6 +96,7 @@
   .group-tab.active.a, .group-tab.active.b{color:#fff; background:var(--red);}
   .group-tab.active.p{color:#fff; background:#552288 !important;}
   .group-tab.active.s{color:#fff; background:#1f7a5c !important;}
+  body[data-view="P"] .group-only, body[data-view="S"] .group-only{display:none !important;}
 
   .group-view{display:none;}
   .group-view.active{display:block;}
@@ -390,7 +391,7 @@
   </div>
 </div>
 
-<section>
+<section class="group-only">
   <div class="section-head">
     <span class="num">00</span>
     <h2><span class="lang-ko">8강 조별 풀리그</span><span class="lang-en">Round of 8 Group Stage</span></h2>
@@ -398,7 +399,7 @@
   </div>
 </section>
 
-<section>
+<section class="group-only">
   <div class="section-head">
     <span class="num">01</span>
     <h2><span class="lang-ko">대회 공통 규정 <span style="color:var(--amber);">(필독)</span></span><span class="lang-en">General Rules <span style="color:var(--amber);">(Must Read)</span></span></h2>
@@ -412,7 +413,7 @@
 </section>
 
 <section>
-  <div class="section-head">
+  <div class="section-head group-only">
     <span class="num">02</span>
     <h2><span class="lang-ko">조 편성 &amp; 일정</span><span class="lang-en">Group Draw &amp; Schedule</span></h2>
     <div class="rule"></div>
@@ -1303,12 +1304,14 @@ function renderIndividualStats(data) {
 document.querySelectorAll(".group-tab").forEach(tab=>{
   tab.addEventListener("click", ()=>{
     const g = tab.dataset.group;
+    document.body.dataset.view = g;
     document.querySelectorAll(".group-tab").forEach(t=>t.classList.remove("active"));
     tab.classList.add("active");
     document.querySelectorAll(".group-view").forEach(v=>v.classList.remove("active"));
     document.getElementById(`view-${g}`).classList.add("active");
   });
 });
+document.body.dataset.view = "A";
 
 // ---- language toggle ----
 function setLanguage(lang) {
