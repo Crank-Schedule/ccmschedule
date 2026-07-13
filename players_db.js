@@ -4,6 +4,7 @@
 // - eventTeam: 연합팀이나 스폰서 팀 로고. 닉네임 뒤에 숫자 '2'를 붙였을 때(예: maru2) 이 로고가 뜹니다. 없으면 "" 로 비워두세요.
 // - realName: 한국 선수의 실명 (외국인은 "" 로 비워두세요)
 // - race: Icons 폴더에 있는 종족 이미지 (예: Icons/terran.png)
+// - raceSC1: 스타1(SC:Evo)에서 주종이 다른 경우에만 추가 (예: Icons/protoss.png). 없으면 race와 동일하게 취급
 // - flag: Flags 폴더에 있는 국기 이미지 (예: Flags/flag_kr.png)
 
 window.PLAYER_DB = {
@@ -28,6 +29,7 @@ window.PLAYER_DB = {
   "mana": { officialId: "MaNa", team: "Team logos/Team Liquid.png", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "" },
   "maru": { officialId: "Maru", team: "Team logos/ONSYDE.png", eventTeam: "", realName: "조성주", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
   "maxpax": { officialId: "MaxPax", team: "Team logos/PSISTORM Gaming.png", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_dk.png" },
+  "milkicow": { officialId: "MilkiCow", team: "Team logos/StalnieBalls.png", eventTeam: "", realName: "", race: "Icons/terran.png", flag: "Flags/flag_ru.png" },
   "neeb": { officialId: "Neeb", team: "Team logos/ONSYDE.png", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_us.png" },
   "nicoract": { officialId: "Nicoract", team: "none", eventTeam: "", realName: "", race: "Icons/terran.png", flag: "Flags/flag_non.png" },
   "nightmare": { officialId: "NightMare", team: "Team logos/StreamerZone.png", eventTeam: "", realName: "장욱", race: "Icons/protoss.png", flag: "Flags/flag_kr.png" },
@@ -37,7 +39,7 @@ window.PLAYER_DB = {
   "reynor": { officialId: "Reynor", team: "Team logos/BASILISK.png", eventTeam: "", realName: "", race: "Icons/zerg.png", flag: "Flags/flag_it.png" },
   "rogue": { officialId: "Rogue", team: "none", eventTeam: "Team logos/지면 크랭크탓.png", realName: "이병렬", race: "Icons/zerg.png", flag: "Flags/flag_kr.png" },
   "ryung": { officialId: "Ryung", team: "Team logos/ONSYDE.png", eventTeam: "", realName: "김동원", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
-  "scarlett": { officialId: "Scarlett", team: "Team logos/Shopify Rebellion.png", eventTeam: "", realName: "", race: "Icons/zerg.png", flag: "Flags/flag_ca.png" },
+  "scarlett": { officialId: "Scarlett", team: "Team logos/Shopify Rebellion.png", eventTeam: "", realName: "", race: "Icons/zerg.png", raceSC1: "Icons/protoss.png", flag: "Flags/flag_ca.png" },
   "serral": { officialId: "Serral", team: "Team logos/BASILISK.png", eventTeam: "", realName: "", race: "Icons/zerg.png", flag: "Flags/flag_fi.png" },
   "shameless": { officialId: "Shameless", team: "Team logos/StalnieBalls.png", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_ru.png" },
   "shin": { officialId: "SHIN", team: "Team logos/ONSYDE.png", eventTeam: "Team logos/턱돌호범.png", realName: "신희범", race: "Icons/zerg.png", flag: "Flags/flag_kr.png" },
@@ -51,7 +53,7 @@ window.PLAYER_DB = {
   "youngyakov": { officialId: "YoungYakov", team: "Team logos/StalnieBalls.png", eventTeam: "", realName: "", race: "Icons/zerg.png", flag: "Flags/flag_ru.png" },
   "zardient": { officialId: "ZaRDieNT", team: "Team logos/StalnieBalls.png", eventTeam: "", realName: "", race: "Icons/terran.png", flag: "Flags/flag_ru.png" },
   "zoun": { officialId: "Zoun", team: "Team logos/ONSYDE.png", eventTeam: "", realName: "박한솔", race: "Icons/protoss.png", flag: "Flags/flag_kr.png" },
-  "blask": { officialId: "Blask", team: "none", eventTeam: "Team logos/Team RWB.png", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_hr.png" },
+  "blask": { officialId: "Blask", team: "none", eventTeam: "Team logos/Team RWB.png", realName: "", race: "Icons/protoss.png", raceSC1: "Icons/zerg.png", flag: "Flags/flag_hr.png" },
   "goblin": { officialId: "goblin", team: "none", eventTeam: "Team logos/Team RWB.png", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_hr.png" },
   "uthermal": { officialId: "uThermal", team: "none", eventTeam: "Team logos/Team RWB.png", realName: "", race: "Icons/terran.png", flag: "Flags/flag_nl.png" },
   "vaeda": { officialId: "Vaeda", team: "none", eventTeam: "Team logos/Team RWB.png", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_nl.png" },
