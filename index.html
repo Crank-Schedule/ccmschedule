@@ -314,6 +314,10 @@
   .stats-table td{padding:11px 12px; border-bottom:1px solid var(--line); text-align:center; font-variant-numeric:tabular-nums;}
   .stats-table tr:last-child td{border-bottom:none;}
   .stats-table .ps-player{text-align:left; color:#fff; font-weight:800; white-space:nowrap;}
+  .player-race-mark{display:inline-block; width:23px; height:23px; margin-right:7px; vertical-align:middle; object-fit:contain;}
+  .player-race-mark.t{filter:brightness(0) saturate(100%) invert(58%) sepia(86%) saturate(2614%) hue-rotate(181deg) brightness(102%) contrast(101%);}
+  .player-race-mark.p{filter:brightness(0) saturate(100%) invert(83%) sepia(95%) saturate(1355%) hue-rotate(328deg) brightness(108%) contrast(101%);}
+  .player-race-mark.z{filter:brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(2643%) hue-rotate(334deg) brightness(108%) contrast(101%);}
   .stats-table .ps-team{text-align:left; color:var(--dim); font-size:12px;}
   .stats-table .ps-win{color:#85d685; font-weight:900;}
   .stats-table .ps-loss{color:#e78a8a; font-weight:900;}
@@ -1271,7 +1275,10 @@ function renderIndividualStats(data) {
   const playerLabel = player => {
     const key=player.toLowerCase();
     const db=window.PLAYER_DB && (window.PLAYER_DB[key] || Object.values(window.PLAYER_DB).find(p=>p.officialId && p.officialId.toLowerCase()===key));
-    return esc(player)+(db&&db.realName?` <span class="lang-ko" style="font-size:.72em;color:var(--dim);font-weight:400;">${esc(db.realName)}</span>`:"");
+    const race=db&&db.race?({terran:"t",protoss:"p",zerg:"z"}[db.race.split('/').pop().replace('.png','').toLowerCase()]||""):"";
+    const raceName=race==='t'?'terran':race==='p'?'protoss':race==='z'?'zerg':'';
+    const raceIcon=raceName?`<img src="./assets/icons/${raceName}.png" class="player-race-mark ${race}" alt="${raceName}" title="${raceName}">`:"";
+    return raceIcon+esc(player)+(db&&db.realName?` <span class="lang-ko" style="font-size:.72em;color:var(--dim);font-weight:400;">${esc(db.realName)}</span>`:"");
   };
   tableContainer.innerHTML = statsTitle + `<div class="stats-table-wrap"><table class="stats-table"><thead><tr>
     <th>#</th><th style="text-align:left;"><span class="lang-ko">선수</span><span class="lang-en">Player</span></th><th style="text-align:left;"><span class="lang-ko">팀</span><span class="lang-en">Team</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th><th>SC2</th><th>BW</th>
