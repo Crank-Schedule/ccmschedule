@@ -239,45 +239,7 @@
   .set-num-center.ace{color:var(--amber); font-size:12px;}
 
 
-  /* ---------- WTL Example ---------- */
-  .wtl-match{background:var(--panel); border:1px solid var(--border); border-radius:6px; margin-top:20px; overflow:hidden;}
-  .wtl-header{display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-bottom:1px solid var(--line); background:#1a110a;}
-  .wtl-header .sm-side{flex:1;}
-  .wtl-score{text-align:center;}
-  .wtl-score-num{font-size:22px; font-weight:900; letter-spacing:2px; line-height:1.2;}
-  .wtl-score-desc{font-size:12px; color:var(--dim); font-weight:700;}
-  .wtl-sub{border-bottom:1px solid var(--line); padding-bottom:8px;}
-  .wtl-sub:last-child{border-bottom:none; padding-bottom:0;}
-  .wtl-sub.ace{background:rgba(241,143,60,.03);}
-  .wtl-sub-head{display:flex; justify-content:center; align-items:center; gap:20px; padding:12px 16px 8px; font-size:15px; font-weight:800;}
-  .wtl-sub-head .player-left, .wtl-sub-head .player-right{display:flex; align-items:center; gap:6px; flex:1; overflow:hidden; padding:4px 8px; border-radius:3px;}
-  .wtl-sub-head .player-left{justify-content:flex-end;}
-  .wtl-sub-head .player-right{justify-content:flex-start;}
-  .wtl-sub-head .sub-score{font-family:monospace; font-size:15px; color:var(--text); letter-spacing:1px; flex-shrink:0; opacity:0.8;}
-  .wtl-map-row{display:flex; justify-content:space-between; align-items:center; padding:4px 16px;}
-  .wtl-map-row .res-wrap{display:flex; align-items:center; gap:10px; flex:1;}
-  .wtl-map-row .res-wrap.left{justify-content:flex-start;}
-  .wtl-map-row .res-wrap.right{justify-content:flex-end;}
-  .wtl-map-row .map-name{width:140px; text-align:center; font-size:13px; font-weight:600; color:#ccc; flex-shrink:0;}
-  .map-res{width:24px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; line-height:1; flex-shrink:0;}
-  .map-res.win{background:var(--panel2); color:#fff; font-weight:900;}
-  .map-res.lose{background:var(--panel2); color:var(--dim); font-weight:400;}
-  .map-res.empty{background:transparent; color:transparent;}
-
-  /* Player name default (Unplayed) */
-  .wtl-sub-head .pname { font-weight: 700; color: var(--text); }
-  
-  /* Played matches: Winners */
-  .wtl-sub.win-left .wtl-sub-head .player-left .pname { font-weight: 900; color: #fff; }
-  .wtl-sub.win-right .wtl-sub-head .player-right .pname { font-weight: 900; color: #fff; }
-  
-  /* Played matches: Losers */
-  .wtl-sub.win-left .wtl-sub-head .player-right .pname { font-weight: 500; color: var(--dim); }
-  .wtl-sub.win-right .wtl-sub-head .player-left .pname { font-weight: 500; color: var(--dim); }
-  
-  /* Played matches: Draw */
-  .wtl-sub.draw .wtl-sub-head .pname { font-weight: 500; color: var(--dim); }
-  /* ---------- Playoff WTL (매치당 2게임) ---------- */
+  /* ---------- Playoff (매치당 2게임) ---------- */
   .po-games{display:inline-flex; gap:6px; flex-shrink:0; margin:0 8px;}
   .po-game-box{
     width:54px; height:38px; border-radius:4px; display:inline-flex; flex-direction:column;
@@ -298,6 +260,7 @@
   .po-score-side{display:inline-flex; align-items:center; gap:9px;}
   .po-score-num{min-width:22px; text-align:center; font-size:30px; font-variant-numeric:tabular-nums;}
   .set-row.ace-locked .side{opacity:.55;}
+  .set-row.po-locked{opacity:.32; filter:grayscale(.45);}
 
   /* ---------- Individual Statistics ---------- */
   .version-record{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:20px; background:var(--panel); border:1px solid var(--line); padding:22px 28px; margin-bottom:22px;}
@@ -476,7 +439,7 @@
 <section id="playoffs-section">
   <div class="section-head">
     <span class="num">03</span>
-    <h2><span class="lang-ko">플레이오프 진행 방식 <span style="color:var(--amber);">(WTL 포맷 / 필독)</span></span><span class="lang-en">Playoff Format <span style="color:var(--amber);">(WTL Format / Must Read)</span></span></h2>
+    <h2><span class="lang-ko">플레이오프 진행 방식 <span style="color:var(--amber);">(필독)</span></span><span class="lang-en">Playoff Format <span style="color:var(--amber);">(Must Read)</span></span></h2>
     <div class="rule"></div>
     <button class="rules-toggle" id="toggle-playoff-rules">
       <span class="lang-ko">전체 보기</span><span class="lang-en">Show All</span>
@@ -863,7 +826,7 @@ function renderSchedule(group, matchesData){
 }
 
 
-// ===== 플레이오프 (WTL 포맷, super_admin과 동일 규칙) =====
+// ===== 플레이오프 (super_admin과 동일 규칙) =====
 const PLAYOFF_REGULAR_MATCHES = 7;
 const PLAYOFF_ACE_INDEX = 7;
 const PLAYOFF_SET_COUNT = 8;
@@ -888,24 +851,33 @@ function normalizePlayoffSets(md) {
   return md.sets;
 }
 
-function getPlayoffRegularScore(md) {
+function getPlayoffRegularScore(md, limit = PLAYOFF_REGULAR_MATCHES) {
   normalizePlayoffSets(md);
   let score1 = 0;
   let score2 = 0;
-  for(let i = 0; i < PLAYOFF_REGULAR_MATCHES; i++) {
+  for(let i = 0; i < Math.min(limit, PLAYOFF_REGULAR_MATCHES); i++) {
     const sd = md.sets[i] || {};
     if(sd.g1w === "1" || sd.g2w === "1") score1++;
     if(sd.g1w === "2" || sd.g2w === "2") score2++;
+    if(score1 >= 4 || score2 >= 4) break;
   }
   return [score1, score2];
+}
+
+function isPlayoffRegularLocked(md, setIdx) {
+  if(setIdx <= 0) return false;
+  const [score1, score2] = getPlayoffRegularScore(md, setIdx);
+  return score1 >= 4 || score2 >= 4;
 }
 
 function getPlayoffTotalScore(md) {
   const [r1, r2] = getPlayoffRegularScore(md);
   let s1 = r1, s2 = r2;
   const ace = (md.sets && md.sets[PLAYOFF_ACE_INDEX]) || {};
-  if(ace.winner === "1") s1++;
-  if(ace.winner === "2") s2++;
+  if(r1 === 4 && r2 === 4) {
+    if(ace.winner === "1") s1++;
+    if(ace.winner === "2") s2++;
+  }
   return [s1, s2];
 }
 
@@ -973,8 +945,10 @@ function renderPlayoffs(pData) {
     const [reg1, reg2] = getPlayoffRegularScore(md);
     let s1 = reg1, s2 = reg2;
     const aceSd = md.sets[PLAYOFF_ACE_INDEX] || {};
-    if(aceSd.winner === "1") s1++;
-    if(aceSd.winner === "2") s2++;
+    if(reg1 === 4 && reg2 === 4) {
+      if(aceSd.winner === "1") s1++;
+      if(aceSd.winner === "2") s2++;
+    }
     md.score1 = s1;
     md.score2 = s2;
 
@@ -998,6 +972,7 @@ function renderPlayoffs(pData) {
     let setsHTML = "";
     for(let i = 0; i < PLAYOFF_REGULAR_MATCHES; i++) {
       const sd = md.sets[i] || {};
+      const rowLocked = isPlayoffRegularLocked(md, i);
       const p1 = sd.p1 || "TBD";
       const p2 = sd.p2 || "TBD";
       const r1 = (p1 === "TBD") ? "-" : (sd.race1 || "-");
@@ -1018,7 +993,7 @@ function renderPlayoffs(pData) {
       const rv1 = lv2, rv2 = lv1;
 
       setsHTML += `
-        <div class="set-row${isPlayed}" data-set="${i}">
+        <div class="set-row${rowLocked ? " po-locked" : ""}${isPlayed}" data-set="${i}">
           <div class="side${win1}${r1Class}">
             <span class="race">${dualRaceIcons(p1, r1)}</span>
             <span class="player">${getP(p1)}</span>
@@ -1096,7 +1071,7 @@ function renderPlayoffs(pData) {
     block.className = "match";
 
     block.innerHTML = `
-      <div class="match-head"><span><span class="lang-ko">${esc(titleKo)} · WTL 포맷 (최대 7경기 × Bo2, 4-4 시 슈퍼 에이스)</span><span class="lang-en">${esc(titleEn)} · WTL Format (Up to 7 Bo2s, Super Ace if 4-4)</span></span></div>
+      <div class="match-head"><span><span class="lang-ko">${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span></div>
       <div class="submatch">
         <div class="sm-top">
           <div class="sm-side left">
@@ -1233,6 +1208,7 @@ function renderIndividualStats(data) {
     if(!md || !Array.isArray(md.sets)) return;
     normalizePlayoffSets(md);
     for(let i = 0; i < PLAYOFF_REGULAR_MATCHES; i++) {
+      if(isPlayoffRegularLocked(md, i)) break;
       const sd = md.sets[i] || {};
       const leftGame1 = i % 2 === 0 ? "SC2" : "BW";
       const leftGame2 = leftGame1 === "SC2" ? "BW" : "SC2";
@@ -1240,7 +1216,10 @@ function renderIndividualStats(data) {
       recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame2, leftGame1, sd.g2w, sd.race1, sd.race2);
     }
     const ace = md.sets[PLAYOFF_ACE_INDEX] || {};
-    recordGame(ace.p1, ace.p2, md.t1, md.t2, normalizeVersion(ace.ver1 || "SC2"), normalizeVersion(ace.ver2 || "BW"), ace.winner, ace.race1, ace.race2);
+    const [regularScore1, regularScore2] = getPlayoffRegularScore(md);
+    if(regularScore1 === 4 && regularScore2 === 4) {
+      recordGame(ace.p1, ace.p2, md.t1, md.t2, normalizeVersion(ace.ver1 || "SC2"), normalizeVersion(ace.ver2 || "BW"), ace.winner, ace.race1, ace.race2);
+    }
   });
 
   const totalGames = versionWins.BW + versionWins.SC2;
