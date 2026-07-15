@@ -321,8 +321,12 @@
   .br-box.gf{top:17.19%; left:70.97%; width:29.03%; height:28.13%; border-left-color:var(--amber); background:var(--panel2);}
   .br-tag{font-weight:900; font-size:clamp(9px,2.2vw,13px); color:var(--red); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .br-box.gf .br-tag{color:var(--amber);}
-  .br-match{display:flex; align-items:center; gap:5px; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; flex-wrap:wrap; line-height:1.3;}
-  .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700;}
+  .br-match{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:7px; width:100%; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; line-height:1.3;}
+  .br-match > span:first-child{text-align:right;}
+  .br-match > span:last-child{text-align:left;}
+  .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
+  .br-date{font-size:clamp(8px,1.7vw,10.5px); color:var(--amber); margin-bottom:3px; font-weight:800;}
+  .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Noto Sans KR',sans-serif;}
 </style>
   <link rel="icon" type="image/png" href="./assets/favicon.png">
 </head>
@@ -464,6 +468,7 @@
     <!-- match boxes -->
     <div class="br-box ub">
       <div class="br-tag">UB FINALS</div>
+      <div class="br-date"><span class="lang-ko">7월 24일 · 오후 8시 KST</span><span class="lang-en">Jul 24 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">A조 1위</span><span class="lang-en">Group A 1st</span></span>
         <span class="br-vs">VS</span>
@@ -473,6 +478,7 @@
 
     <div class="br-box lbsf">
       <div class="br-tag">LB SEMIFINALS</div>
+      <div class="br-date"><span class="lang-ko">7월 23일 · 오후 8시 KST</span><span class="lang-en">Jul 23 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">A조 2위</span><span class="lang-en">Group A 2nd</span></span>
         <span class="br-vs">VS</span>
@@ -482,6 +488,7 @@
 
     <div class="br-box lbf">
       <div class="br-tag">LB FINALS</div>
+      <div class="br-date"><span class="lang-ko">7월 30일 · 오후 8시 KST</span><span class="lang-en">Jul 30 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">UB 패자</span><span class="lang-en">UB Loser</span></span>
         <span class="br-vs">VS</span>
@@ -491,6 +498,7 @@
 
     <div class="br-box gf">
       <div class="br-tag">GRAND FINALS</div>
+      <div class="br-date"><span class="lang-ko">7월 31일 · 오후 8시 KST</span><span class="lang-en">Jul 31 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">UB 승자</span><span class="lang-en">UB Winner</span></span>
         <span class="br-vs">VS</span>
@@ -654,25 +662,83 @@ function wireRulesToggle(btnId, gridId){
 wireRulesToggle("toggle-rules", "rules-grid");
 wireRulesToggle("toggle-playoff-rules", "playoff-rules-grid");
 
-function renderStandings(elId, teams, standingsData){
-  const sortedTeams = [...teams].sort((a, b) => {
-    const sA = (standingsData && standingsData[a]) || {w:0, l:0, sw:0, sl:0};
-    const sB = (standingsData && standingsData[b]) || {w:0, l:0, sw:0, sl:0};
-    if (sA.w !== sB.w) return sB.w - sA.w;
-    const diffA = sA.sw - sA.sl;
-    const diffB = sB.sw - sB.sl;
-    if (diffA !== diffB) return diffB - diffA;
-    if (sA.sw !== sB.sw) return sB.sw - sA.sw;
-    if (sA.l !== sB.l) return sA.l - sB.l;
-    return 0;
+function getHeadToHeadWinner(teamA, teamB, matchesData){
+  if(!matchesData) return null;
+  for(let wi = 0; wi < WEEKS.length; wi++){
+    for(let mi = 0; mi < WEEKS[wi].matches.length; mi++){
+      for(const group of ["A", "B"]){
+        const matchup = WEEKS[wi].matches[mi][group];
+        if(!matchup || !matchup.t.includes(teamA) || !matchup.t.includes(teamB)) continue;
+        const md = matchesData[`w${wi+1}-m${mi+1}-${group}`];
+        let score1 = 0, score2 = 0;
+        (md && md.sets || []).forEach(s => {
+          if(s && s.winner === "1") score1++;
+          if(s && s.winner === "2") score2++;
+        });
+        if(score1 >= 3) return matchup.t[0];
+        if(score2 >= 3) return matchup.t[1];
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
+function rankStandings(teams, standingsData, matchesData){
+  const ranked = teams.map((team, order) => ({
+    team,
+    order,
+    stats: (standingsData && standingsData[team]) || blankStats(),
+    h2h: 0,
+    rank: 1
+  }));
+
+  ranked.sort((a, b) => {
+    if(a.stats.w !== b.stats.w) return b.stats.w - a.stats.w;
+    const diffA = a.stats.sw - a.stats.sl;
+    const diffB = b.stats.sw - b.stats.sl;
+    return diffB - diffA || a.order - b.order;
   });
-  const rows = sortedTeams.map((t,i)=>{
-    const s = (standingsData && standingsData[t]) || blankStats();
+
+  for(let start = 0; start < ranked.length;){
+    let end = start + 1;
+    const base = ranked[start];
+    const baseDiff = base.stats.sw - base.stats.sl;
+    while(end < ranked.length && ranked[end].stats.w === base.stats.w &&
+      ranked[end].stats.sw - ranked[end].stats.sl === baseDiff) end++;
+
+    const tied = ranked.slice(start, end);
+    for(let i = 0; i < tied.length; i++){
+      for(let j = i + 1; j < tied.length; j++){
+        const winner = getHeadToHeadWinner(tied[i].team, tied[j].team, matchesData);
+        if(winner === tied[i].team) tied[i].h2h++;
+        if(winner === tied[j].team) tied[j].h2h++;
+      }
+    }
+    tied.sort((a, b) => b.h2h - a.h2h || a.order - b.order);
+    ranked.splice(start, tied.length, ...tied);
+    start = end;
+  }
+
+  ranked.forEach((entry, i) => {
+    if(i === 0) return;
+    const prev = ranked[i-1];
+    const same = entry.stats.w === prev.stats.w &&
+      entry.stats.sw - entry.stats.sl === prev.stats.sw - prev.stats.sl &&
+      entry.h2h === prev.h2h;
+    entry.rank = same ? prev.rank : i + 1;
+  });
+  return ranked;
+}
+
+function renderStandings(elId, teams, standingsData, matchesData){
+  const rankedTeams = rankStandings(teams, standingsData, matchesData);
+  const rows = rankedTeams.map(({team:t, stats:s, rank})=>{
     const diff = s.sw - s.sl;
     const diffStr = diff > 0 ? `+${diff}` : diff;
     return `
       <tr data-team="${esc(t)}">
-        <td class="c-rank">${i+1}</td>
+        <td class="c-rank">${rank}</td>
         <td class="c-team">
           <div style="display:flex; align-items:center; gap:8px;">
             <img src="./assets/team_logos/${TEAM_LOGO[t]}" class="team-logo-small">
@@ -830,6 +896,12 @@ function renderSchedule(group, matchesData){
 const PLAYOFF_REGULAR_MATCHES = 7;
 const PLAYOFF_ACE_INDEX = 7;
 const PLAYOFF_SET_COUNT = 8;
+const PLAYOFF_SCHEDULE = {
+  "p-m2": { ko:"7월 23일 · 오후 8시 KST", en:"Jul 23 · 8 PM KST" },
+  "p-m1": { ko:"7월 24일 · 오후 8시 KST", en:"Jul 24 · 8 PM KST" },
+  "p-m3": { ko:"7월 30일 · 오후 8시 KST", en:"Jul 30 · 8 PM KST" },
+  "p-m4": { ko:"7월 31일 · 오후 8시 KST", en:"Jul 31 · 8 PM KST" }
+};
 const DEFAULT_PLAYOFF_MAP_ORDERS = {
   "p-m1": ["[SC:Evo] Sylphid", "[SC:Evo] Fighting Spirit", "[SC:Evo] Polypoid", "[SC:Evo] Match Point", "Blackrock LE", "Washout LE", "Fear and Faith LE"],
   "p-m2": ["Fear and Faith LE", "[SC:Evo] Match Point", "[SC:Evo] Polypoid", "Washout LE", "Blackrock LE", "[SC:Evo] Fighting Spirit", "[SC:Evo] Sylphid"],
@@ -924,7 +996,7 @@ function renderPlayoffs(pData) {
     "p-m3": { ko: "최종 진출전", en: "LB Finals" },
     "p-m4": { ko: "최종 결승전", en: "Grand Finals" }
   };
-  const mKeys = ["p-m1", "p-m2", "p-m3", "p-m4"];
+  const mKeys = ["p-m2", "p-m1", "p-m3", "p-m4"];
   mKeys.forEach(k => {
     if(!pData[k]) {
       pData[k] = {
@@ -1064,6 +1136,7 @@ function renderPlayoffs(pData) {
     const nameOrTBD = team => team ? teamNameHTML(team) : 'TBD';
     const titleKo = md.title_ko || defaultTitles[mKey].ko;
     const titleEn = md.title_en || defaultTitles[mKey].en;
+    const matchSchedule = PLAYOFF_SCHEDULE[mKey];
 
     const block = document.createElement("div");
     block.dataset.matchkey = mKey;
@@ -1071,7 +1144,7 @@ function renderPlayoffs(pData) {
     block.className = "match";
 
     block.innerHTML = `
-      <div class="match-head"><span><span class="lang-ko">${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span></div>
+      <div class="match-head"><span><span class="lang-ko">${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span><span class="po-match-date"><span class="lang-ko">${matchSchedule.ko}</span><span class="lang-en">${matchSchedule.en}</span></span></div>
       <div class="submatch">
         <div class="sm-top">
           <div class="sm-side left">
@@ -1271,8 +1344,8 @@ function renderIndividualStats(data) {
     const res = await fetch("./data.json?t=" + Date.now(), { cache: "no-store" });
     if(res.ok) data = await res.json();
   }catch(e){ }
-  renderStandings("groupA", GROUP_A, data && data.standings);
-  renderStandings("groupB", GROUP_B, data && data.standings);
+  renderStandings("groupA", GROUP_A, data && data.standings, data && data.matches);
+  renderStandings("groupB", GROUP_B, data && data.standings, data && data.matches);
   renderSchedule("A", data && data.matches);
   renderSchedule("B", data && data.matches);
   renderPlayoffs((data && data.playoffs) || {});
