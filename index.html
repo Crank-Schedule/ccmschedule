@@ -1204,7 +1204,7 @@ function renderIndividualStats(data) {
   const tableContainer = document.getElementById('player-stats-table');
   if(!versionContainer || !raceContainer || !tableContainer) return;
 
-  const playerStats = {};
+  const playerStats = { group: {}, playoff: {}, total: {} };
   const versionWins = { SC2: 0, BW: 0 };
   const raceStats = {
     SC2: { P: {wins:0, losses:0}, T: {wins:0, losses:0}, Z: {wins:0, losses:0} },
@@ -1213,37 +1213,42 @@ function renderIndividualStats(data) {
   const normalizeVersion = ver => ver === "SC1" ? "BW" : (ver || "SC2");
   const validPlayer = player => player && player !== "TBD";
 
-  const ensurePlayer = (player, team) => {
+  const ensurePlayer = (scope, player, team) => {
     if(!validPlayer(player)) return null;
-    if(!playerStats[player]) {
-      playerStats[player] = {
+    const scopedStats = playerStats[scope];
+    if(!scopedStats[player]) {
+      scopedStats[player] = {
         player, teams: new Set(), wins: 0, losses: 0,
         SC2: { wins: 0, losses: 0 }, BW: { wins: 0, losses: 0 }
       };
     }
-    if(team) playerStats[player].teams.add(team);
-    return playerStats[player];
+    if(team) scopedStats[player].teams.add(team);
+    return scopedStats[player];
   };
 
-  const recordGame = (p1, p2, team1, team2, ver1, ver2, winner, baseRace1, baseRace2) => {
+  const recordGame = (p1, p2, team1, team2, ver1, ver2, winner, baseRace1, baseRace2, scope) => {
     if(winner !== "1" && winner !== "2") return;
     const v1 = normalizeVersion(ver1);
     const v2 = normalizeVersion(ver2);
     const race1 = getRaceForVer(p1, baseRace1 || "-", v1);
     const race2 = getRaceForVer(p2, baseRace2 || "-", v2);
-    const s1 = ensurePlayer(p1, team1);
-    const s2 = ensurePlayer(p2, team2);
+    const scoped1 = ensurePlayer(scope, p1, team1);
+    const scoped2 = ensurePlayer(scope, p2, team2);
+    const total1 = ensurePlayer("total", p1, team1);
+    const total2 = ensurePlayer("total", p2, team2);
     const winnerVersion = winner === "1" ? v1 : v2;
     if(versionWins[winnerVersion] !== undefined) versionWins[winnerVersion]++;
 
-    if(s1) {
+    [scoped1, total1].forEach(s1 => {
+      if(!s1) return;
       if(winner === "1") { s1.wins++; s1[v1].wins++; }
       else { s1.losses++; s1[v1].losses++; }
-    }
-    if(s2) {
+    });
+    [scoped2, total2].forEach(s2 => {
+      if(!s2) return;
       if(winner === "2") { s2.wins++; s2[v2].wins++; }
       else { s2.losses++; s2[v2].losses++; }
-    }
+    });
     if(raceStats[v1] && raceStats[v1][race1]) {
       if(winner === "1") raceStats[v1][race1].wins++;
       else raceStats[v1][race1].losses++;
@@ -1271,7 +1276,7 @@ function renderIndividualStats(data) {
             ver1 = normalizeVersion(sd.ver1 || "SC2");
             ver2 = normalizeVersion(sd.ver2 || "BW");
           }
-          recordGame(sd.p1, sd.p2, team1, team2, ver1, ver2, sd.winner, sd.race1, sd.race2);
+          recordGame(sd.p1, sd.p2, team1, team2, ver1, ver2, sd.winner, sd.race1, sd.race2, "group");
         });
       });
     });
@@ -1287,13 +1292,13 @@ function renderIndividualStats(data) {
       const sd = md.sets[i] || {};
       const leftGame1 = i % 2 === 0 ? "SC2" : "BW";
       const leftGame2 = leftGame1 === "SC2" ? "BW" : "SC2";
-      recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame1, leftGame2, sd.g1w, sd.race1, sd.race2);
-      recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame2, leftGame1, sd.g2w, sd.race1, sd.race2);
+      recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame1, leftGame2, sd.g1w, sd.race1, sd.race2, "playoff");
+      recordGame(sd.p1, sd.p2, md.t1, md.t2, leftGame2, leftGame1, sd.g2w, sd.race1, sd.race2, "playoff");
     }
     const ace = md.sets[PLAYOFF_ACE_INDEX] || {};
     const [regularScore1, regularScore2] = getPlayoffRegularScore(md);
     if(regularScore1 === 4 && regularScore2 === 4) {
-      recordGame(ace.p1, ace.p2, md.t1, md.t2, normalizeVersion(ace.ver1 || "SC2"), normalizeVersion(ace.ver2 || "BW"), ace.winner, ace.race1, ace.race2);
+      recordGame(ace.p1, ace.p2, md.t1, md.t2, normalizeVersion(ace.ver1 || "SC2"), normalizeVersion(ace.ver2 || "BW"), ace.winner, ace.race1, ace.race2, "playoff");
     }
   });
 
@@ -1318,15 +1323,6 @@ function renderIndividualStats(data) {
       <th>#</th><th><span class="lang-ko">버전</span><span class="lang-en">Version</span></th><th><span class="lang-ko">종족</span><span class="lang-en">Race</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">경기</span><span class="lang-en">Games</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th>
     </tr></thead><tbody>${raceRows.map((stat,index)=>`<tr><td>${stat.games ? index+1 : "-"}</td><td><span class="race-version-chip ${stat.version.toLowerCase()}">${stat.version}</span></td><td><span class="race-stat-label">${getRaceIcon(stat.race,stat.version)} ${stat.race}</span></td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${stat.games}</td><td>${stat.games ? (stat.winRate*100).toFixed(1)+"%" : "-"}</td></tr>`).join("")}</tbody></table></div>`;
 
-  const rows = Object.values(playerStats).filter(stat=>stat.wins+stat.losses>0).sort((a,b)=>{
-    const rateA=a.wins/(a.wins+a.losses), rateB=b.wins/(b.wins+b.losses);
-    return b.wins-a.wins || rateB-rateA || a.losses-b.losses || a.player.localeCompare(b.player);
-  });
-  const statsTitle = '<div class="stats-table-title"><span class="lang-ko">선수별 승·패 순위</span><span class="lang-en">Player Win-Loss Ranking</span></div>';
-  if(!rows.length) {
-    tableContainer.innerHTML = statsTitle + '<div class="stats-empty"><span class="lang-ko">아직 입력된 개인 경기 결과가 없습니다.</span><span class="lang-en">No individual results have been entered yet.</span></div>';
-    return;
-  }
   const playerLabel = player => {
     const key=player.toLowerCase();
     const db=window.PLAYER_DB && (window.PLAYER_DB[key] || Object.values(window.PLAYER_DB).find(p=>p.officialId && p.officialId.toLowerCase()===key));
@@ -1335,9 +1331,28 @@ function renderIndividualStats(data) {
     const raceIcon=raceName?`<img src="./assets/icons/${raceName}.png" class="player-race-mark ${race}" alt="${raceName}" title="${raceName}">`:"";
     return raceIcon+esc(player)+(db&&db.realName?` <span class="lang-ko" style="font-size:.72em;color:var(--dim);font-weight:400;">${esc(db.realName)}</span>`:"");
   };
-  tableContainer.innerHTML = statsTitle + `<div class="stats-table-wrap"><table class="stats-table"><thead><tr>
-    <th>#</th><th style="text-align:left;"><span class="lang-ko">선수</span><span class="lang-en">Player</span></th><th style="text-align:left;"><span class="lang-ko">팀</span><span class="lang-en">Team</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th><th>SC2</th><th>BW</th>
-  </tr></thead><tbody>${rows.map((stat,index)=>{const games=stat.wins+stat.losses;return `<tr><td>${index+1}</td><td class="ps-player">${playerLabel(stat.player)}</td><td class="ps-team">${Array.from(stat.teams).map(teamNameHTML).join(" / ")}</td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${(stat.wins/games*100).toFixed(1)}%</td><td>${stat.SC2.wins}-${stat.SC2.losses}</td><td>${stat.BW.wins}-${stat.BW.losses}</td></tr>`;}).join("")}</tbody></table></div>`;
+
+  const sortedPlayerRows = scope => Object.values(playerStats[scope])
+    .filter(stat => stat.wins + stat.losses > 0)
+    .sort((a,b) => {
+      const rateA = a.wins / (a.wins + a.losses), rateB = b.wins / (b.wins + b.losses);
+      return b.wins - a.wins || rateB - rateA || a.losses - b.losses || a.player.localeCompare(b.player);
+    });
+
+  const renderPlayerRanking = (scope, titleKo, titleEn) => {
+    const rows = sortedPlayerRows(scope);
+    const title = `<div class="stats-table-title"><span class="lang-ko">${titleKo}</span><span class="lang-en">${titleEn}</span></div>`;
+    if(!rows.length) return title + '<div class="stats-empty"><span class="lang-ko">아직 입력된 개인 경기 결과가 없습니다.</span><span class="lang-en">No individual results have been entered yet.</span></div>';
+    return title + `<div class="stats-table-wrap"><table class="stats-table"><thead><tr>
+      <th>#</th><th style="text-align:left;"><span class="lang-ko">선수</span><span class="lang-en">Player</span></th><th style="text-align:left;"><span class="lang-ko">팀</span><span class="lang-en">Team</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th><th>SC2</th><th>BW</th>
+    </tr></thead><tbody>${rows.map((stat,index)=>{const games=stat.wins+stat.losses;return `<tr><td>${index+1}</td><td class="ps-player">${playerLabel(stat.player)}</td><td class="ps-team">${Array.from(stat.teams).map(teamNameHTML).join(" / ")}</td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${(stat.wins/games*100).toFixed(1)}%</td><td>${stat.SC2.wins}-${stat.SC2.losses}</td><td>${stat.BW.wins}-${stat.BW.losses}</td></tr>`;}).join("")}</tbody></table></div>`;
+  };
+
+  tableContainer.innerHTML = [
+    renderPlayerRanking("group", "조별 풀리그 개인 순위", "Group Stage Player Ranking"),
+    renderPlayerRanking("playoff", "플레이오프 개인 순위", "Playoff Player Ranking"),
+    renderPlayerRanking("total", "전체 개인 순위", "Overall Player Ranking")
+  ].join("");
 }
 
 (async function loadDataAndRender(){
