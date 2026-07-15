@@ -327,12 +327,6 @@
   .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
   .br-date{font-size:clamp(8px,1.7vw,10.5px); color:var(--amber); margin-bottom:3px; font-weight:800;}
   .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Noto Sans KR',sans-serif;}
-  .playoff-calendar{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:0 0 26px;}
-  .playoff-calendar-item{background:var(--panel); border-top:3px solid var(--red-dark); padding:10px 12px; text-align:center;}
-  .playoff-calendar-item:last-child{border-top-color:var(--amber);}
-  .playoff-calendar-stage{display:block; color:#fff; font-size:12px; font-weight:900; margin-bottom:3px;}
-  .playoff-calendar-date{display:block; color:var(--amber); font-size:12px; font-weight:800; white-space:nowrap;}
-  @media(max-width:640px){.playoff-calendar{grid-template-columns:repeat(2,minmax(0,1fr));}}
 </style>
   <link rel="icon" type="image/png" href="./assets/favicon.png">
 </head>
@@ -458,13 +452,6 @@
   </div>
   <div class="rules" id="playoff-rules-grid" style="margin-bottom:34px;"></div>
 
-  <div class="playoff-calendar">
-    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">1경기 · 패자조 준결승</span><span class="lang-en">MATCH 1 · LB SEMIFINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 23일 · 오후 8시 KST</span><span class="lang-en">JUL 23 · 8 PM KST</span></span></div>
-    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">2경기 · 승자조 결승</span><span class="lang-en">MATCH 2 · UB FINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 24일 · 오후 8시 KST</span><span class="lang-en">JUL 24 · 8 PM KST</span></span></div>
-    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">3경기 · 패자조 결승</span><span class="lang-en">MATCH 3 · LB FINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 30일 · 오후 8시 KST</span><span class="lang-en">JUL 30 · 8 PM KST</span></span></div>
-    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">4경기 · 최종 결승</span><span class="lang-en">MATCH 4 · GRAND FINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 31일 · 오후 8시 KST</span><span class="lang-en">JUL 31 · 8 PM KST</span></span></div>
-  </div>
-      
 <!-- Playoff Bracket -->
 <section class="bracket-container">
   <div class="bracket-canvas">
