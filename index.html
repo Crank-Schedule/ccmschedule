@@ -327,6 +327,12 @@
   .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
   .br-date{font-size:clamp(8px,1.7vw,10.5px); color:var(--amber); margin-bottom:3px; font-weight:800;}
   .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Noto Sans KR',sans-serif;}
+  .playoff-calendar{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:0 0 26px;}
+  .playoff-calendar-item{background:var(--panel); border-top:3px solid var(--red-dark); padding:10px 12px; text-align:center;}
+  .playoff-calendar-item:last-child{border-top-color:var(--amber);}
+  .playoff-calendar-stage{display:block; color:#fff; font-size:12px; font-weight:900; margin-bottom:3px;}
+  .playoff-calendar-date{display:block; color:var(--amber); font-size:12px; font-weight:800; white-space:nowrap;}
+  @media(max-width:640px){.playoff-calendar{grid-template-columns:repeat(2,minmax(0,1fr));}}
 </style>
   <link rel="icon" type="image/png" href="./assets/favicon.png">
 </head>
@@ -451,6 +457,13 @@
     </button>
   </div>
   <div class="rules" id="playoff-rules-grid" style="margin-bottom:34px;"></div>
+
+  <div class="playoff-calendar">
+    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">1경기 · 패자조 준결승</span><span class="lang-en">MATCH 1 · LB SEMIFINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 23일 · 오후 8시 KST</span><span class="lang-en">JUL 23 · 8 PM KST</span></span></div>
+    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">2경기 · 승자조 결승</span><span class="lang-en">MATCH 2 · UB FINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 24일 · 오후 8시 KST</span><span class="lang-en">JUL 24 · 8 PM KST</span></span></div>
+    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">3경기 · 패자조 결승</span><span class="lang-en">MATCH 3 · LB FINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 30일 · 오후 8시 KST</span><span class="lang-en">JUL 30 · 8 PM KST</span></span></div>
+    <div class="playoff-calendar-item"><span class="playoff-calendar-stage"><span class="lang-ko">4경기 · 최종 결승</span><span class="lang-en">MATCH 4 · GRAND FINALS</span></span><span class="playoff-calendar-date"><span class="lang-ko">7월 31일 · 오후 8시 KST</span><span class="lang-en">JUL 31 · 8 PM KST</span></span></div>
+  </div>
       
 <!-- Playoff Bracket -->
 <section class="bracket-container">
@@ -467,7 +480,7 @@
 
     <!-- match boxes -->
     <div class="br-box ub">
-      <div class="br-tag">UB FINALS</div>
+      <div class="br-tag"><span class="lang-ko">2경기 · 승자조 결승</span><span class="lang-en">MATCH 2 · UB FINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 24일 · 오후 8시 KST</span><span class="lang-en">Jul 24 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">A조 1위</span><span class="lang-en">Group A 1st</span></span>
@@ -477,7 +490,7 @@
     </div>
 
     <div class="br-box lbsf">
-      <div class="br-tag">LB SEMIFINALS</div>
+      <div class="br-tag"><span class="lang-ko">1경기 · 패자조 준결승</span><span class="lang-en">MATCH 1 · LB SEMIFINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 23일 · 오후 8시 KST</span><span class="lang-en">Jul 23 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">A조 2위</span><span class="lang-en">Group A 2nd</span></span>
@@ -487,7 +500,7 @@
     </div>
 
     <div class="br-box lbf">
-      <div class="br-tag">LB FINALS</div>
+      <div class="br-tag"><span class="lang-ko">3경기 · 패자조 결승</span><span class="lang-en">MATCH 3 · LB FINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 30일 · 오후 8시 KST</span><span class="lang-en">Jul 30 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">UB 패자</span><span class="lang-en">UB Loser</span></span>
@@ -497,7 +510,7 @@
     </div>
 
     <div class="br-box gf">
-      <div class="br-tag">GRAND FINALS</div>
+      <div class="br-tag"><span class="lang-ko">4경기 · 최종 결승</span><span class="lang-en">MATCH 4 · GRAND FINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 31일 · 오후 8시 KST</span><span class="lang-en">Jul 31 · 8 PM KST</span></div>
       <div class="br-match">
         <span><span class="lang-ko">UB 승자</span><span class="lang-en">UB Winner</span></span>
@@ -902,6 +915,7 @@ const PLAYOFF_SCHEDULE = {
   "p-m3": { ko:"7월 30일 · 오후 8시 KST", en:"Jul 30 · 8 PM KST" },
   "p-m4": { ko:"7월 31일 · 오후 8시 KST", en:"Jul 31 · 8 PM KST" }
 };
+const PLAYOFF_MATCH_ORDER = ["p-m2", "p-m1", "p-m3", "p-m4"];
 const DEFAULT_PLAYOFF_MAP_ORDERS = {
   "p-m1": ["[SC:Evo] Sylphid", "[SC:Evo] Fighting Spirit", "[SC:Evo] Polypoid", "[SC:Evo] Match Point", "Blackrock LE", "Washout LE", "Fear and Faith LE"],
   "p-m2": ["Fear and Faith LE", "[SC:Evo] Match Point", "[SC:Evo] Polypoid", "Washout LE", "Blackrock LE", "[SC:Evo] Fighting Spirit", "[SC:Evo] Sylphid"],
@@ -996,7 +1010,7 @@ function renderPlayoffs(pData) {
     "p-m3": { ko: "최종 진출전", en: "LB Finals" },
     "p-m4": { ko: "최종 결승전", en: "Grand Finals" }
   };
-  const mKeys = ["p-m2", "p-m1", "p-m3", "p-m4"];
+  const mKeys = PLAYOFF_MATCH_ORDER;
   mKeys.forEach(k => {
     if(!pData[k]) {
       pData[k] = {
@@ -1137,6 +1151,7 @@ function renderPlayoffs(pData) {
     const titleKo = md.title_ko || defaultTitles[mKey].ko;
     const titleEn = md.title_en || defaultTitles[mKey].en;
     const matchSchedule = PLAYOFF_SCHEDULE[mKey];
+    const matchNumber = PLAYOFF_MATCH_ORDER.indexOf(mKey) + 1;
 
     const block = document.createElement("div");
     block.dataset.matchkey = mKey;
@@ -1144,7 +1159,7 @@ function renderPlayoffs(pData) {
     block.className = "match";
 
     block.innerHTML = `
-      <div class="match-head"><span><span class="lang-ko">${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span><span class="po-match-date"><span class="lang-ko">${matchSchedule.ko}</span><span class="lang-en">${matchSchedule.en}</span></span></div>
+      <div class="match-head"><span><span class="lang-ko">${matchNumber}경기 · ${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">MATCH ${matchNumber} · ${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span><span class="po-match-date"><span class="lang-ko">${matchSchedule.ko}</span><span class="lang-en">${matchSchedule.en}</span></span></div>
       <div class="submatch">
         <div class="sm-top">
           <div class="sm-side left">
