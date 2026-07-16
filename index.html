@@ -4,9 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>크총모 S4 · 8강 조별 풀리그</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
+  @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap;}
+  @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap;}
+  @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+  @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap;}
+  @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2') format('woff2');font-weight:900;font-display:swap;}
+  @font-face{font-family:'Escoredream';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Escoredream';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');font-weight:500;font-display:swap;}
+  @font-face{font-family:'Escoredream';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');font-weight:600;font-display:swap;}
+  @font-face{font-family:'Escoredream';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff');font-weight:700;font-display:swap;}
+  @font-face{font-family:'Escoredream';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');font-weight:800;font-display:swap;}
+  @font-face{font-family:'Escoredream';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff') format('woff');font-weight:900;font-display:swap;}
   :root{
     --bg:#0d0708;
     --panel:#181011;
@@ -25,16 +36,23 @@
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:'Noto Sans KR',sans-serif;
+    font-family:'Paperozi','Escoredream',sans-serif;
     font-weight:400;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     padding-top: 20px;
   }
-  h1,h2,h3{font-family:'Noto Sans KR',sans-serif; font-weight:800; margin:0;}
+  h1,h2,h3{font-family:'Paperozi','Escoredream',sans-serif; font-weight:800; margin:0;}
 
   body[data-lang="ko"] .lang-en{display:none;}
   body[data-lang="en"] .lang-ko{display:none;}
+
+  body *{font-family:'Paperozi','Escoredream',sans-serif !important;}
+  td.c-team, td.c-team *, .teamname, .teamname *, .set-row .player, .set-row .player *,
+  .stats-table .ps-player, .stats-table .ps-player *, .stats-table .ps-team, .stats-table .ps-team *,
+  .br-match > span:not(.br-vs), .br-match > span:not(.br-vs) *{
+    font-family:'Escoredream',sans-serif !important;
+  }
 
   /* ---------- floating lang ---------- */
   .floating-lang {
@@ -45,22 +63,21 @@
   }
   .lang-btn{
     background:none; border:none; color:var(--dim);
-    font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:14px;
+    font-family:'Paperozi','Escoredream',sans-serif; font-weight:700; font-size:14px;
     padding:5px 10px; cursor:pointer;
   }
   .lang-btn.active{color:#fff; border-bottom:2px solid var(--red);}
   .lang-btn:hover{color:#fff;}
 
-  /* ---------- deadline banner ---------- */
-  .deadline-banner{
-    max-width:1040px; margin:8px auto 0; padding:16px 22px; background:var(--panel);
-    border-top:3px solid var(--amber);
-    display:flex; gap:14px; align-items:flex-start;
-  }
-  .deadline-banner .db-icon{display:none;}
-  .deadline-banner .db-title{font-weight:800; font-size:15px; color:var(--amber); margin-bottom:4px;}
-  .deadline-banner .db-abs{font-size:14px; color:var(--text); margin-bottom:4px;}
-  .deadline-banner .db-submit{margin-top:12px; font-size:13.5px; color:#fff; font-weight:700;}
+  /* ---------- playoff lineup deadline ---------- */
+  .playoff-deadline{max-width:1040px; margin:16px auto 28px; padding:18px 22px; background:var(--panel); border-top:3px solid var(--amber);}
+  .playoff-deadline .db-title{font-weight:900; font-size:17px; color:var(--amber); margin-bottom:12px;}
+  .playoff-deadline .deadline-list{display:grid; gap:10px;}
+  .playoff-deadline .deadline-row{padding:10px 12px; background:var(--panel2); border-left:3px solid var(--red-dark);}
+  .playoff-deadline .deadline-match{font-size:14px; font-weight:900; color:#fff; margin-bottom:4px;}
+  .playoff-deadline .deadline-detail{font-size:13.5px; line-height:1.65; color:var(--text);}
+  .playoff-deadline .deadline-time{color:var(--amber); font-weight:900;}
+  .playoff-deadline .db-submit{margin-top:12px; font-size:13.5px; color:#fff; font-weight:700;}
 
   section{max-width:1040px; margin:0 auto; padding:16px 22px 8px;}
 
@@ -72,7 +89,7 @@
 
   .rules-toggle{
     background:var(--panel2); border:1px solid var(--line); color:var(--text);
-    font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:13px;
+    font-family:'Paperozi','Escoredream',sans-serif; font-weight:700; font-size:13px;
     padding:6px 14px; cursor:pointer; border-radius:2px;
   }
   .rules-toggle:hover{border-color:var(--red); color:#fff;}
@@ -326,7 +343,7 @@
   .br-match > span:last-child{text-align:left;}
   .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
   .br-date{font-size:clamp(8px,1.7vw,10.5px); color:var(--amber); margin-bottom:3px; font-weight:800;}
-  .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Noto Sans KR',sans-serif;}
+  .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Paperozi','Escoredream',sans-serif;}
 </style>
   <link rel="icon" type="image/png" href="./assets/favicon.png">
 </head>
@@ -337,25 +354,23 @@
   <button class="lang-btn active" id="btn-en">ENG</button>
 </div>
 
-<div class="deadline-banner">
-  <div class="db-icon">⏰</div>
-  <div>
-    <div class="db-title"><span class="lang-ko">라인업 제출 마감</span><span class="lang-en">Lineup Submission Deadline</span></div>
-    <div class="db-abs">
-      <span class="lang-ko">
-        • 1주차: 7월 6일(월) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-06T23:00:00+09:00"></span>)</span><br>
-        • 2주차: 7월 13일(월) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-13T23:00:00+09:00"></span>)</span>
-      </span>
-      <span class="lang-en">
-        • Week 1: Jul 6 (Mon) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-06T23:00:00+09:00"></span>)</span><br>
-        • Week 2: Jul 13 (Mon) 23:00 KST <span style="color:var(--dim); font-size:12px;">(<span class="local-time" data-iso="2026-07-13T23:00:00+09:00"></span>)</span>
-      </span>
+<div class="playoff-deadline">
+  <div class="db-title"><span class="lang-ko">플레이오프 라인업 제출 마감</span><span class="lang-en">Playoff Lineup Submission Deadlines</span></div>
+  <div class="deadline-list">
+    <div class="deadline-row" data-expires="2026-07-20T23:00:00+09:00">
+      <div class="deadline-match"><span class="lang-ko">1·2경기 — 패자조 준결승 / 승자조 결승</span><span class="lang-en">MATCHES 1 & 2 — LB SEMIFINALS / UB FINALS</span></div>
+      <div class="deadline-detail"><span class="lang-ko">선봉 선수 제출: <span class="deadline-time">7월 20일(월) 오후 11시 KST</span></span><span class="lang-en">Submit the lead-off player by <span class="deadline-time">Mon, Jul 20 · 11 PM KST</span> <span style="color:var(--dim);">(<span class="local-time" data-iso="2026-07-20T23:00:00+09:00"></span>)</span></span></div>
     </div>
-    <div class="db-submit">
-      <span class="lang-ko">제출 방법: Kuro에게 DM</span>
-      <span class="lang-en">How to submit: DM Kuro</span>
+    <div class="deadline-row" data-expires="2026-07-27T23:00:00+09:00">
+      <div class="deadline-match"><span class="lang-ko">3경기 — 패자조 결승</span><span class="lang-en">MATCH 3 — LB FINALS</span></div>
+      <div class="deadline-detail"><span class="lang-ko">선봉 선수 제출: <span class="deadline-time">7월 27일(월) 오후 11시 KST</span></span><span class="lang-en">Submit the lead-off player by <span class="deadline-time">Mon, Jul 27 · 11 PM KST</span> <span style="color:var(--dim);">(<span class="local-time" data-iso="2026-07-27T23:00:00+09:00"></span>)</span></span></div>
+    </div>
+    <div class="deadline-row" data-expires="2026-07-31T03:00:00+09:00">
+      <div class="deadline-match"><span class="lang-ko">4경기 — 최종 결승</span><span class="lang-en">MATCH 4 — GRAND FINALS</span></div>
+      <div class="deadline-detail"><span class="lang-ko">① 패자조 결승 승리팀은 경기 종료 즉시 최종 결승 출전 가능 선수 명단 제출<br>② 승자조 결승 승리팀은 해당 명단에서 상대 선봉 선수를 지목해 <span class="deadline-time">7월 31일(금) 오전 3시 KST</span>까지 제출</span><span class="lang-en">① The LB Finals winner must submit its eligible Grand Finals player list immediately after the match.<br>② The UB Finals winner must select the opponent's lead-off player from that list by <span class="deadline-time">Fri, Jul 31 · 3 AM KST</span> <span style="color:var(--dim);">(<span class="local-time" data-iso="2026-07-31T03:00:00+09:00"></span>)</span>.</span></div>
     </div>
   </div>
+  <div class="db-submit"><span class="lang-ko">제출 방법: Kuro에게 DM</span><span class="lang-en">How to submit: DM Kuro</span></div>
 </div>
 
 <section class="group-only">
@@ -539,7 +554,6 @@ const RULES = [
   {ko:"세트 스코어 3:0 시에도 4세트 무조건 진행", en:"4th set MUST be played even at a 3-0 score.", k_ko:"의무 플레이", k_en:"Mandatory 4th Set"},
   {ko:"1~3번째로 출전하는 선수는 서로 중복될 수 없음", en:"The 1st-3rd players to compete cannot be the same person twice.", k_ko:"엔트리 (1~3번째 출전선수)", k_en:"Entry (1st-3rd Players)"},
   {ko:"앞서 2경기를 뛴 선수는 5세트(ACE) 참가 불가", en:"A player who already played 2 sets cannot play Set 5 (Ace).", k_ko:"엔트리 (5세트)", k_en:"Entry (Set 5)"},
-  {ko:"매주 월요일 오후 11:00 (KST)까지 Kuro에게 제출", en:"Submit lineups to Kuro by Monday 11:00 PM KST.", k_ko:"라인업 제출", k_en:"Lineup Submission"},
   {ko:"피치 못할 사정 시 선행 플레이 후 리플레이 중계 가능", en:"Pre-playing with a replay broadcast is allowed if necessary.", k_ko:"사전 플레이", k_en:"Pre-Play"},
   {ko:"양 팀 동의 시 라인업 조기 교환 및 이른 시간 진행 가능", en:"Early lineup exchange and start time allowed with mutual agreement.", k_ko:"조기 진행", k_en:"Early Start"},
   {ko:"서버 선택이 필요할 경우, 스타2로 진행하는 팀이 조금 더 좋은 서버를 선택", en:"If a server choice is needed, the team playing SC2 selects the better server.", k_ko:"서버 선택", k_en:"Server Selection"},
@@ -1381,6 +1395,20 @@ document.querySelectorAll(".group-tab").forEach(tab=>{
   });
 });
 document.body.dataset.view = "A";
+
+// 마감 시간이 지난 항목은 자동으로 숨기고, 모두 마감되면 안내 전체를 숨김
+function updatePlayoffDeadlineVisibility(nowMs = Date.now()) {
+  const banner = document.querySelector('.playoff-deadline');
+  if(!banner) return;
+  const rows = Array.from(banner.querySelectorAll('.deadline-row[data-expires]'));
+  rows.forEach(row => {
+    const expiresAt = Date.parse(row.dataset.expires);
+    row.hidden = Number.isFinite(expiresAt) && nowMs >= expiresAt;
+  });
+  banner.hidden = !rows.some(row => !row.hidden);
+}
+updatePlayoffDeadlineVisibility();
+setInterval(updatePlayoffDeadlineVisibility, 60 * 1000);
 
 // ---- language toggle ----
 function setLanguage(lang) {
