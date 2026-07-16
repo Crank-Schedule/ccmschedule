@@ -2,15 +2,15 @@
   "standings": {
     "Shopify": {
       "w": 0,
-      "l": 2,
-      "sw": 4,
-      "sl": 6
+      "l": 3,
+      "sw": 5,
+      "sl": 9
     },
     "ONSYDE": {
-      "w": 2,
+      "w": 3,
       "l": 0,
-      "sw": 6,
-      "sl": 3
+      "sw": 9,
+      "sl": 4
     },
     "If we lose, it's Crank's fault": {
       "w": 1,
@@ -248,28 +248,28 @@
     "w2-m3-A": {
       "sets": [
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Scarlett",
           "race1": "Z",
           "p2": "Maru",
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Harstem",
           "race1": "P",
           "p2": "Zoun",
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Lambo",
           "race1": "Z",
           "p2": "Ryung",
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "ByuN",
           "race1": "T",
           "p2": "Zoun",
