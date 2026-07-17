@@ -39,14 +39,14 @@
     "CRHB": {
       "w": 1,
       "l": 1,
-      "sw": 5,
+      "sw": 7,
       "sl": 5
     },
     "Team Red White Blue": {
       "w": 1,
       "l": 1,
       "sw": 4,
-      "sl": 5
+      "sl": 7
     }
   },
   "matches": {
@@ -445,14 +445,14 @@
     "w2-m2-B": {
       "sets": [
         {
-          "winner": null,
+          "winner": "1",
           "p1": "herO",
           "race1": "P",
           "p2": "Blask",
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "SHIN",
           "race1": "Z",
           "p2": "goblin",
