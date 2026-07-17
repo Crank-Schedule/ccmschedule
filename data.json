@@ -32,9 +32,9 @@
     },
     "Basilisk": {
       "w": 0,
-      "l": 1,
-      "sw": 2,
-      "sl": 3
+      "l": 2,
+      "sw": 4,
+      "sl": 6
     },
     "CRHB": {
       "w": 1,
@@ -43,10 +43,10 @@
       "sl": 5
     },
     "Team Red White Blue": {
-      "w": 0,
+      "w": 1,
       "l": 1,
-      "sw": 1,
-      "sl": 3
+      "sw": 4,
+      "sl": 5
     }
   },
   "matches": {
@@ -404,39 +404,41 @@
     "w2-m1-B": {
       "sets": [
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Serral",
           "race1": "Z",
           "p2": "uThermal",
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Reynor",
           "race1": "Z",
           "p2": "Blask",
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "trigger",
           "race1": "P",
           "p2": "goblin",
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Serral",
           "race1": "Z",
           "p2": "Blask",
           "race2": "Z"
         },
         {
-          "winner": null,
-          "p1": "",
-          "race1": "",
-          "p2": "",
-          "race2": ""
+          "winner": "2",
+          "p1": "Reynor",
+          "race1": "Z",
+          "p2": "uThermal",
+          "race2": "T",
+          "ver1": "BW",
+          "ver2": "SC2"
         }
       ]
     },
