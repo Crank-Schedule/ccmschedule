@@ -28,12 +28,12 @@
       "w": 2,
       "l": 0,
       "sw": 6,
-      "sl": 3
+      "sl": 4
     },
     "Basilisk": {
       "w": 0,
       "l": 2,
-      "sw": 4,
+      "sw": 5,
       "sl": 6
     },
     "CRHB": {
@@ -484,7 +484,7 @@
     "w2-m3-B": {
       "sets": [
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Clem",
           "race1": "T",
           "p2": "Serral",
