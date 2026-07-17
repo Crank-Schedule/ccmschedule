@@ -27,14 +27,14 @@
     "Team Liquid": {
       "w": 2,
       "l": 0,
-      "sw": 6,
+      "sw": 8,
       "sl": 4
     },
     "Basilisk": {
       "w": 0,
       "l": 2,
       "sw": 5,
-      "sl": 6
+      "sl": 8
     },
     "CRHB": {
       "w": 2,
@@ -491,14 +491,14 @@
           "race2": "Z"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Cure",
           "race1": "T",
           "p2": "trigger",
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Elazer",
           "race1": "Z",
           "p2": "Reynor",
