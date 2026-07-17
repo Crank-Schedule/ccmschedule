@@ -37,16 +37,16 @@
       "sl": 6
     },
     "CRHB": {
-      "w": 1,
+      "w": 2,
       "l": 1,
-      "sw": 7,
-      "sl": 5
+      "sw": 8,
+      "sl": 6
     },
     "Team Red White Blue": {
       "w": 1,
-      "l": 1,
-      "sw": 4,
-      "sl": 7
+      "l": 2,
+      "sw": 5,
+      "sl": 8
     }
   },
   "matches": {
@@ -459,14 +459,14 @@
           "race2": "P"
         },
         {
-          "winner": null,
+          "winner": "1",
           "p1": "Classic",
           "race1": "P",
           "p2": "uThermal",
           "race2": "T"
         },
         {
-          "winner": null,
+          "winner": "2",
           "p1": "Solar",
           "race1": "Z",
           "p2": "goblin",
