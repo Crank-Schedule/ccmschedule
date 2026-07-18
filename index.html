@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>크총모 S4 · 8강 조별 풀리그</title>
+<title>크총모 S4 · 플레이오프</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
   @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
@@ -337,25 +337,25 @@
   .br-line{position:absolute; background:var(--line);}
   .br-box{
     position:absolute; background:var(--panel); border-left:4px solid var(--red-dark);
-    padding:8px 4%; display:flex; flex-direction:column; justify-content:center;
+    padding:6px 4%; display:flex; flex-direction:column; justify-content:center;
     border-radius:2px;
   }
   .br-box.ub{top:0%; left:0%; width:29.03%; height:25%; border-left-color:var(--red);}
   .br-box.lbsf{top:75%; left:0%; width:29.03%; height:25%;}
-  .br-box.lbf{top:37.5%; left:35.48%; width:29.03%; height:25%;}
+  .br-box.lbf{top:35.5%; left:35.48%; width:29.03%; height:29%;}
   .br-box.gf{top:17.19%; left:70.97%; width:29.03%; height:28.13%; border-left-color:var(--amber); background:var(--panel2);}
-  .br-tag{font-weight:900; font-size:clamp(9px,2.2vw,13px); color:var(--red); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .br-tag{flex-shrink:0; font-weight:900; font-size:clamp(9px,2.2vw,13px); line-height:1.15; color:var(--red); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .br-box.gf .br-tag{color:var(--amber);}
-  .br-match{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:7px; width:100%; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; line-height:1.3;}
+  .br-match{flex-shrink:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:7px; width:100%; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; line-height:1.18;}
   .br-match > span:first-child{text-align:right;}
   .br-match > span:last-child{text-align:left;}
   .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
-  .br-date{font-size:clamp(8px,1.7vw,10.5px); color:var(--amber); margin-bottom:3px; font-weight:800;}
+  .br-date{flex-shrink:0; font-size:clamp(8px,1.7vw,10.5px); line-height:1.15; color:var(--amber); margin-bottom:3px; font-weight:800;}
   .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Paperozi','Escoredream',sans-serif;}
 </style>
   <link rel="icon" type="image/png" href="./assets/favicon.png">
 </head>
-<body data-lang="en">
+<body data-lang="en" data-view="P">
 
 <div class="floating-lang">
   <button class="lang-btn" id="btn-ko">KO</button>
@@ -410,13 +410,13 @@
   </div>
 
   <div class="group-tabs">
-    <button class="group-tab a active" data-group="A"><span class="lang-ko">A조</span><span class="lang-en">Group A</span></button>
+    <button class="group-tab a" data-group="A"><span class="lang-ko">A조</span><span class="lang-en">Group A</span></button>
     <button class="group-tab b" data-group="B"><span class="lang-ko">B조</span><span class="lang-en">Group B</span></button>
-    <button class="group-tab p" data-group="P" style="background:#2f1748; color:#fff;"><span class="lang-ko">플레이오프</span><span class="lang-en">Playoffs</span></button>
+    <button class="group-tab p active" data-group="P" style="background:#2f1748; color:#fff;"><span class="lang-ko">플레이오프</span><span class="lang-en">Playoffs</span></button>
     <button class="group-tab s" data-group="S" style="background:#173f35; color:#fff;"><span class="lang-ko">개인성적</span><span class="lang-en">Player Stats</span></button>
   </div>
 
-  <div class="group-view active" id="view-A">
+  <div class="group-view" id="view-A">
     <div class="group-panel a"><div class="gh"><span class="lang-ko">A조 순위</span><span class="lang-en">Group A Standings</span></div>
       <div style="overflow-x:auto;"><table class="standings" id="groupA"></table></div>
       <div class="standings-benefit">
@@ -462,7 +462,7 @@
   </div>
 </section>
 
-<div class="group-view" id="view-P">
+<div class="group-view active" id="view-P">
 <section id="playoffs-section">
   <div class="section-head">
     <span class="num">03</span>
@@ -503,9 +503,9 @@
       <div class="br-tag"><span class="lang-ko">1경기 · 패자조 준결승</span><span class="lang-en">MATCH 1 · LB SEMIFINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 23일 · 오후 8시 KST</span><span class="lang-en">Jul 23 · 8 PM KST</span></div>
       <div class="br-match">
-        <span><span class="lang-ko">A조 2위</span><span class="lang-en">Group A 2nd</span></span>
-        <span class="br-vs">VS</span>
         <span><span class="lang-ko">B조 2위</span><span class="lang-en">Group B 2nd</span></span>
+        <span class="br-vs">VS</span>
+        <span><span class="lang-ko">A조 2위</span><span class="lang-en">Group A 2nd</span></span>
       </div>
     </div>
 
@@ -513,9 +513,9 @@
       <div class="br-tag"><span class="lang-ko">3경기 · 패자조 결승</span><span class="lang-en">MATCH 3 · LB FINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 30일 · 오후 8시 KST</span><span class="lang-en">Jul 30 · 8 PM KST</span></div>
       <div class="br-match">
-        <span><span class="lang-ko">UB 패자</span><span class="lang-en">UB Loser</span></span>
+        <span><span class="lang-ko">플레이오프 1경기 승자</span><span class="lang-en">Playoff Match 1 Winner</span></span>
         <span class="br-vs">VS</span>
-        <span><span class="lang-ko">LB SF 승자</span><span class="lang-en">LB SF Winner</span></span>
+        <span><span class="lang-ko">플레이오프 2경기 패자</span><span class="lang-en">Playoff Match 2 Loser</span></span>
       </div>
     </div>
 
@@ -523,9 +523,9 @@
       <div class="br-tag"><span class="lang-ko">4경기 · 최종 결승</span><span class="lang-en">MATCH 4 · GRAND FINALS</span></div>
       <div class="br-date"><span class="lang-ko">7월 31일 · 오후 8시 KST</span><span class="lang-en">Jul 31 · 8 PM KST</span></div>
       <div class="br-match">
-        <span><span class="lang-ko">UB 승자</span><span class="lang-en">UB Winner</span></span>
+        <span><span class="lang-ko">결승 직행팀</span><span class="lang-en">Direct Finalist</span></span>
         <span class="br-vs">VS</span>
-        <span><span class="lang-ko">LB 승자</span><span class="lang-en">LB Winner</span></span>
+        <span><span class="lang-ko">패자조 생존팀</span><span class="lang-en">Lower Bracket Survivor</span></span>
       </div>
     </div>
   </div>
@@ -1003,11 +1003,11 @@ function fillAutoSlot(md, slot, team) {
   }
 }
 
-// UB 승자→GF, UB 패자→LB Finals, LB SF 승자→LB Finals, LB Finals 승자→GF
+// 1경기 승자→3경기 왼쪽, 2경기 패자→3경기 오른쪽, 2경기 승자→4경기 왼쪽, 3경기 승자→4경기 오른쪽
 function syncPlayoffProgression(pData) {
   const [ubWinner, ubLoser] = playoffWinnerLoser(pData["p-m1"]);
   const [sfWinner] = playoffWinnerLoser(pData["p-m2"]);
-  if(pData["p-m3"]) { fillAutoSlot(pData["p-m3"], "t1", ubLoser); fillAutoSlot(pData["p-m3"], "t2", sfWinner); }
+  if(pData["p-m3"]) { fillAutoSlot(pData["p-m3"], "t1", sfWinner); fillAutoSlot(pData["p-m3"], "t2", ubLoser); }
   const [lbfWinner] = playoffWinnerLoser(pData["p-m3"]);
   if(pData["p-m4"]) { fillAutoSlot(pData["p-m4"], "t1", ubWinner); fillAutoSlot(pData["p-m4"], "t2", lbfWinner); }
 }
@@ -1205,9 +1205,9 @@ function renderPlayoffs(pData) {
   const bMap = { "ub": "p-m1", "lbsf": "p-m2", "lbf": "p-m3", "gf": "p-m4" };
   const bPlaceholder = {
     "p-m1": [["A조 1위", "Group A 1st"], ["B조 1위", "Group B 1st"]],
-    "p-m2": [["A조 2위", "Group A 2nd"], ["B조 2위", "Group B 2nd"]],
-    "p-m3": [["UB 패자", "UB Loser"], ["LB SF 승자", "LB SF Winner"]],
-    "p-m4": [["UB 승자", "UB Winner"], ["LB 승자", "LB Winner"]]
+    "p-m2": [["B조 2위", "Group B 2nd"], ["A조 2위", "Group A 2nd"]],
+    "p-m3": [["플레이오프 1경기 승자", "Playoff Match 1 Winner"], ["플레이오프 2경기 패자", "Playoff Match 2 Loser"]],
+    "p-m4": [["결승 직행팀", "Direct Finalist"], ["패자조 생존팀", "Lower Bracket Survivor"]]
   };
   for(const [cls, key] of Object.entries(bMap)) {
     const box = document.querySelector(`.br-box.${cls} .br-match`);
@@ -1410,7 +1410,7 @@ document.querySelectorAll(".group-tab").forEach(tab=>{
     document.getElementById(`view-${g}`).classList.add("active");
   });
 });
-document.body.dataset.view = "A";
+document.body.dataset.view = "P";
 
 // 마감 시간이 지난 항목은 자동으로 숨기고, 모두 마감되면 안내 전체를 숨김
 function updatePlayoffDeadlineVisibility(nowMs = Date.now()) {
