@@ -312,6 +312,9 @@
   .stats-table .ps-loss{color:#e78a8a; font-weight:900;}
   .race-stat-label{display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:800; color:#fff;}
   .race-stat-label .race-icon{width:22px; height:22px;}
+  .race-matchup-label{display:flex; align-items:center; justify-content:center; gap:7px; white-space:nowrap;}
+  .race-matchup-label .race-icon{width:21px; height:21px;}
+  .race-matchup-vs{color:var(--dim); font-size:11px; font-weight:900;}
   .race-version-chip{display:inline-block; min-width:42px; padding:2px 7px; border-radius:3px; font-size:11px; font-weight:900;}
   .race-version-chip.sc2{background:var(--red-dark); color:#fff;}
   .race-version-chip.bw{background:#a87b00; color:#fff;}
@@ -1240,6 +1243,10 @@ function renderIndividualStats(data) {
     SC2: { P: {wins:0, losses:0}, T: {wins:0, losses:0}, Z: {wins:0, losses:0} },
     BW: { P: {wins:0, losses:0}, T: {wins:0, losses:0}, Z: {wins:0, losses:0} }
   };
+  const raceOrder = ["T", "P", "Z"];
+  const crossRaceStats = Object.fromEntries(raceOrder.map(bwRace => [bwRace,
+    Object.fromEntries(raceOrder.map(sc2Race => [sc2Race, {bwWins:0, sc2Wins:0}]))
+  ]));
   const normalizeVersion = ver => ver === "SC1" ? "BW" : (ver || "SC2");
   const validPlayer = player => player && player !== "TBD";
 
@@ -1286,6 +1293,14 @@ function renderIndividualStats(data) {
     if(raceStats[v2] && raceStats[v2][race2]) {
       if(winner === "2") raceStats[v2][race2].wins++;
       else raceStats[v2][race2].losses++;
+    }
+    if(v1 !== v2 && raceOrder.includes(race1) && raceOrder.includes(race2)) {
+      const bwOnLeft = v1 === "BW";
+      const bwRace = bwOnLeft ? race1 : race2;
+      const sc2Race = bwOnLeft ? race2 : race1;
+      const bwWon = (winner === "1" && bwOnLeft) || (winner === "2" && !bwOnLeft);
+      if(bwWon) crossRaceStats[bwRace][sc2Race].bwWins++;
+      else crossRaceStats[bwRace][sc2Race].sc2Wins++;
     }
   };
 
@@ -1347,11 +1362,28 @@ function renderIndividualStats(data) {
     return { version, race, wins:stat.wins, losses:stat.losses, games, winRate:games ? stat.wins / games : -1 };
   })).sort((a,b) => b.winRate - a.winRate || b.wins - a.wins || b.games - a.games || a.version.localeCompare(b.version) || a.race.localeCompare(b.race));
 
+  const crossRaceRows = raceOrder.flatMap(bwRace => raceOrder.map(sc2Race => {
+    const stat = crossRaceStats[bwRace][sc2Race];
+    const games = stat.bwWins + stat.sc2Wins;
+    const sc2First = stat.sc2Wins > stat.bwWins;
+    const frontVersion = sc2First ? "SC2" : "BW";
+    const backVersion = sc2First ? "BW" : "SC2";
+    const frontRace = sc2First ? sc2Race : bwRace;
+    const backRace = sc2First ? bwRace : sc2Race;
+    const wins = sc2First ? stat.sc2Wins : stat.bwWins;
+    const losses = sc2First ? stat.bwWins : stat.sc2Wins;
+    return {frontVersion, backVersion, frontRace, backRace, wins, losses, games, winRate:games ? wins/games : -1};
+  })).sort((a,b) => b.winRate-a.winRate || b.wins-a.wins || b.games-a.games || a.frontVersion.localeCompare(b.frontVersion) || a.frontRace.localeCompare(b.frontRace) || a.backRace.localeCompare(b.backRace));
+
   raceContainer.innerHTML = `
     <div class="stats-table-title"><span class="lang-ko">버전·종족별 승률 순위</span><span class="lang-en">Version & Race Win-Rate Ranking</span></div>
     <div class="stats-table-wrap"><table class="stats-table"><thead><tr>
       <th>#</th><th><span class="lang-ko">버전</span><span class="lang-en">Version</span></th><th><span class="lang-ko">종족</span><span class="lang-en">Race</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">경기</span><span class="lang-en">Games</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th>
-    </tr></thead><tbody>${raceRows.map((stat,index)=>`<tr><td>${stat.games ? index+1 : "-"}</td><td><span class="race-version-chip ${stat.version.toLowerCase()}">${stat.version}</span></td><td><span class="race-stat-label">${getRaceIcon(stat.race,stat.version)} ${stat.race}</span></td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${stat.games}</td><td>${stat.games ? (stat.winRate*100).toFixed(1)+"%" : "-"}</td></tr>`).join("")}</tbody></table></div>`;
+    </tr></thead><tbody>${raceRows.map((stat,index)=>`<tr><td>${stat.games ? index+1 : "-"}</td><td><span class="race-version-chip ${stat.version.toLowerCase()}">${stat.version}</span></td><td><span class="race-stat-label">${getRaceIcon(stat.race,stat.version)} ${stat.race}</span></td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${stat.games}</td><td>${stat.games ? (stat.winRate*100).toFixed(1)+"%" : "-"}</td></tr>`).join("")}</tbody></table></div>
+    <div class="stats-table-title"><span class="lang-ko">버전 간 종족전 승률 순위</span><span class="lang-en">Cross-Version Race Matchup Rankings</span></div>
+    <div class="stats-table-wrap"><table class="stats-table"><thead><tr>
+      <th>#</th><th><span class="lang-ko">종족전</span><span class="lang-en">Matchup</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">경기</span><span class="lang-en">Games</span></th><th><span class="lang-ko">앞 종족 승률</span><span class="lang-en">Leading Side Win %</span></th>
+    </tr></thead><tbody>${crossRaceRows.map((stat,index)=>`<tr><td>${stat.games ? index+1 : "-"}</td><td><span class="race-matchup-label"><span class="race-version-chip ${stat.frontVersion.toLowerCase()}">${stat.frontVersion}</span>${getRaceIcon(stat.frontRace,stat.frontVersion)} ${stat.frontRace}<span class="race-matchup-vs">VS</span><span class="race-version-chip ${stat.backVersion.toLowerCase()}">${stat.backVersion}</span>${getRaceIcon(stat.backRace,stat.backVersion)} ${stat.backRace}</span></td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${stat.games}</td><td>${stat.games ? (stat.winRate*100).toFixed(1)+"%" : "-"}</td></tr>`).join("")}</tbody></table></div>`;
 
   const playerLabel = player => {
     const key=player.toLowerCase();
