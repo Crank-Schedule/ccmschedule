@@ -113,7 +113,8 @@
   .group-tab.active.a, .group-tab.active.b{color:#fff; background:var(--red);}
   .group-tab.active.p{color:#fff; background:#552288 !important;}
   .group-tab.active.s{color:#fff; background:#1f7a5c !important;}
-  body[data-view="P"] .group-only, body[data-view="S"] .group-only{display:none !important;}
+  .group-tab.active.q{color:#fff; background:#8b521f !important;}
+  body[data-view="P"] .group-only, body[data-view="S"] .group-only, body[data-view="Q"] .group-only{display:none !important;}
 
   .group-view{display:none;}
   .group-view.active{display:block;}
@@ -319,12 +320,35 @@
   .race-version-chip.sc2{background:var(--red-dark); color:#fff;}
   .race-version-chip.bw{background:#a87b00; color:#fff;}
   .stats-empty{padding:36px; text-align:center; color:var(--dim); background:var(--panel); border:1px solid var(--line);}
+  .qualifier-summary{padding:14px 18px; margin-bottom:18px; background:var(--panel); border-left:4px solid var(--amber); color:var(--text); font-size:13.5px; line-height:1.6;}
+  .qualifier-summary b{color:var(--amber);}
+  .qualifier-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;}
+  .qualifier-match{background:var(--panel); border:1px solid var(--line); overflow:hidden;}
+  .qualifier-match-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px; background:var(--panel2); color:var(--dim); font-size:12px; font-weight:800;}
+  .qualifier-teams{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:10px; padding:15px 14px; font-size:16px; font-weight:900; color:#fff;}
+  .qualifier-teams .q-team:first-child{text-align:right;}
+  .qualifier-teams .q-team:last-child{text-align:left;}
+  .qualifier-teams .q-team.loser{color:var(--dim); font-weight:600;}
+  .qualifier-score{font-size:21px; color:var(--amber); white-space:nowrap;}
+  .qualifier-set{display:grid; grid-template-columns:minmax(0,1fr) 120px minmax(0,1fr); align-items:center; gap:6px; padding:8px 12px; border-top:1px solid var(--line); font-size:12px;}
+  .qualifier-player{display:flex; align-items:center; gap:6px; min-width:0; color:var(--dim); font-weight:600;}
+  .qualifier-player.right{justify-content:flex-end; flex-direction:row-reverse; text-align:right;}
+  .qualifier-player.win{color:#fff; font-weight:900;}
+  .qualifier-player.win::after{content:"✓"; color:#85d685;}
+  .qualifier-player.right.win::after{order:-1;}
+  .qualifier-mid{text-align:center; line-height:1.25;}
+  .qualifier-mid .q-set-num{color:var(--dim); font-size:10px; font-weight:800;}
+  .qualifier-mid .q-map{color:#fff; font-weight:800;}
+  .qualifier-source{margin-top:12px; color:var(--dim); font-size:11.5px; text-align:right;}
+  .qualifier-source a{color:var(--amber); text-decoration:none;}
   @media(max-width:640px){
     .version-record{gap:10px; padding:18px 12px;}
     .version-score{font-size:20px;}
     .version-name{font-size:17px;}
     .stats-table{font-size:12px;}
     .stats-table th,.stats-table td{padding:9px 8px;}
+    .qualifier-grid{grid-template-columns:1fr;}
+    .qualifier-set{grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr); padding:8px;}
   }
 
   /* ---------- playoff note ---------- */
@@ -420,6 +444,7 @@
     <button class="group-tab b" data-group="B"><span class="lang-ko">B조</span><span class="lang-en">Group B</span></button>
     <button class="group-tab p active" data-group="P" style="background:#2f1748; color:#fff;"><span class="lang-ko">플레이오프</span><span class="lang-en">Playoffs</span></button>
     <button class="group-tab s" data-group="S" style="background:#173f35; color:#fff;"><span class="lang-ko">개인성적</span><span class="lang-en">Player Stats</span></button>
+    <button class="group-tab q" data-group="Q" style="background:#3b2717; color:#fff;"><span class="lang-ko">예선전</span><span class="lang-en">Qualifier</span></button>
   </div>
 
   <div class="group-view" id="view-A">
@@ -556,6 +581,23 @@
 </section>
 </div>
 
+<div class="group-view" id="view-Q">
+<section id="qualifier-section">
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2><span class="lang-ko">예선전 경기 결과</span><span class="lang-en">Qualifier Results</span></h2>
+    <div class="rule"></div>
+  </div>
+  <div class="qualifier-summary">
+    <span class="lang-ko"><b>2026년 7월 2일</b> · 8팀 싱글 엘리미네이션 · Bo7 올킬 방식 · 승리 4팀 본선 진출</span>
+    <span class="lang-en"><b>July 2, 2026</b> · 8-team single elimination · Bo7 All-Kill · Four winners advanced to the Main Event</span>
+  </div>
+  <div id="qualifier-results"></div>
+  <div id="qualifier-stats"></div>
+  <div class="qualifier-source"><span class="lang-ko">출처:</span><span class="lang-en">Source:</span> <a href="https://liquipedia.net/starcraft2/CranK_Gathers/Season_4/Qualifier" target="_blank" rel="noopener">Liquipedia</a></div>
+</section>
+</div>
+
 
 
 
@@ -609,6 +651,49 @@ const WEEKS = [
     A:{t:["Shopify","ONSYDE"], v:"SC2"}, B:{t:["Team Liquid","Basilisk"], v:"SC2"}},
   ]
  }
+];
+
+const QUALIFIER_TEAM_KO = {
+  "Team Red White Blue":"Team RWB",
+  "Old Men":"Old Men",
+  "StalnieBalls":"StalnieBalls",
+  "Proxy Gate":"Proxy Gate",
+  "If we lose, it's Crank's fault":"지면 크랭크탓",
+  "Point Me Mono":"Point Me Mono",
+  "CRHB":"턱돌호범",
+  "UED":"UED"
+};
+
+const QUALIFIER_MATCHES = [
+  {dateKo:"7월 2일 · 20:30 KST", dateEn:"Jul 2 · 8:30 PM KST", team1:"Team Red White Blue", team2:"Old Men", sets:[
+    {p1:"goblin",p2:"KingSlayeR",map:"Fighting Spirit",winner:"1"},
+    {p1:"goblin",p2:"Jieshi",map:"Fear and Faith",winner:"1"},
+    {p1:"goblin",p2:"Cyan",map:"Washout",winner:"1"},
+    {p1:"goblin",p2:"Cyan",map:"Match Point",winner:"2"},
+    {p1:"Vaeda",p2:"Cyan",map:"Blackrock",winner:"2"},
+    {p1:"uThermal",p2:"Cyan",map:"Sylphid",winner:"1"}
+  ]},
+  {dateKo:"7월 2일 · 22:45 KST", dateEn:"Jul 2 · 10:45 PM KST", team1:"StalnieBalls", team2:"Proxy Gate", sets:[
+    {p1:"MilkiCow",p2:"iosup",map:"Polypoid",winner:"2"},
+    {p1:"ZaRDieNT",p2:"iosup",map:"Sylphid",winner:"2"},
+    {p1:"GgMaChine",p2:"iosup",map:"Blackrock",winner:"1"},
+    {p1:"GgMaChine",p2:"Nihed",map:"Match Point",winner:"1"},
+    {p1:"GgMaChine",p2:"Rake",map:"Washout",winner:"1"},
+    {p1:"GgMaChine",p2:"iosup",map:"Fear and Faith",winner:"1"}
+  ]},
+  {dateKo:"7월 3일 · 00:00 KST", dateEn:"Jul 3 · 12:00 AM KST", team1:"If we lose, it's Crank's fault", team2:"Point Me Mono", sets:[
+    {p1:"Trap",p2:"threepoint",map:"Fighting Spirit",winner:"1"},
+    {p1:"Trap",p2:"HonMonO",map:"Fear and Faith",winner:"2"},
+    {p1:"Creator",p2:"HonMonO",map:"Washout",winner:"1"},
+    {p1:"Creator",p2:"prome",map:"Match Point",winner:"1"},
+    {p1:"Creator",p2:"threepoint",map:"Blackrock",winner:"1"}
+  ]},
+  {dateKo:"7월 3일 · 01:00 KST", dateEn:"Jul 3 · 1:00 AM KST", team1:"CRHB", team2:"UED", sets:[
+    {p1:"herO",p2:"MANGRUSL",map:"Polypoid",winner:"1"},
+    {p1:"herO",p2:"control",map:"Sylphid",winner:"1"},
+    {p1:"herO",p2:"TheSTC",map:"Blackrock",winner:"1"},
+    {p1:"herO",p2:"QuanTa",map:"Match Point",winner:"1"}
+  ]}
 ];
 
 function esc(s){if(!s) return ""; return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
@@ -1420,6 +1505,71 @@ function renderIndividualStats(data) {
   ].join("");
 }
 
+function renderQualifier(){
+  const resultsContainer = document.getElementById("qualifier-results");
+  const statsContainer = document.getElementById("qualifier-stats");
+  if(!resultsContainer || !statsContainer) return;
+
+  const versionWins = {SC2:0, BW:0};
+  const playerStats = {};
+  const ensurePlayer = (player, team) => {
+    if(!playerStats[player]) playerStats[player] = {player, team, wins:0, losses:0, SC2:{wins:0,losses:0}, BW:{wins:0,losses:0}};
+    return playerStats[player];
+  };
+  const teamLabel = team => `<span class="lang-ko">${esc(QUALIFIER_TEAM_KO[team] || team)}</span><span class="lang-en">${esc(team)}</span>`;
+  const playerLabel = player => {
+    const key = player.toLowerCase();
+    const db = window.PLAYER_DB && (window.PLAYER_DB[key] || Object.values(window.PLAYER_DB).find(p => p.officialId && p.officialId.toLowerCase() === key));
+    return esc(player) + (db && db.realName ? ` <span class="lang-ko" style="font-size:.72em;color:var(--dim);font-weight:400;">${esc(db.realName)}</span>` : "");
+  };
+
+  const matchCards = QUALIFIER_MATCHES.map((match, matchIndex) => {
+    let score1 = 0, score2 = 0;
+    const sets = match.sets.map((set, setIndex) => {
+      const version1 = setIndex % 2 === 0 ? "SC2" : "BW";
+      const version2 = version1 === "SC2" ? "BW" : "SC2";
+      const stat1 = ensurePlayer(set.p1, match.team1);
+      const stat2 = ensurePlayer(set.p2, match.team2);
+      if(set.winner === "1") {
+        score1++; stat1.wins++; stat1[version1].wins++; stat2.losses++; stat2[version2].losses++; versionWins[version1]++;
+      } else {
+        score2++; stat2.wins++; stat2[version2].wins++; stat1.losses++; stat1[version1].losses++; versionWins[version2]++;
+      }
+      return `<div class="qualifier-set">
+        <div class="qualifier-player${set.winner === "1" ? " win" : ""}"><span class="race-version-chip ${version1.toLowerCase()}">${version1}</span><span>${playerLabel(set.p1)}</span></div>
+        <div class="qualifier-mid"><div class="q-set-num"><span class="lang-ko">${setIndex+1}세트</span><span class="lang-en">SET ${setIndex+1}</span></div><div class="q-map">${esc(cleanMapName(set.map))}</div></div>
+        <div class="qualifier-player right${set.winner === "2" ? " win" : ""}"><span class="race-version-chip ${version2.toLowerCase()}">${version2}</span><span>${playerLabel(set.p2)}</span></div>
+      </div>`;
+    }).join("");
+    const winner = score1 > score2 ? "1" : "2";
+    return `<div class="qualifier-match">
+      <div class="qualifier-match-head"><span><span class="lang-ko">예선 ${matchIndex+1}경기 · Bo7 올킬</span><span class="lang-en">QUALIFIER MATCH ${matchIndex+1} · BO7 ALL-KILL</span></span><span><span class="lang-ko">${match.dateKo}</span><span class="lang-en">${match.dateEn}</span></span></div>
+      <div class="qualifier-teams"><div class="q-team${winner === "1" ? "" : " loser"}">${teamLabel(match.team1)}</div><div class="qualifier-score">${score1} : ${score2}</div><div class="q-team${winner === "2" ? "" : " loser"}">${teamLabel(match.team2)}</div></div>
+      <div>${sets}</div>
+    </div>`;
+  }).join("");
+  resultsContainer.innerHTML = `<div class="qualifier-grid">${matchCards}</div>`;
+
+  const totalGames = versionWins.SC2 + versionWins.BW;
+  const versionRate = version => totalGames ? (versionWins[version] / totalGames * 100).toFixed(1) : "0.0";
+  const rows = Object.values(playerStats).sort((a,b) => {
+    const gamesA = a.wins+a.losses, gamesB = b.wins+b.losses;
+    return b.wins-a.wins || (b.wins/gamesB)-(a.wins/gamesA) || a.losses-b.losses || a.player.localeCompare(b.player);
+  });
+  statsContainer.innerHTML = `
+    <div class="stats-table-title"><span class="lang-ko">예선전 전용 통계</span><span class="lang-en">Qualifier-Only Statistics</span></div>
+    <div class="qualifier-summary"><span class="lang-ko">아래 기록은 <b>예선전 결과만</b> 집계하며 메인 개인 성적에는 포함되지 않습니다.</span><span class="lang-en">These figures use <b>qualifier results only</b> and are excluded from the Main Event player statistics.</span></div>
+    <div class="version-record">
+      <div class="version-side"><div class="version-name bw">BW</div><div class="version-score">${versionWins.BW}<span class="lang-ko">승</span><span class="lang-en">W</span> ${versionWins.SC2}<span class="lang-ko">패</span><span class="lang-en">L</span></div><div class="version-detail"><span class="lang-ko">승률</span><span class="lang-en">Win rate</span> ${versionRate("BW")}%</div></div>
+      <div class="version-vs">VS<br><span style="font-size:12px;">${totalGames} GAMES</span></div>
+      <div class="version-side"><div class="version-name sc2">SC2</div><div class="version-score">${versionWins.SC2}<span class="lang-ko">승</span><span class="lang-en">W</span> ${versionWins.BW}<span class="lang-ko">패</span><span class="lang-en">L</span></div><div class="version-detail"><span class="lang-ko">승률</span><span class="lang-en">Win rate</span> ${versionRate("SC2")}%</div></div>
+    </div>
+    <div class="stats-table-title"><span class="lang-ko">예선전 개인 순위</span><span class="lang-en">Qualifier Player Ranking</span></div>
+    <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>#</th><th style="text-align:left;"><span class="lang-ko">선수</span><span class="lang-en">Player</span></th><th style="text-align:left;"><span class="lang-ko">팀</span><span class="lang-en">Team</span></th><th><span class="lang-ko">승</span><span class="lang-en">W</span></th><th><span class="lang-ko">패</span><span class="lang-en">L</span></th><th><span class="lang-ko">승률</span><span class="lang-en">Win %</span></th><th>SC2</th><th>BW</th></tr></thead>
+      <tbody>${rows.map((stat,index)=>{const games=stat.wins+stat.losses;return `<tr><td>${index+1}</td><td class="ps-player">${playerLabel(stat.player)}</td><td class="ps-team">${teamLabel(stat.team)}</td><td class="ps-win">${stat.wins}</td><td class="ps-loss">${stat.losses}</td><td>${(stat.wins/games*100).toFixed(1)}%</td><td>${stat.SC2.wins}-${stat.SC2.losses}</td><td>${stat.BW.wins}-${stat.BW.losses}</td></tr>`;}).join("")}</tbody>
+    </table></div>`;
+}
+
 (async function loadDataAndRender(){
   let data = null;
   try{
@@ -1432,6 +1582,7 @@ function renderIndividualStats(data) {
   renderSchedule("B", data && data.matches);
   renderPlayoffs((data && data.playoffs) || {});
   renderIndividualStats(data || {});
+  renderQualifier();
 })();
 
 // ---- group tabs ----
