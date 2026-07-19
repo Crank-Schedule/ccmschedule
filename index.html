@@ -349,13 +349,13 @@
   .br-box.gf{top:17.19%; left:70.97%; width:29.03%; height:28.13%; border-left-color:var(--amber); background:var(--panel2);}
   .br-tag{flex-shrink:0; font-weight:900; font-size:clamp(9px,2.2vw,13px); line-height:1.15; color:var(--red); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .br-box.gf .br-tag{color:var(--amber);}
-  .br-match{flex-shrink:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:7px; width:100%; font-size:clamp(10.5px,2.6vw,14.5px); font-weight:700; color:#fff; line-height:1.18;}
+  .br-match{flex-shrink:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:4px; width:100%; font-size:clamp(10px,2.2vw,13px); font-weight:700; color:#fff; line-height:1.15;}
   .br-match > span:first-child{text-align:right;}
   .br-match > span:last-child{text-align:left;}
+  .br-match > span:first-child,.br-match > span:last-child{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
   .br-date{flex-shrink:0; font-size:clamp(8px,1.7vw,10.5px); line-height:1.15; color:var(--amber); margin-bottom:3px; font-weight:800;}
-  .br-caster{color:#fff; margin-left:6px;}
-  .br-box.gf .br-date{font-size:9px; letter-spacing:-.2px; white-space:nowrap;}
+  .br-caster{color:#fff; margin-left:3px;}
   .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Paperozi','Escoredream',sans-serif;}
   .po-caster{color:#fff; margin-left:8px;}
 </style>
@@ -497,7 +497,7 @@
     <!-- match boxes -->
     <div class="br-box ub">
       <div class="br-tag"><span class="lang-ko">2경기 · 승자조 결승</span><span class="lang-en">MATCH 2 · UB FINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 24일 · 오후 8시 KST <span class="br-caster">/ 해설: 신희범</span></span><span class="lang-en">Jul 24 · 8 PM KST <span class="br-caster">/ Caster: SHIN</span></span></div>
+      <div class="br-date"><span class="lang-ko">7/24 · 20:00 KST <span class="br-caster">· 신희범</span></span><span class="lang-en">Jul 24 · 8 PM KST <span class="br-caster">· SHIN</span></span></div>
       <div class="br-match">
         <span><span class="lang-ko">A조 1위</span><span class="lang-en">Group A 1st</span></span>
         <span class="br-vs">VS</span>
@@ -507,7 +507,7 @@
 
     <div class="br-box lbsf">
       <div class="br-tag"><span class="lang-ko">1경기 · 패자조 준결승</span><span class="lang-en">MATCH 1 · LB SEMIFINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 23일 · 오후 8시 KST <span class="br-caster">/ 해설: 조성주</span></span><span class="lang-en">Jul 23 · 8 PM KST <span class="br-caster">/ Caster: Maru</span></span></div>
+      <div class="br-date"><span class="lang-ko">7/23 · 20:00 KST <span class="br-caster">· 조성주</span></span><span class="lang-en">Jul 23 · 8 PM KST <span class="br-caster">· Maru</span></span></div>
       <div class="br-match">
         <span><span class="lang-ko">B조 2위</span><span class="lang-en">Group B 2nd</span></span>
         <span class="br-vs">VS</span>
@@ -517,21 +517,21 @@
 
     <div class="br-box lbf">
       <div class="br-tag"><span class="lang-ko">3경기 · 패자조 결승</span><span class="lang-en">MATCH 3 · LB FINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 30일 · 오후 8시 KST <span class="br-caster">/ 해설: 최연식</span></span><span class="lang-en">Jul 30 · 8 PM KST <span class="br-caster">/ Caster: TheSTC</span></span></div>
+      <div class="br-date"><span class="lang-ko">7/30 · 20:00 KST <span class="br-caster">· 최연식</span></span><span class="lang-en">Jul 30 · 8 PM KST <span class="br-caster">· TheSTC</span></span></div>
       <div class="br-match">
-        <span><span class="lang-ko">플레이오프 1경기 승자</span><span class="lang-en">Playoff Match 1 Winner</span></span>
+        <span><span class="lang-ko">1경기 승자</span><span class="lang-en">M1 Winner</span></span>
         <span class="br-vs">VS</span>
-        <span><span class="lang-ko">플레이오프 2경기 패자</span><span class="lang-en">Playoff Match 2 Loser</span></span>
+        <span><span class="lang-ko">2경기 패자</span><span class="lang-en">M2 Loser</span></span>
       </div>
     </div>
 
     <div class="br-box gf">
       <div class="br-tag"><span class="lang-ko">4경기 · 최종 결승</span><span class="lang-en">MATCH 4 · GRAND FINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 31일 · 오후 8시 KST <span class="br-caster">/ 해설: 크랭크 솔로</span></span><span class="lang-en">Jul 31 · 8 PM KST <span class="br-caster">/ Caster: Crank Solo</span></span></div>
+      <div class="br-date"><span class="lang-ko">7/31 · 20:00 KST <span class="br-caster">· 크랭크 솔로</span></span><span class="lang-en">Jul 31 · 8 PM KST <span class="br-caster">· Crank Solo</span></span></div>
       <div class="br-match">
-        <span><span class="lang-ko">결승 직행팀</span><span class="lang-en">Direct Finalist</span></span>
+        <span><span class="lang-ko">직행팀</span><span class="lang-en">UB Winner</span></span>
         <span class="br-vs">VS</span>
-        <span><span class="lang-ko">패자조 생존팀</span><span class="lang-en">Lower Bracket Survivor</span></span>
+        <span><span class="lang-ko">생존팀</span><span class="lang-en">LB Winner</span></span>
       </div>
     </div>
   </div>
@@ -1212,8 +1212,8 @@ function renderPlayoffs(pData) {
   const bPlaceholder = {
     "p-m1": [["A조 1위", "Group A 1st"], ["B조 1위", "Group B 1st"]],
     "p-m2": [["B조 2위", "Group B 2nd"], ["A조 2위", "Group A 2nd"]],
-    "p-m3": [["플레이오프 1경기 승자", "Playoff Match 1 Winner"], ["플레이오프 2경기 패자", "Playoff Match 2 Loser"]],
-    "p-m4": [["결승 직행팀", "Direct Finalist"], ["패자조 생존팀", "Lower Bracket Survivor"]]
+    "p-m3": [["1경기 승자", "M1 Winner"], ["2경기 패자", "M2 Loser"]],
+    "p-m4": [["직행팀", "UB Winner"], ["생존팀", "LB Winner"]]
   };
   for(const [cls, key] of Object.entries(bMap)) {
     const box = document.querySelector(`.br-box.${cls} .br-match`);
