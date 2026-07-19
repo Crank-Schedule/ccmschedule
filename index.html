@@ -354,7 +354,10 @@
   .br-match > span:last-child{text-align:left;}
   .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
   .br-date{flex-shrink:0; font-size:clamp(8px,1.7vw,10.5px); line-height:1.15; color:var(--amber); margin-bottom:3px; font-weight:800;}
+  .br-caster{color:#fff; margin-left:6px;}
+  .br-box.gf .br-date{font-size:9px; letter-spacing:-.2px; white-space:nowrap;}
   .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Paperozi','Escoredream',sans-serif;}
+  .po-caster{color:#fff; margin-left:8px;}
 </style>
   <link rel="icon" type="image/png" href="./assets/favicon.png">
 </head>
@@ -494,7 +497,7 @@
     <!-- match boxes -->
     <div class="br-box ub">
       <div class="br-tag"><span class="lang-ko">2경기 · 승자조 결승</span><span class="lang-en">MATCH 2 · UB FINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 24일 · 오후 8시 KST</span><span class="lang-en">Jul 24 · 8 PM KST</span></div>
+      <div class="br-date"><span class="lang-ko">7월 24일 · 오후 8시 KST <span class="br-caster">/ 해설: 신희범</span></span><span class="lang-en">Jul 24 · 8 PM KST <span class="br-caster">/ Caster: SHIN</span></span></div>
       <div class="br-match">
         <span><span class="lang-ko">A조 1위</span><span class="lang-en">Group A 1st</span></span>
         <span class="br-vs">VS</span>
@@ -504,7 +507,7 @@
 
     <div class="br-box lbsf">
       <div class="br-tag"><span class="lang-ko">1경기 · 패자조 준결승</span><span class="lang-en">MATCH 1 · LB SEMIFINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 23일 · 오후 8시 KST</span><span class="lang-en">Jul 23 · 8 PM KST</span></div>
+      <div class="br-date"><span class="lang-ko">7월 23일 · 오후 8시 KST <span class="br-caster">/ 해설: 조성주</span></span><span class="lang-en">Jul 23 · 8 PM KST <span class="br-caster">/ Caster: Maru</span></span></div>
       <div class="br-match">
         <span><span class="lang-ko">B조 2위</span><span class="lang-en">Group B 2nd</span></span>
         <span class="br-vs">VS</span>
@@ -514,7 +517,7 @@
 
     <div class="br-box lbf">
       <div class="br-tag"><span class="lang-ko">3경기 · 패자조 결승</span><span class="lang-en">MATCH 3 · LB FINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 30일 · 오후 8시 KST</span><span class="lang-en">Jul 30 · 8 PM KST</span></div>
+      <div class="br-date"><span class="lang-ko">7월 30일 · 오후 8시 KST <span class="br-caster">/ 해설: 최연식</span></span><span class="lang-en">Jul 30 · 8 PM KST <span class="br-caster">/ Caster: TheSTC</span></span></div>
       <div class="br-match">
         <span><span class="lang-ko">플레이오프 1경기 승자</span><span class="lang-en">Playoff Match 1 Winner</span></span>
         <span class="br-vs">VS</span>
@@ -524,7 +527,7 @@
 
     <div class="br-box gf">
       <div class="br-tag"><span class="lang-ko">4경기 · 최종 결승</span><span class="lang-en">MATCH 4 · GRAND FINALS</span></div>
-      <div class="br-date"><span class="lang-ko">7월 31일 · 오후 8시 KST</span><span class="lang-en">Jul 31 · 8 PM KST</span></div>
+      <div class="br-date"><span class="lang-ko">7월 31일 · 오후 8시 KST <span class="br-caster">/ 해설: 크랭크 솔로</span></span><span class="lang-en">Jul 31 · 8 PM KST <span class="br-caster">/ Caster: Crank Solo</span></span></div>
       <div class="br-match">
         <span><span class="lang-ko">결승 직행팀</span><span class="lang-en">Direct Finalist</span></span>
         <span class="br-vs">VS</span>
@@ -930,10 +933,10 @@ const PLAYOFF_REGULAR_MATCHES = 7;
 const PLAYOFF_ACE_INDEX = 7;
 const PLAYOFF_SET_COUNT = 8;
 const PLAYOFF_SCHEDULE = {
-  "p-m2": { ko:"7월 23일 · 오후 8시 KST", en:"Jul 23 · 8 PM KST" },
-  "p-m1": { ko:"7월 24일 · 오후 8시 KST", en:"Jul 24 · 8 PM KST" },
-  "p-m3": { ko:"7월 30일 · 오후 8시 KST", en:"Jul 30 · 8 PM KST" },
-  "p-m4": { ko:"7월 31일 · 오후 8시 KST", en:"Jul 31 · 8 PM KST" }
+  "p-m2": { ko:"7월 23일 · 오후 8시 KST", en:"Jul 23 · 8 PM KST", casterKo:"조성주", casterEn:"Maru" },
+  "p-m1": { ko:"7월 24일 · 오후 8시 KST", en:"Jul 24 · 8 PM KST", casterKo:"신희범", casterEn:"SHIN" },
+  "p-m3": { ko:"7월 30일 · 오후 8시 KST", en:"Jul 30 · 8 PM KST", casterKo:"최연식", casterEn:"TheSTC" },
+  "p-m4": { ko:"7월 31일 · 오후 8시 KST", en:"Jul 31 · 8 PM KST", casterKo:"크랭크 솔로", casterEn:"Crank Solo" }
 };
 const PLAYOFF_MATCH_ORDER = ["p-m2", "p-m1", "p-m3", "p-m4"];
 const DEFAULT_PLAYOFF_MAP_ORDERS = {
@@ -1179,7 +1182,7 @@ function renderPlayoffs(pData) {
     block.className = "match";
 
     block.innerHTML = `
-      <div class="match-head"><span><span class="lang-ko">${matchNumber}경기 · ${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">MATCH ${matchNumber} · ${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span><span class="po-match-date"><span class="lang-ko">${matchSchedule.ko}</span><span class="lang-en">${matchSchedule.en}</span></span></div>
+      <div class="match-head"><span><span class="lang-ko">${matchNumber}경기 · ${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">MATCH ${matchNumber} · ${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span><span class="po-match-date"><span class="lang-ko">${matchSchedule.ko}<span class="po-caster">/ 해설: ${matchSchedule.casterKo}</span></span><span class="lang-en">${matchSchedule.en}<span class="po-caster">/ Caster: ${matchSchedule.casterEn}</span></span></span></div>
       <div class="submatch">
         <div class="sm-top">
           <div class="sm-side left">
