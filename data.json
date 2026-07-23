@@ -595,28 +595,62 @@
       "t2": "Team Liquid",
       "sets": [
         {
-          "map": "[SC:Evo] Sylphid"
+          "map": "[SC:Evo] Sylphid",
+          "p1": "Zoun",
+          "race1": "P",
+          "p2": "Cure",
+          "race2": "T",
+          "g2w": "",
+          "g1w": ""
         },
         {
-          "map": "[SC:Evo] Fighting Spirit"
+          "map": "[SC:Evo] Fighting Spirit",
+          "p1": "",
+          "race1": "-",
+          "g1w": "",
+          "g2w": ""
         },
         {
-          "map": "[SC:Evo] Polypoid"
+          "map": "[SC:Evo] Polypoid",
+          "p1": "",
+          "race1": "-",
+          "p2": "",
+          "race2": "-",
+          "g1w": "",
+          "g2w": ""
         },
         {
-          "map": "[SC:Evo] Match Point"
+          "map": "[SC:Evo] Match Point",
+          "p1": "",
+          "race1": "-",
+          "p2": "",
+          "race2": "-",
+          "g1w": "",
+          "g2w": ""
         },
         {
-          "map": "Blackrock LE"
+          "map": "Blackrock LE",
+          "p1": "",
+          "race1": "-",
+          "p2": "",
+          "race2": "-",
+          "g2w": "",
+          "g1w": ""
         },
         {
-          "map": "Washout LE"
+          "map": "Washout LE",
+          "p1": "",
+          "race1": "-"
         },
         {
           "map": "Fear and Faith LE"
         },
         {
-          "map": "Blackrock LE"
+          "map": "Blackrock LE",
+          "p2": "",
+          "race2": "-",
+          "p1": "",
+          "race1": "-"
         }
       ],
       "score1": 0,
