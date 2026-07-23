@@ -268,13 +268,14 @@
   /* ---------- Playoff (매치당 2게임) ---------- */
   .po-games{display:inline-flex; gap:6px; flex-shrink:0; margin:0 8px;}
   .po-game-box{
-    width:54px; height:38px; border-radius:4px; display:inline-flex; flex-direction:column;
-    align-items:center; justify-content:center; gap:1px;
+    width:64px; height:48px; border-radius:4px; display:inline-flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:0;
     font-weight:900; background:var(--panel2); color:var(--dim);
     border:1px solid var(--line);
   }
+  .po-game-order{font-size:8px; line-height:1; opacity:.62;}
   .po-game-ver{font-size:9px; line-height:1; letter-spacing:.3px; opacity:.75;}
-  .po-game-result{font-size:14px; line-height:1;}
+  .po-game-result{font-size:13px; line-height:1.1;}
   .po-game-box.sc2{background:rgba(143,17,25,.18); border-color:var(--red-dark);}
   .po-game-box.bw{background:rgba(168,123,0,.18); border-color:#a87b00;}
   .po-game-box.sc2.win{background:var(--red-dark); color:#fff; border-color:var(--red);}
@@ -1156,11 +1157,11 @@ function renderPlayoffs(pData) {
       return nameHTML;
     };
 
-    const gameBox = (w, sideCode, version) => {
+    const gameBox = (w, sideCode, game, version) => {
       const state = w === sideCode ? " win" : (w ? " lose" : "");
       const label = w === sideCode ? "W" : (w ? "L" : "·");
       const versionClass = version === "SC2" ? " sc2" : " bw";
-      return `<span class="po-game-box${versionClass}${state}"><span class="po-game-ver">${version}</span><span class="po-game-result">${label}</span></span>`;
+      return `<span class="po-game-box${versionClass}${state}"><span class="po-game-order"><span class="lang-ko">${game}번째</span><span class="lang-en">GAME ${game}</span></span><span class="po-game-ver">${version}</span><span class="po-game-result">${label}</span></span>`;
     };
 
     let setsHTML = "";
@@ -1191,7 +1192,7 @@ function renderPlayoffs(pData) {
           <div class="side${win1}${r1Class}">
             <span class="race">${dualRaceIcons(p1, r1)}</span>
             <span class="player">${getP(p1)}</span>
-            <span class="po-games">${gameBox(sd.g1w, "1", lv1)}${gameBox(sd.g2w, "1", lv2)}</span>
+            <span class="po-games">${gameBox(sd.g1w, "1", 1, lv1)}${gameBox(sd.g2w, "1", 2, lv2)}</span>
           </div>
           <div class="mid">
             <div class="set-num-center"><span class="lang-ko">${i+1}경기 · 2세트</span><span class="lang-en">MATCH ${i+1} · Bo2</span></div>
@@ -1200,7 +1201,7 @@ function renderPlayoffs(pData) {
           <div class="side right${win2}${r2Class}">
             <span class="race">${dualRaceIcons(p2, r2)}</span>
             <span class="player">${getP(p2)}</span>
-            <span class="po-games">${gameBox(sd.g2w, "2", rv2)}${gameBox(sd.g1w, "2", rv1)}</span>
+            <span class="po-games">${gameBox(sd.g1w, "2", 1, rv1)}${gameBox(sd.g2w, "2", 2, rv2)}</span>
           </div>
         </div>`;
     }
