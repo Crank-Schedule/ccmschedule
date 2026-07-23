@@ -529,7 +529,11 @@
       "t2": "StalnieBalls",
       "sets": [
         {
-          "map": "Fear and Faith LE"
+          "map": "Fear and Faith LE",
+          "p1": "Solar",
+          "race1": "Z",
+          "p2": "MilkiCow",
+          "race2": "T"
         },
         {
           "map": "[SC:Evo] Match Point"
