@@ -541,10 +541,17 @@
           "map": "[SC:Evo] Match Point",
           "p1": "Solar",
           "race1": "Z",
-          "autoP1From": 0
+          "autoP1From": 0,
+          "p2": "YoungYakov",
+          "race2": "Z",
+          "g1w": "2",
+          "g2w": "2"
         },
         {
-          "map": "[SC:Evo] Polypoid"
+          "map": "[SC:Evo] Polypoid",
+          "p2": "YoungYakov",
+          "race2": "Z",
+          "autoP2From": 1
         },
         {
           "map": "Washout LE"
@@ -563,7 +570,7 @@
         }
       ],
       "score1": 1,
-      "score2": 0
+      "score2": 1
     },
     "p-m1": {
       "title_ko": "결승전 직행전",
