@@ -551,13 +551,29 @@
           "map": "[SC:Evo] Polypoid",
           "p2": "YoungYakov",
           "race2": "Z",
-          "autoP2From": 1
+          "autoP2From": 1,
+          "p1": "herO",
+          "race1": "P",
+          "g1w": "2",
+          "g2w": "1"
         },
         {
-          "map": "Washout LE"
+          "map": "Washout LE",
+          "p1": "SHIN",
+          "race1": "Z",
+          "p2": "ZaRDieNT",
+          "race2": "T",
+          "g1w": "1",
+          "g2w": "1"
         },
         {
-          "map": "Blackrock LE"
+          "map": "Blackrock LE",
+          "p1": "SHIN",
+          "race1": "Z",
+          "autoP1From": 3,
+          "p2": "YoungYakov",
+          "race2": "Z",
+          "g1w": "1"
         },
         {
           "map": "[SC:Evo] Fighting Spirit"
@@ -569,8 +585,8 @@
           "map": "Fear and Faith LE"
         }
       ],
-      "score1": 1,
-      "score2": 1
+      "score1": 4,
+      "score2": 2
     },
     "p-m1": {
       "title_ko": "결승전 직행전",
@@ -609,7 +625,7 @@
     "p-m3": {
       "title_ko": "최종 진출전",
       "title_en": "LB Finals",
-      "t1": "",
+      "t1": "CRHB",
       "t2": "",
       "sets": [
         {
@@ -638,7 +654,8 @@
         }
       ],
       "score1": 0,
-      "score2": 0
+      "score2": 0,
+      "_auto_t1": true
     },
     "p-m4": {
       "title_ko": "최종 결승전",
