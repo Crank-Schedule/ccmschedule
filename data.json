@@ -615,30 +615,32 @@
         },
         {
           "map": "[SC:Evo] Polypoid",
-          "p1": "",
-          "race1": "-",
-          "p2": "",
-          "race2": "-",
-          "g1w": "",
-          "g2w": ""
+          "p1": "Maru",
+          "race1": "T",
+          "p2": "Clem",
+          "race2": "T",
+          "g1w": "1",
+          "g2w": "1"
         },
         {
           "map": "[SC:Evo] Match Point",
-          "p1": "",
-          "race1": "-",
-          "p2": "",
-          "race2": "-",
-          "g1w": "",
-          "g2w": ""
+          "p1": "Maru",
+          "race1": "T",
+          "p2": "Elazer",
+          "race2": "Z",
+          "g1w": "1",
+          "g2w": "1",
+          "autoP1From": 2
         },
         {
           "map": "Blackrock LE",
-          "p1": "",
-          "race1": "-",
+          "p1": "Maru",
+          "race1": "T",
           "p2": "",
           "race2": "-",
           "g2w": "",
-          "g1w": ""
+          "g1w": "",
+          "autoP1From": 3
         },
         {
           "map": "Washout LE",
@@ -656,7 +658,7 @@
           "race1": "-"
         }
       ],
-      "score1": 1,
+      "score1": 3,
       "score2": 2
     },
     "p-m3": {
