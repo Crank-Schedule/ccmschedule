@@ -600,15 +600,18 @@
           "race1": "P",
           "p2": "Cure",
           "race2": "T",
-          "g2w": "",
+          "g2w": "2",
           "g1w": "2"
         },
         {
           "map": "[SC:Evo] Fighting Spirit",
-          "p1": "",
-          "race1": "-",
+          "p1": "Ryung",
+          "race1": "T",
           "g1w": "",
-          "g2w": ""
+          "g2w": "",
+          "p2": "Cure",
+          "race2": "T",
+          "autoP2From": 0
         },
         {
           "map": "[SC:Evo] Polypoid",
