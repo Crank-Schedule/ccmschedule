@@ -607,8 +607,8 @@
           "map": "[SC:Evo] Fighting Spirit",
           "p1": "Ryung",
           "race1": "T",
-          "g1w": "",
-          "g2w": "",
+          "g1w": "2",
+          "g2w": "1",
           "p2": "Cure",
           "race2": "T",
           "autoP2From": 0
@@ -656,8 +656,8 @@
           "race1": "-"
         }
       ],
-      "score1": 0,
-      "score2": 1
+      "score1": 1,
+      "score2": 2
     },
     "p-m3": {
       "title_ko": "최종 진출전",
