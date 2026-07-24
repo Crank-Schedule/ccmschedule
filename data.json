@@ -601,7 +601,7 @@
           "p2": "Cure",
           "race2": "T",
           "g2w": "",
-          "g1w": ""
+          "g1w": "2"
         },
         {
           "map": "[SC:Evo] Fighting Spirit",
@@ -654,7 +654,7 @@
         }
       ],
       "score1": 0,
-      "score2": 0
+      "score2": 1
     },
     "p-m3": {
       "title_ko": "최종 진출전",
