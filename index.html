@@ -365,22 +365,26 @@
   .br-line{position:absolute; background:var(--line);}
   .br-box{
     position:absolute; background:var(--panel); border-left:4px solid var(--red-dark);
-    padding:6px 4%; display:flex; flex-direction:column; justify-content:center;
+    --br-text-size:clamp(9px,1.25vw,12px);
+    padding:9px 14px; display:flex; flex-direction:column; justify-content:center; gap:3px;
     border-radius:2px;
   }
   .br-box.ub{top:0%; left:0%; width:29.03%; height:25%; border-left-color:var(--red);}
   .br-box.lbsf{top:75%; left:0%; width:29.03%; height:25%;}
   .br-box.lbf{top:35.5%; left:35.48%; width:29.03%; height:29%;}
   .br-box.gf{top:17.19%; left:70.97%; width:29.03%; height:28.13%; border-left-color:var(--amber); background:var(--panel2);}
-  .br-tag{flex-shrink:0; font-weight:900; font-size:clamp(9px,2.2vw,13px); line-height:1.15; color:var(--red); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .br-tag{flex-shrink:0; font-weight:900; font-size:var(--br-text-size); line-height:1.2; color:var(--red); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .br-box.gf .br-tag{color:var(--amber);}
-  .br-match{flex-shrink:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:4px; width:100%; font-size:clamp(10px,2.2vw,13px); font-weight:700; color:#fff; line-height:1.15;}
+  .br-match{flex-shrink:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:5px; width:100%; font-size:var(--br-text-size); font-weight:700; color:#fff; line-height:1.2;}
   .br-match > span:first-child{text-align:right;}
   .br-match > span:last-child{text-align:left;}
   .br-match > span:first-child,.br-match > span:last-child{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .br-vs{color:var(--dim); font-size:clamp(8.5px,1.8vw,11px); font-weight:700; text-align:center;}
-  .br-date{flex-shrink:0; font-size:clamp(8px,1.7vw,10.5px); line-height:1.15; color:var(--amber); margin-bottom:3px; font-weight:800;}
+  .br-vs{color:var(--dim); font-size:var(--br-text-size); font-weight:700; text-align:center;}
+  .br-date{flex-shrink:0; font-size:var(--br-text-size); line-height:1.2; color:var(--amber); font-weight:800;}
   .br-caster{color:#fff; margin-left:3px;}
+  .br-team-winner{color:var(--amber) !important; font-weight:900 !important;}
+  .br-team-winner::after{content:" ✓"; color:var(--amber);}
+  .br-team-loser{color:var(--dim) !important; opacity:.5;}
   .po-match-date{font-size:12px; color:var(--amber); white-space:nowrap; font-family:'Paperozi','Escoredream',sans-serif;}
   .po-caster{color:#fff; margin-left:8px;}
 </style>
@@ -1261,6 +1265,9 @@ function renderPlayoffs(pData) {
     const titleEn = md.title_en || defaultTitles[mKey].en;
     const matchSchedule = PLAYOFF_SCHEDULE[mKey];
     const matchNumber = PLAYOFF_MATCH_ORDER.indexOf(mKey) + 1;
+    const [matchWinner] = playoffWinnerLoser(md);
+    const team1Result = matchWinner ? (matchWinner === md.t1 ? " team-win" : " team-lose") : "";
+    const team2Result = matchWinner ? (matchWinner === md.t2 ? " team-win" : " team-lose") : "";
 
     const block = document.createElement("div");
     block.dataset.matchkey = mKey;
@@ -1271,7 +1278,7 @@ function renderPlayoffs(pData) {
       <div class="match-head"><span><span class="lang-ko">${matchNumber}경기 · ${esc(titleKo)} · 최대 7경기 × Bo2 (4-4 시 슈퍼 에이스)</span><span class="lang-en">MATCH ${matchNumber} · ${esc(titleEn)} · Up to 7 Bo2s (Super Ace if 4-4)</span></span><span class="po-match-date"><span class="lang-ko">${matchSchedule.ko}<span class="po-caster">/ 해설: ${matchSchedule.casterKo}</span></span><span class="lang-en">${matchSchedule.en}<span class="po-caster">/ Caster: ${matchSchedule.casterEn}</span></span></span></div>
       <div class="submatch">
         <div class="sm-top">
-          <div class="sm-side left">
+          <div class="sm-side left${team1Result}">
             ${logoHTML(md.t1)}
             <span class="teamname">${nameOrTBD(md.t1)}</span>
           </div>
@@ -1280,7 +1287,7 @@ function renderPlayoffs(pData) {
             <span style="font-size:0.55em; opacity:0.7;">VS</span>
             <span class="po-score-side"><span class="po-score-num">${s2}</span><span class="po-hearts">${hearts(h2, "left")}</span></span>
           </span>
-          <div class="sm-side right">
+          <div class="sm-side right${team2Result}">
             ${logoHTML(md.t2)}
             <span class="teamname">${nameOrTBD(md.t2)}</span>
           </div>
@@ -1312,11 +1319,11 @@ function renderPlayoffs(pData) {
     const bs1 = md.score1 || 0, bs2 = md.score2 || 0;
     const played = (md.t1 && md.t2) && (bs1 + bs2 > 0);
     const [winner] = playoffWinnerLoser(md);
-    const wStyle = t => (winner && t === winner) ? ' style="color:var(--amber);"' : '';
+    const teamClass = t => !winner ? "" : (t === winner ? ' class="br-team-winner"' : ' class="br-team-loser"');
     box.innerHTML = `
-      <span${wStyle(md.t1)}>${nameHTML(md.t1, 0)}</span>
+      <span${teamClass(md.t1)}>${nameHTML(md.t1, 0)}</span>
       <span class="br-vs">${played ? `${bs1} : ${bs2}` : 'VS'}</span>
-      <span${wStyle(md.t2)}>${nameHTML(md.t2, 1)}</span>`;
+      <span${teamClass(md.t2)}>${nameHTML(md.t2, 1)}</span>`;
   }
 }
 
