@@ -702,8 +702,8 @@
           "race2": "Z",
           "p1": "Classic",
           "race1": "P",
-          "g1w": "",
-          "g2w": ""
+          "g1w": "2",
+          "g2w": "2"
         },
         {
           "map": "[SC:Evo] Match Point"
@@ -719,7 +719,7 @@
         }
       ],
       "score1": 3,
-      "score2": 3,
+      "score2": 4,
       "_auto_t1": true,
       "_auto_t2": true
     },
@@ -727,7 +727,7 @@
       "title_ko": "최종 결승전",
       "title_en": "Grand Finals",
       "t1": "ONSYDE",
-      "t2": "",
+      "t2": "Team Liquid",
       "sets": [
         {
           "map": "[SC:Evo] Fighting Spirit"
@@ -756,7 +756,8 @@
       ],
       "score1": 0,
       "score2": 0,
-      "_auto_t1": true
+      "_auto_t1": true,
+      "_auto_t2": true
     },
     "_mapOrders": {
       "p-m2": [
