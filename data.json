@@ -697,7 +697,13 @@
           "g2w": "2"
         },
         {
-          "map": "[SC:Evo] Fighting Spirit"
+          "map": "[SC:Evo] Fighting Spirit",
+          "p2": "Elazer",
+          "race2": "Z",
+          "p1": "Classic",
+          "race1": "P",
+          "g1w": "",
+          "g2w": ""
         },
         {
           "map": "[SC:Evo] Match Point"
