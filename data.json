@@ -670,7 +670,11 @@
       "t2": "Team Liquid",
       "sets": [
         {
-          "map": "Washout LE"
+          "map": "Washout LE",
+          "p1": "Solar",
+          "race1": "Z",
+          "p2": "Elazer",
+          "race2": "Z"
         },
         {
           "map": "[SC:Evo] Polypoid"
