@@ -688,7 +688,11 @@
           "g2w": "2"
         },
         {
-          "map": "Fear and Faith LE"
+          "map": "Fear and Faith LE",
+          "p1": "",
+          "race1": "-",
+          "p2": "",
+          "race2": "-"
         },
         {
           "map": "[SC:Evo] Fighting Spirit"
