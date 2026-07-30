@@ -689,10 +689,12 @@
         },
         {
           "map": "Fear and Faith LE",
-          "p1": "",
-          "race1": "-",
-          "p2": "",
-          "race2": "-"
+          "p1": "Classic",
+          "race1": "P",
+          "p2": "Clem",
+          "race2": "T",
+          "g1w": "1",
+          "g2w": "2"
         },
         {
           "map": "[SC:Evo] Fighting Spirit"
@@ -710,8 +712,8 @@
           "map": "Fear and Faith LE"
         }
       ],
-      "score1": 2,
-      "score2": 2,
+      "score1": 3,
+      "score2": 3,
       "_auto_t1": true,
       "_auto_t2": true
     },
