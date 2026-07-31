@@ -758,10 +758,22 @@
           "g2w": "2"
         },
         {
-          "map": "[SC:Evo] Sylphid"
+          "map": "[SC:Evo] Sylphid",
+          "p1": "Maru",
+          "race1": "T",
+          "p2": "Cure",
+          "race2": "T",
+          "g2w": "",
+          "g1w": "1"
         },
         {
-          "map": "[SC:Evo] Match Point"
+          "map": "[SC:Evo] Match Point",
+          "p2": "",
+          "race2": "-",
+          "p1": "",
+          "race1": "-",
+          "g1w": "",
+          "g2w": ""
         },
         {
           "map": "[SC:Evo] Polypoid"
@@ -773,7 +785,7 @@
           "map": "[SC:Evo] Fighting Spirit"
         }
       ],
-      "score1": 3,
+      "score1": 4,
       "score2": 2,
       "_auto_t1": true,
       "_auto_t2": true
