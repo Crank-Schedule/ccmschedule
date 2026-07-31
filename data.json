@@ -745,7 +745,8 @@
           "autoP1From": 0,
           "p2": "Elazer",
           "race2": "Z",
-          "g1w": "1"
+          "g1w": "1",
+          "g2w": "2"
         },
         {
           "map": "Washout LE"
@@ -767,7 +768,7 @@
         }
       ],
       "score1": 2,
-      "score2": 0,
+      "score2": 1,
       "_auto_t1": true,
       "_auto_t2": true
     },
