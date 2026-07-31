@@ -744,7 +744,8 @@
           "race1": "P",
           "autoP1From": 0,
           "p2": "Elazer",
-          "race2": "Z"
+          "race2": "Z",
+          "g1w": "1"
         },
         {
           "map": "Washout LE"
@@ -765,7 +766,7 @@
           "map": "[SC:Evo] Fighting Spirit"
         }
       ],
-      "score1": 1,
+      "score1": 2,
       "score2": 0,
       "_auto_t1": true,
       "_auto_t2": true
