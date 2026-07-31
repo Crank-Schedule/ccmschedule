@@ -753,7 +753,8 @@
           "p1": "Ryung",
           "race1": "T",
           "p2": "Clem",
-          "race2": "T"
+          "race2": "T",
+          "g1w": "1"
         },
         {
           "map": "[SC:Evo] Sylphid"
@@ -771,7 +772,7 @@
           "map": "[SC:Evo] Fighting Spirit"
         }
       ],
-      "score1": 2,
+      "score1": 3,
       "score2": 1,
       "_auto_t1": true,
       "_auto_t2": true
