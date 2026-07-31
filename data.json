@@ -742,7 +742,9 @@
           "map": "Blackrock LE",
           "p1": "Zoun",
           "race1": "P",
-          "autoP1From": 0
+          "autoP1From": 0,
+          "p2": "Elazer",
+          "race2": "Z"
         },
         {
           "map": "Washout LE"
