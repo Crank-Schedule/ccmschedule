@@ -749,7 +749,11 @@
           "g2w": "2"
         },
         {
-          "map": "Washout LE"
+          "map": "Washout LE",
+          "p1": "Ryung",
+          "race1": "T",
+          "p2": "Clem",
+          "race2": "T"
         },
         {
           "map": "[SC:Evo] Sylphid"
