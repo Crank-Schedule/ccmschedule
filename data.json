@@ -734,10 +734,15 @@
           "p1": "Zoun",
           "race1": "P",
           "p2": "Cure",
-          "race2": "T"
+          "race2": "T",
+          "g1w": "1",
+          "g2w": "1"
         },
         {
-          "map": "Blackrock LE"
+          "map": "Blackrock LE",
+          "p1": "Zoun",
+          "race1": "P",
+          "autoP1From": 0
         },
         {
           "map": "Washout LE"
@@ -758,7 +763,7 @@
           "map": "[SC:Evo] Fighting Spirit"
         }
       ],
-      "score1": 0,
+      "score1": 1,
       "score2": 0,
       "_auto_t1": true,
       "_auto_t2": true
