@@ -754,7 +754,8 @@
           "race1": "T",
           "p2": "Clem",
           "race2": "T",
-          "g1w": "1"
+          "g1w": "1",
+          "g2w": "2"
         },
         {
           "map": "[SC:Evo] Sylphid"
@@ -773,7 +774,7 @@
         }
       ],
       "score1": 3,
-      "score2": 1,
+      "score2": 2,
       "_auto_t1": true,
       "_auto_t2": true
     },
