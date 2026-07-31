@@ -730,7 +730,11 @@
       "t2": "Team Liquid",
       "sets": [
         {
-          "map": "[SC:Evo] Fighting Spirit"
+          "map": "[SC:Evo] Fighting Spirit",
+          "p1": "Zoun",
+          "race1": "P",
+          "p2": "Cure",
+          "race2": "T"
         },
         {
           "map": "Blackrock LE"
