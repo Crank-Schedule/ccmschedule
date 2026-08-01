@@ -63,5 +63,17 @@ window.PLAYER_DB = {
   "soo": { officialId: "soO", team: "none", eventTeam: "", realName: "어윤수", race: "Icons/zerg.png", flag: "Flags/flag_kr.png" },
   "rebellion": { officialId: "ReBellioN", team: "none", eventTeam: "", realName: "강정우", race: "Icons/protoss.png", flag: "Flags/flag_kr.png" },
   "threepoint": { officialId: "threepoint", team: "none", eventTeam: "", realName: "정예준", race: "Icons/zerg.png", flag: "Flags/flag_kr.png" },
+  "honmono": { officialId: "HonMonO", team: "none", eventTeam: "", realName: "정근용", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
+  "prome": { officialId: "prome", team: "none", eventTeam: "", realName: "최윤성", race: "Icons/protoss.png", flag: "Flags/flag_kr.png" },
+  "mangrusl": { officialId: "MANGRUSL", team: "none", eventTeam: "", realName: "정윤식", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
+  "quanta": { officialId: "QuanTa", team: "none", eventTeam: "", realName: "김현호", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
+  "control": { officialId: "control", team: "none", eventTeam: "", realName: "원준영", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
+  "thestc": { officialId: "TheSTC", team: "none", eventTeam: "", realName: "최연식", race: "Icons/terran.png", flag: "Flags/flag_kr.png" },
+  "kingslayer": { officialId: "KingSlayeR", team: "none", eventTeam: "", realName: "", race: "Icons/terran.png", flag: "Flags/flag_cn.png" },
+  "jieshi": { officialId: "Jieshi", team: "none", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_cn.png" },
+  "cyan": { officialId: "Cyan", team: "none", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_cn.png" },
+  "iosup": { officialId: "iosup", team: "none", eventTeam: "", realName: "", race: "Icons/zerg.png", flag: "Flags/flag_ru.png" },
+  "nihed": { officialId: "Nihed", team: "none", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_ru.png" },
+  "rake": { officialId: "Rake", team: "none", eventTeam: "", realName: "", race: "Icons/protoss.png", flag: "Flags/flag_ru.png" },
   "elazer": { officialId: "Elazer", team: "none", eventTeam: "Team logos/Team Liquid.png", realName: "", race: "Icons/zerg.png", flag: "Flags/flag_pl.png" }
 };
